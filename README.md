@@ -13,7 +13,7 @@ This kernel can be used in `Armbian` and `OpenWrt` systems. For example [amlogic
 
 ## Compile the kernel
 
-- For the compilation method of the kernel, see [compile-kernel](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel), The template for kernel compilation using github.com's Actions can be found in [.github/workflows](.github/workflows), It can be customized by modifying the kernel config-x.y file in [tool/config](tool/config).
+- For the method of compiling the kernel, see [compile-kernel](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel). For the method of using github.com's Actions to compile the kernel, see [.github/workflows](.github/workflows). You can customize it by modifying the kernel configuration file in [tool/config](tool/config).
 
 - You can adjust the configuration of the kernel as needed, such as adding drivers and patches. It is also possible to compile personalized signature kernels with special meanings according to mood, such as `5.10.95-happy-new-year`, `5.10.96-beijing-winter-olympics`, `5.10.99-valentines-day` and so on.
 

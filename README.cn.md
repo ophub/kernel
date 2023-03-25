@@ -13,7 +13,7 @@
 
 ## 编译内核
 
-- 内核的编译方法详见 [compile-kernel](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel), 使用 github.com 的 Actions 进行内核编译的模板可参考 [.github/workflows](.github/workflows)，可以通过修改 [tool/config](tool/config) 里的内核配置文件进行自定义。
+- 编译内核的方法详见 [compile-kernel](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel), 使用 github.com 的 Actions 编译内核的方法可参考 [.github/workflows](.github/workflows)，可以通过修改 [tool/config](tool/config) 里的内核配置文件进行自定义内核。
 
 - 你可以根据需要对内核的配置进行调整，如添加驱动和补丁。也可以根据心情编译具有特殊意义的个性化签名内核，如 `5.10.95-happy-new-year`, `5.10.96-beijing-winter-olympics`, `5.10.99-valentines-day` 等等。
 
