@@ -33,9 +33,9 @@ Thank you very much for the kernel source code maintained by unifreq and 1358445
 
 | Kernel Tag    | Source Author  | Source Code Repository  |
 | ------------- | -------------- | ----------------------- |
-| kernel_stable | [unifreq](https://github.com/unifreq) | [linux-5.4.y](https://github.com/unifreq/linux-5.4.y), [linux-5.10.y](https://github.com/unifreq/linux-5.10.y), [linux-5.15.y](https://github.com/unifreq/linux-5.15.y), [linux-6.1.y](https://github.com/unifreq/linux-6.1.y) |
-| kernel_rk3588 | [unifreq](https://github.com/unifreq) | [linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) |
-| kernel_h6     | [13584452567](https://github.com/13584452567) | [linux-6.1.y](https://github.com/13584452567/linux-6.1.y) |
+| [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) | [unifreq](https://github.com/unifreq) | [linux-5.4.y](https://github.com/unifreq/linux-5.4.y), [linux-5.10.y](https://github.com/unifreq/linux-5.10.y), [linux-5.15.y](https://github.com/unifreq/linux-5.15.y), [linux-6.1.y](https://github.com/unifreq/linux-6.1.y) |
+| [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq](https://github.com/unifreq) | [linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) |
+| [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6)     | [13584452567](https://github.com/13584452567) | [linux-6.1.y](https://github.com/13584452567/linux-6.1.y) |
 
 ## Links
 
