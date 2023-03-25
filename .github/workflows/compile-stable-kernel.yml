@@ -57,7 +57,7 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: ""
+        default: "tool/config/stable"
 
 env:
   TZ: America/New_York
