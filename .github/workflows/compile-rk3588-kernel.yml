@@ -51,7 +51,7 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "tool/config/rk3588"
+        default: "kernel-config/rk3588"
 
 env:
   TZ: America/New_York
