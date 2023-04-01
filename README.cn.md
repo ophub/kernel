@@ -4,6 +4,7 @@
 
 这些内核可用于 `Armbian` 和 `OpenWrt` 系统。例如 [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian), [amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt), [flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions) 和 [unifreq/openwrt_packit](https://github.com/unifreq/openwrt_packit) 等项目。可以在编译固件时集成，也可以安装到已有的系统中使用。具体使用方法详见[内核使用说明](https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/compile-kernel/README.cn.md#内核使用说明)。
 
+- 在 Releases 的 [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) 里的内核文件是`稳定版`，是`flippy`制作分享的系列内核。
 - 在 Releases 的 [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) 里的内核文件是`稳定版`，适合在正式生产环境中使用。
 - 在 Releases 的 [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) 里的内核文件是 `rk3588` 系列的`专用版本`，适合 Rock-5B 和 HinLink-H88K 等设备，和其他系列不通用。
 - 在 Releases 的 [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) 里的内核文件是 `H6` 系列的`专用版本`，适合 TQC-A01 等设备，和其他系列不通用。

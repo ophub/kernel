@@ -4,6 +4,7 @@ View Chinese description  |  [查看中文说明](README.cn.md)
 
 This kernel can be used in `Armbian` and `OpenWrt` systems. For example [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian), [amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt), [flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions) and [unifreq/openwrt_packit](https://github.com/unifreq/openwrt_packit). It can be integrated when compiling firmware, or it can be installed into an existing system for use. For specific usage, please refer to [Kernel usage Instructions](https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/compile-kernel/README.md#kernel-usage-instructions).
 
+- The kernel files in [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) in Releases are `stable version`, made and shared by `flippy`.
 - The kernel files in [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) in Releases are `stable version`, suitable for use in a formal production environment.
 - The kernel files in [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) in Releases are `special versions` of the `rk3588` series, which is suitable for devices such as Rock-5B and HinLink-H88K, and is not common to other series.
 - The kernel files in [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) in Releases are `special version` of the `H6` series, which is suitable for devices such as TQC-A01, and is not common to other series.
