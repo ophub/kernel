@@ -32,7 +32,7 @@ This kernel can be used in `Armbian` and `OpenWrt` systems. For example [amlogic
 
 Thank you very much for the kernel source code maintained by unifreq and 13584452567. The source code used by the kernel files in the repository is as follows:
 
-| Kernel Tag    | Source Author  | Source Code Repository  |
+| Kernel Tags   | Source Code Maintainer  | Source Code Repository  |
 | ------------- | -------------- | ----------------------- |
 | [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) | [unifreq](https://github.com/unifreq) | [linux-5.4.y](https://github.com/unifreq/linux-5.4.y), [linux-5.10.y](https://github.com/unifreq/linux-5.10.y), [linux-5.15.y](https://github.com/unifreq/linux-5.15.y), [linux-6.1.y](https://github.com/unifreq/linux-6.1.y) |
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq](https://github.com/unifreq) | [linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) |

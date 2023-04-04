@@ -33,7 +33,7 @@
 
 非常感谢 unifreq 和 13584452567 等大佬们维护的内核源码，目前仓库中的内核文件使用的源码如下：
 
-| 内核分类       | 源码作者      | 源码仓库               |
+| 内核分类       | 源码维护者    | 源码仓库               |
 | ------------- | ----------- | --------------------- |
 | [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) | [unifreq](https://github.com/unifreq) | [linux-5.4.y](https://github.com/unifreq/linux-5.4.y), [linux-5.10.y](https://github.com/unifreq/linux-5.10.y), [linux-5.15.y](https://github.com/unifreq/linux-5.15.y), [linux-6.1.y](https://github.com/unifreq/linux-6.1.y) |
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq](https://github.com/unifreq) | [linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) |
