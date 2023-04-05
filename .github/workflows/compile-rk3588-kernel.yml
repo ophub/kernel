@@ -48,10 +48,17 @@ on:
         description: "Set the kernel custom signature"
         required: false
         default: "-rk3588"
+        type: choice
+        options:
+          - -rk3588
+          - -rk35xx
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
         default: "kernel-config/rk3588"
+        type: choice
+        options:
+          - kernel-config/rk3588
 
 env:
   TZ: America/New_York

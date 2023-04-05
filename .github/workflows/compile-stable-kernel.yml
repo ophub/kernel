@@ -54,10 +54,17 @@ on:
         description: "Set the kernel custom signature"
         required: false
         default: "-ophub"
+        type: choice
+        options:
+          - -ophub
+          - -yourname
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
         default: "kernel-config/stable"
+        type: choice
+        options:
+          - kernel-config/stable
 
 env:
   TZ: America/New_York
