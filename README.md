@@ -7,7 +7,6 @@ This kernel can be used in `Armbian` and `OpenWrt` systems. For example [amlogic
 - The kernel files in [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) in Releases are `stable version`, made and shared by `flippy`.
 - The kernel files in [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) in Releases are `stable version`, suitable for use in a formal production environment.
 - The kernel files in [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) in Releases are `special versions` of the `rk3588` series, which is suitable for devices such as Rock-5B and HinLink-H88K, and is not common to other series.
-- The kernel files in [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) in Releases are `special version` of the `H6` series, which is suitable for devices such as TQC-A01, and is not common to other series.
 - The kernel files in [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) in Releases are `development version`, and third-party driver support and special modifications have been added for some specific devices, for development and testing use.
 - In the [dev](https://github.com/ophub/kernel/releases/tag/dev) of Releases, there are download image of the `cross-compilation toolchain` required for compiling the kernel.
 - In the [tools](https://github.com/ophub/kernel/releases/tag/tools) of Releases, there are some `Android system` download images of common TV boxes. When using Armbian and OpenWrt systems, you can use It is used to restore the Android system.
@@ -36,12 +35,10 @@ Thank you very much for the kernel source code maintained by unifreq and 1358445
 | ------------- | -------------- | ----------------------- |
 | [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) | [unifreq](https://github.com/unifreq) | [linux-5.4.y](https://github.com/unifreq/linux-5.4.y), [linux-5.10.y](https://github.com/unifreq/linux-5.10.y), [linux-5.15.y](https://github.com/unifreq/linux-5.15.y), [linux-6.1.y](https://github.com/unifreq/linux-6.1.y) |
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq](https://github.com/unifreq) | [linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) |
-| [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6)     | [13584452567](https://github.com/13584452567) | [linux-6.1.y](https://github.com/13584452567/linux-6.1.y) |
 
 ## Links
 
 - [unifreq/kernel](https://github.com/unifreq)
-- [13584452567/kernel](https://github.com/13584452567/linux-6.1.y)
 - [chewitt/linux](https://github.com/chewitt/linux)
 - [torvalds/linux](https://github.com/torvalds/linux)
 - [kernel.org](https://kernel.org)
