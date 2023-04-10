@@ -51,7 +51,7 @@ on:
         type: choice
         options:
           - -rk3588
-          - -rk35xx
+          - -yourname
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
