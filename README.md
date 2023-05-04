@@ -10,6 +10,7 @@ Among them, [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_
 - The kernel files in [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) in Releases are `stable version`, more support options have been enabled based on user needs.
 - The kernel files in [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) in Releases are `development version`, and third-party driver support and special modifications have been added for some specific devices.
 - The kernel files in [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) in Releases are `special versions` of the `rk3588` series, which is suitable for devices such as Rock-5B and HinLink-H88K, and is not common to other series.
+- The kernel files in [kernel_rk3588-ipc-r](https://github.com/ophub/kernel/releases/tag/kernel_rk3588-ipc-r) in Releases are `special versions` of the `rk3588` series, which is suitable for devices such as Beelink-IPC-R, and is not common to other series.
 - In the [dev](https://github.com/ophub/kernel/releases/tag/dev) of Releases, there are download image of the `cross-compilation toolchain` required for compiling the kernel.
 - In the [tools](https://github.com/ophub/kernel/releases/tag/tools) of Releases, there are some `Android system` download images of common TV boxes. When using Armbian and OpenWrt systems, you can use It is used to restore the Android system.
 
@@ -37,6 +38,7 @@ Thank you very much for the kernel source code maintained by giants such as Unif
 | ------------- | -------------- | ----------------------- |
 | [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) | [unifreq](https://github.com/unifreq) | [linux-5.4.y](https://github.com/unifreq/linux-5.4.y), [linux-5.10.y](https://github.com/unifreq/linux-5.10.y), [linux-5.15.y](https://github.com/unifreq/linux-5.15.y), [linux-6.1.y](https://github.com/unifreq/linux-6.1.y) |
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq](https://github.com/unifreq) | [linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) |
+| [kernel_rk3588-ipc-r](https://github.com/ophub/kernel/releases/tag/kernel_rk3588-ipc-r) | [unifreq](https://github.com/unifreq) | [linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) |
 
 ## Links
 
