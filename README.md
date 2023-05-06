@@ -2,22 +2,22 @@
 
 View Chinese description  |  [查看中文说明](README.cn.md)
 
-This kernel can be used in `Armbian` and `OpenWrt` systems. For example [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian), [amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt), [flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions) and [unifreq/openwrt_packit](https://github.com/unifreq/openwrt_packit). It can be integrated when compiling firmware, or it can be installed into an existing system for use. For specific usage, please refer to [Kernel usage Instructions](https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/compile-kernel/README.md#kernel-usage-instructions).
+These kernels can be used on `Armbian` and `OpenWrt` systems, such as [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian), [amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt), [flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions), and [unifreq/openwrt_packit](https://github.com/unifreq/openwrt_packit). They can be integrated when compiling firmware or installed in existing systems for use. For specific usage methods, please refer to [kernel usage instructions](https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/compile-kernel/README.md#usage-instructions).
 
-Among them, [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy), [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) and [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) are general-purpose kernels that can be used interchangeably. The feature of flippy is that it understands you better, the feature of stable is that it is more intimate, and the feature of dev is that it is more silky.
+The [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy), [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable), and [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) are universal kernels that can be interchanged. Flippy's feature is being more user-friendly, Stable is more intimate, and Dev is smoother.
 
-- The kernel files in [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) in Releases are `stable version`, made and shared by `flippy`.
-- The kernel files in [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) in Releases are `stable version`, more support options have been enabled based on user needs.
-- The kernel files in [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) in Releases are `development version`, and third-party driver support and special modifications have been added for some specific devices.
-- The kernel files in [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) in Releases are `special versions` of the `rk3588` series, which is suitable for devices such as Rock-5B, HinLink-H88K and Beelink-IPC-R, and is not common to other series.
-- In the [dev](https://github.com/ophub/kernel/releases/tag/dev) of Releases, there are download image of the `cross-compilation toolchain` required for compiling the kernel.
-- In the [tools](https://github.com/ophub/kernel/releases/tag/tools) of Releases, there are some `Android system` download images of common TV boxes. When using Armbian and OpenWrt systems, you can use It is used to restore the Android system.
+- The kernel files in [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) of Releases are the `stable version`, which are a series of kernels shared by `flippy`.
+- The kernel files in [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) of Releases are the `stable version` with more support options enabled according to user needs.
+- The kernel files in [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) of Releases are the `development version`, which adds third-party driver support and special modifications for some specific boxes.
+- The kernel files in [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) of Releases are `dedicated versions` for the `rk3588` series, suitable for devices such as Rock-5B, HinLink-H88K, and Beelink-IPC-R and are not interchangeable with other series.
+- In the [dev](https://github.com/ophub/kernel/releases/tag/dev) section of releases, there is a `cross-compilation toolchain` download image required for compiling the kernel.
+- In the [tools](https://github.com/ophub/kernel/releases/tag/tools) section of releases, there are `Android system` download images for some common TV boxes, which can be used to restore the Android system when using Armbian and OpenWrt systems.
 
-## Compile the kernel
+## Compiling the Kernel
 
-- For the method of compiling the kernel, see [compile-kernel](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel). For the method of using github.com's Actions to compile the kernel, see [.github/workflows](.github/workflows). You can customize it by modifying the kernel configuration file in [kernel-config](kernel-config).
+- For detailed instructions on how to compile the kernel, please refer to [compile-kernel](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel). The method of using github.com's Actions to compile the kernel can be found in [.github/workflows](.github/workflows). You can customize the kernel by modifying the kernel configuration file in [kernel-config](kernel-config).
 
-- You can adjust the configuration of the kernel as needed, such as adding drivers and patches. It is also possible to compile personalized signature kernels with special meanings according to mood, such as `5.10.95-happy-new-year`, `5.10.96-beijing-winter-olympics`, `5.10.99-valentines-day` and so on.
+- You can adjust the kernel configuration as needed, such as adding drivers and patches. You can also compile a personalized signature kernel with special significance based on your mood, such as `5.10.95-happy-new-year`, `5.10.96-beijing-winter-olympics`, `5.10.99-valentines-day`, and so on.
 
 ```yaml
 - name: Compile the kernel
@@ -29,9 +29,9 @@ Among them, [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_
     kernel_sign: -yourname
 ```
 
-## kernel source code
+## Kernel Source Code
 
-Thank you very much for the kernel source code maintained by giants such as Unifreq. The source code used by the kernel files in the repository is as follows:
+We would like to express our sincere thanks to unifreq and others for maintaining the kernel source code. The current kernel files in the repository use the following source code:
 
 | Kernel Tags   | Source Code Repository  |
 | ------------- | ----------------------- |
