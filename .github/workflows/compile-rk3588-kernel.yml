@@ -112,7 +112,8 @@ jobs:
           allowUpdates: true
           token: ${{ secrets.GH_TOKEN }}
           body: |
-            The kernel can be used to compile Armbian and OpenWrt.
-            The kernel source code comes from: ${{ inputs.kernel_source }}
-            The kernel compilation toolchain: ${{ inputs.kernel_toolchain }}
-            The kernel files is a special version of the `Rockchip rk3588` series, and is not common to other series.
+            - The kernel can be used to compile Armbian and OpenWrt.
+            - The kernel source code comes from: ${{ inputs.kernel_source }}
+            - The kernel compilation toolchain: ${{ inputs.kernel_toolchain }}
+            - This is a dedicated kernel for `Rockchip rk3588` and is not compatible with other series.
+            - 这是 `Rockchip rk3588` 专用内核，和其他系列不通用。
