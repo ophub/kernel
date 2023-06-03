@@ -65,6 +65,7 @@ on:
         type: choice
         options:
           - kernel-config/stable
+          - false
 
 env:
   TZ: America/New_York

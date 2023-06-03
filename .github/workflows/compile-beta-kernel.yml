@@ -49,6 +49,7 @@ on:
         type: choice
         options:
           - kernel-config/stable
+          - false
       kernel_patch:
         description: "Set the directory for kernel patches"
         required: false

@@ -59,6 +59,7 @@ on:
         type: choice
         options:
           - kernel-config/rk3588
+          - false
 
 env:
   TZ: America/New_York
