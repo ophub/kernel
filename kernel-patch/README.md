@@ -21,6 +21,7 @@ You can refer to the settings in [compile-beta-kernel.yml](../.github/workflows/
     build_target: kernel
     kernel_version: 5.15.1_6.1.1
     kernel_auto: true
+    kernel_config: kernel-config/beta
     kernel_patch: kernel-patch/beta
     auto_patch: true
 ```
@@ -50,6 +51,7 @@ When compiling the kernel, all patches with the suffix `.patch` under `common-ke
     build_target: kernel
     kernel_version: 5.15.1_6.1.1
     kernel_auto: true
+    kernel_config: kernel-config/beta
     kernel_patch: kernel-patch/beta
     auto_patch: true
 ```
