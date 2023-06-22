@@ -45,10 +45,10 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/stable"
+        default: "kernel-config/beta"
         type: choice
         options:
-          - kernel-config/stable
+          - kernel-config/beta
           - false
       kernel_patch:
         description: "Set the directory for kernel patches"
@@ -77,10 +77,10 @@ on:
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-ophub"
+        default: "-ophub-beta"
         type: choice
         options:
-          - -ophub
+          - -ophub-beta
           - -yourname
 
 env:
