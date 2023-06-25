@@ -1,6 +1,6 @@
 # Kernel Patches Description
 
-During GitHub Actions cloud compilation, you can use the `kernel_patch` parameter to specify the directory in your repository where the kernel patches are located. The common kernel patches are stored in a fixed directory name (`common-kernel-patches`), while patches specific to a designated kernel version (e.g., `linux-5.15.y`) should be placed in a directory with the same name as `the kernel source repository`. Any other custom-named directories (such as the one for storing deprecated patches, `deprecated-patches`) will be ignored during kernel compilation.
+During GitHub Actions cloud compilation, you can use the `kernel_patch` parameter to specify the directory in your repository where the kernel patches are located. The common kernel patches are stored in a fixed directory name (`common-kernel-patches`), while patches specific to a designated kernel version should be placed in a directory with the same name as `the kernel source repository` (e.g., [linux-5.15.y](https://github.com/unifreq/linux-5.15.y)). Any other custom-named directories (such as the one for storing deprecated patches, `deprecated-patches`) will be ignored during kernel compilation.
 
 ```shell
 ~/kernel
@@ -30,7 +30,7 @@ When compiling the kernel, all patches with the suffix `.patch` under `common-ke
 
 # 内核补丁使用说明
 
-在 GitHub Actions 云编译时，可以使用 `kernel_patch` 参数指定内核补丁在你仓库中的目录。其中通用内核补丁采用固定目录名称（`common-kernel-patches`），仅适用于指定内核版本（例如 `linux-5.15.y`）的补丁使用 `与内核源码库同名` 的目录名称。使用其他自定义命名的目录（例如存放已弃用补丁的目录`deprecated-patches`）在内核编译时将忽略。
+在 GitHub Actions 云编译时，可以使用 `kernel_patch` 参数指定内核补丁在你仓库中的目录。其中通用内核补丁采用固定目录名称（`common-kernel-patches`），仅适用于指定内核版本的补丁使用 `与内核源码库同名` 的目录名称（例如 [linux-5.15.y](https://github.com/unifreq/linux-5.15.y)）。使用其他自定义命名的目录（例如存放已弃用补丁的目录`deprecated-patches`）在内核编译时将忽略。
 
 ```shell
 ~/kernel
