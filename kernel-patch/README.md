@@ -12,7 +12,7 @@ When cloud compiling with GitHub Actions, you can use the `kernel_patch` paramet
         └── more kernel directory...
 ```
 
-You can refer to the settings in [compile-beta-kernel.yml](../.github/workflows/compile-beta-kernel.yml) for usage examples in kernel compilation scripts.
+You can refer to the settings in [compile-beta-general-kernel.yml](../.github/workflows/compile-beta-general-kernel.yml) for usage examples in kernel compilation scripts.
 
 ```yaml
 - name: Compile the kernel
@@ -42,7 +42,7 @@ When compiling the kernel, all patches with the suffix `.patch` under `common-ke
         └── more kernel directory...
 ```
 
-在内核编译脚本中使用方法可以参考 [compile-beta-kernel.yml](../.github/workflows/compile-beta-kernel.yml) 的设置：
+在内核编译脚本中使用方法可以参考 [compile-beta-general-kernel.yml](../.github/workflows/compile-beta-general-kernel.yml) 的设置：
 
 ```yaml
 - name: Compile the kernel

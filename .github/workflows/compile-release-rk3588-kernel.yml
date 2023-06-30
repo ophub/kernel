@@ -1,10 +1,10 @@
 #==========================================================================
-# Description: Compile stable kernel
-# Copyright (C) 2021 https://github.com/unifreq/openwrt_packit
-# Copyright (C) 2021 https://github.com/ophub/kernel
+# Description: Compile release rk3588 kernel
+# Copyright (C) 2023 https://github.com/unifreq/linux-5.10.y-rk35xx
+# Copyright (C) 2023 https://github.com/ophub/kernel
 #==========================================================================
 
-name: Compile stable kernel
+name: Compile release rk3588 kernel
 
 on:
   repository_dispatch:
@@ -13,22 +13,17 @@ on:
       kernel_source:
         description: "Select the kernel source"
         required: false
-        default: "unifreq"
+        default: "unifreq/linux-5.10.y-rk35xx"
         type: choice
         options:
-          - unifreq
+          - unifreq/linux-5.10.y-rk35xx
       kernel_version:
         description: "Select kernel version"
         required: false
-        default: "5.15.1_6.1.1"
+        default: "5.10.1"
         type: choice
         options:
-          - 5.4.1_5.10.1
-          - 5.15.1_6.1.1
-          - 5.4.1
           - 5.10.1
-          - 5.15.1
-          - 6.1.1
       kernel_auto:
         description: "Auto use the latest kernel"
         required: false
@@ -48,23 +43,22 @@ on:
         default: "gcc"
         type: choice
         options:
-          - clang
           - gcc
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-ophub"
+        default: "-rk3588"
         type: choice
         options:
-          - -ophub
+          - -rk3588
           - -yourname
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/release/general"
+        default: "kernel-config/release/rk3588"
         type: choice
         options:
-          - kernel-config/release/general
+          - kernel-config/release/rk3588
           - false
 
 env:
@@ -114,7 +108,7 @@ jobs:
         uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
         with:
-          tag: kernel_stable
+          tag: kernel_rk3588
           artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
           allowUpdates: true
           token: ${{ secrets.GH_TOKEN }}
@@ -122,5 +116,5 @@ jobs:
             - The kernel can be used to compile Armbian and OpenWrt.
             - The kernel source code comes from: ${{ inputs.kernel_source }}
             - The kernel compilation toolchain: ${{ inputs.kernel_toolchain }}
-            - This is a `stable` kernel, which can be used in Armbian and OpenWrt.
-            - 这是`稳定版`内核，可以在 Armbian 和 OpenWrt 里使用。
+            - This is a dedicated kernel for `Rockchip rk3588` and is not compatible with other series.
+            - 这是 `Rockchip rk3588` 专用内核，和其他系列不通用。
