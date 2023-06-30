@@ -3173,10 +3173,10 @@ CONFIG_WIFI_BUILD_MODULE=y
 # CONFIG_WIFI_GENERATE_RANDOM_MAC_ADDR is not set
 CONFIG_BCMDHD=y
 CONFIG_AP6XXX=m
-# CONFIG_BCMDHD_SDIO is not set
-CONFIG_BCMDHD_PCIE=y
-CONFIG_BCMDHD_FW_PATH="/vendor/etc/firmware/fw_bcmdhd.bin"
-CONFIG_BCMDHD_NVRAM_PATH="/vendor/etc/firmware/nvram.txt"
+CONFIG_BCMDHD_SDIO=y
+# CONFIG_BCMDHD_PCIE is not set
+CONFIG_BCMDHD_FW_PATH="/lib/firmware/fw_bcmdhd.bin"
+CONFIG_BCMDHD_NVRAM_PATH="/lib/firmware/nvram.txt"
 # CONFIG_BCMDHD_STATIC_IF is not set
 # CONFIG_CYW_BCMDHD is not set
 # CONFIG_INFINEON_DHD is not set
