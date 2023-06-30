@@ -47,10 +47,10 @@ on:
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-rk3588"
+        default: "-rk3588-ophub"
         type: choice
         options:
-          - -rk3588
+          - -rk3588-ophub
           - -yourname
       kernel_config:
         description: "Set the path of kernel .config"

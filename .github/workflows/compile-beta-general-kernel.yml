@@ -77,10 +77,10 @@ on:
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-ophub-beta"
+        default: "-beta"
         type: choice
         options:
-          - -ophub-beta
+          - -beta
           - -yourname
 
 env:
