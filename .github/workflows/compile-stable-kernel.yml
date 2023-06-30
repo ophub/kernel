@@ -61,10 +61,10 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/release/stable"
+        default: "kernel-config/release/general"
         type: choice
         options:
-          - kernel-config/release/stable
+          - kernel-config/release/general
           - false
 
 env:
