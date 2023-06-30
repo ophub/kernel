@@ -17,6 +17,7 @@ on:
         type: choice
         options:
           - unifreq
+          - unifreq/linux-5.10.y-rk35xx
       kernel_version:
         description: "Select kernel version"
         required: false
@@ -45,10 +46,11 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/beta"
+        default: "kernel-config/beta/general"
         type: choice
         options:
-          - kernel-config/beta
+          - kernel-config/beta/general
+          - kernel-config/beta/rk3588
           - false
       kernel_patch:
         description: "Set the directory for kernel patches"
@@ -77,10 +79,11 @@ on:
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-ophub-beta"
+        default: "-ophub-beta-general"
         type: choice
         options:
-          - -ophub-beta
+          - -ophub-beta-general
+          - -ophub-beta-rk3588
           - -yourname
 
 env:

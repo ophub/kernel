@@ -55,10 +55,10 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/rk3588"
+        default: "kernel-config/release/rk3588"
         type: choice
         options:
-          - kernel-config/rk3588
+          - kernel-config/release/rk3588
           - false
 
 env:
