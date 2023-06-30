@@ -1,6 +1,6 @@
-From cb17fc4c3b4f281c49df03b8e946fd964c2bd900 Mon Sep 17 00:00:00 2001
+From 2c932164df37508ba169cd70475b43ec49e30e0e Mon Sep 17 00:00:00 2001
 From: xxxxx <67037522+xxxxx@users.noreply.github.com>
-Date: Sun, 23 Apr 2023 00:48:16 +0000
+Date: Fri, 30 Jun 2023 13:40:46 +0000
 Subject: [PATCH] Add text_offset
 
 ---
@@ -96,7 +96,7 @@ index 2f361a883..fd925c914 100644
  
  CFLAGS_REMOVE_ftrace.o = $(CC_FLAGS_FTRACE)
 diff --git a/arch/arm64/kernel/head.S b/arch/arm64/kernel/head.S
-index 2196aad7b..cd5e09825 100644
+index cdbbc95eb..344282cde 100644
 --- a/arch/arm64/kernel/head.S
 +++ b/arch/arm64/kernel/head.S
 @@ -37,6 +37,8 @@
@@ -251,10 +251,10 @@ index ef5045a53..4e1275321 100644
  zboot-obj-$(CONFIG_RISCV)	:= lib-clz_ctz.o lib-ashldi3.o
  lib-$(CONFIG_EFI_ZBOOT)		+= zboot.o $(zboot-obj-y)
 diff --git a/drivers/firmware/efi/libstub/arm64-stub.c b/drivers/firmware/efi/libstub/arm64-stub.c
-index 42282c5c3..381b494bf 100644
+index e2f90566b..94fdd23ea 100644
 --- a/drivers/firmware/efi/libstub/arm64-stub.c
 +++ b/drivers/firmware/efi/libstub/arm64-stub.c
-@@ -149,7 +149,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
+@@ -172,7 +172,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
  
  	kernel_size = _edata - _text;
  	kernel_memsize = kernel_size + (_end - _edata);
@@ -263,7 +263,7 @@ index 42282c5c3..381b494bf 100644
  
  	if (IS_ENABLED(CONFIG_RANDOMIZE_BASE) && phys_seed != 0) {
  		/*
-@@ -167,7 +167,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
+@@ -190,7 +190,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
  	if (status != EFI_SUCCESS) {
  		if (!check_image_region((u64)_text, kernel_memsize)) {
  			efi_err("FIRMWARE BUG: Image BSS overlaps adjacent EFI memory region\n");
@@ -272,7 +272,7 @@ index 42282c5c3..381b494bf 100644
  			/*
  			 * Just execute from wherever we were loaded by the
  			 * UEFI PE/COFF loader if the alignment is suitable.
-@@ -187,7 +187,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
+@@ -210,7 +210,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
  		}
  	}
  
