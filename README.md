@@ -9,8 +9,8 @@ The [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy),
 - The kernel files in [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) of Releases are the `stable version`, which are a series of kernels shared by `flippy`.
 - The kernel files in [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) of Releases are the `stable version` with more support options enabled according to user needs.
 - The kernel files in [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) of Releases are the `development version`, which adds third-party driver support and special modifications for some specific boxes.
-- The kernel files in [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) of Releases are `dedicated versions` for the `rk3588` series, suitable for devices such as Rock-5B, HinLink-H88K, and Beelink-IPC-R and are not interchangeable with other series.
-- The kernel files in [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) of Releases are `beta versions` that will be sent to testers for functional testing on specific devices. Other users should not install and use them.
+- The kernel files in [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) of Releases are `dedicated versions` for the `rk3588` series, and it is not compatible with other series.
+- The kernel files in [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) of Releases are the `beta versions`, Supports custom addition of third-party drivers and other patches, as well as custom configuration for compilation.
 - In the [dev](https://github.com/ophub/kernel/releases/tag/dev) section of releases, there is a `cross-compilation toolchain` download image required for compiling the kernel.
 - In the [tools](https://github.com/ophub/kernel/releases/tag/tools) section of releases, there are `Android system` download images for some common TV boxes, which can be used to restore the Android system when using Armbian and OpenWrt systems.
 
