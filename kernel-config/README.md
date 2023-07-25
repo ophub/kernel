@@ -1,6 +1,6 @@
-# Personalized Kernel Configuration Description
+# Kernel Personalized Configuration Guide
 
-During GitHub Actions cloud compilation, you can use the `kernel_config` parameter to specify a personalized kernel configuration. The configuration files (config-k.x) for each kernel version are named using the major version number (e.g. config-6.1). The usage can refer to the settings in [compile-release-general-kernel.yml](../.github/workflows/compile-release-general-kernel.yml):
+During cloud compilation using GitHub Actions, you can use the `kernel_config` parameter to specify personalized kernel configuration. The naming of the configuration files (config-k.x) of each kernel version uses the major version number (for example: config-6.1). You can refer to the settings in [compile-release-general-kernel.yml](../.github/workflows/compile-release-general-kernel.yml):
 
 ```yaml
 - name: Compile the kernel
@@ -12,7 +12,7 @@ During GitHub Actions cloud compilation, you can use the `kernel_config` paramet
     kernel_config: kernel-config/release/stable
 ```
 
-If there is no special requirement, you can compile the kernel using the default configuration file [compile-kernel/tools/config](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel/tools/config) without specifying personalized configuration. For more settings, please refer to the [Kernel Compilation Instructions](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel) document.
+If there is no special requirement, you can proceed without specifying personalized configuration. The kernel default configuration file [compile-kernel/tools/config](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel/tools/config) will be used for kernel compilation. For more settings, please refer to the [Kernel Compilation Guide](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel) document.
 
 # 内核个性化配置说明
 

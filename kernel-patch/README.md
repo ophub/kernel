@@ -1,18 +1,18 @@
-# Kernel Patches Description
+# Kernel Patch Usage Guide
 
-When cloud compiling with GitHub Actions, you can use the `kernel_patch` parameter to specify the directory of kernel patches in your repository. For universally applicable kernel patches that can be used for every kernel series, a fixed directory name (`common-kernel-patches`) is used. For kernel patches specific to a particular series, such as [linux-5.15.y](https://github.com/unifreq/linux-5.15.y), the directory name should be the same as `the kernel source code repository`. Any other directories with custom names (e.g., a directory for deprecated patches named `deprecated-patches`) will be skipped during kernel compilation and won't be used.
+During cloud compilation using GitHub Actions, you can use the `kernel_patch` parameter to specify the directory of the kernel patches in your repository. The common kernel patches that can be used for each series of kernels adopt a fixed directory name (`common-kernel-patches`). Only the patches specific to a particular series, for example, [linux-5.15.y](https://github.com/unifreq/linux-5.15.y), use the directory name `identical to the kernel source library`. Other custom named directories (such as the `deprecated-patches` directory for storing obsolete patches) will be skipped during kernel compilation and will not be used.
 
 ```shell
 ~/kernel
     └── <your-kernel-patches>
-        ├── common-kernel-patches  # Fixed directory name: Storing common kernel patches
-        ├── linux-5.15.y           # Same as kernel source repository: storing dedicated kernel patches
+        ├── common-kernel-patches  # Fixed directory name: Stores kernel patches common to all versions
+        ├── linux-5.15.y           # Same as the kernel source library: stores dedicated patches
         ├── linux-6.1.y
         ├── linux-5.10.y-rk35xx
         └── more kernel directory...
 ```
 
-You can refer to the settings in [compile-beta-general-kernel.yml](../.github/workflows/compile-beta-general-kernel.yml) for usage examples in kernel compilation scripts.
+The usage in the kernel compilation script can refer to the settings in [compile-beta-general-kernel.yml](../.github/workflows/compile-beta-general-kernel.yml):
 
 ```yaml
 - name: Compile the kernel
@@ -26,7 +26,7 @@ You can refer to the settings in [compile-beta-general-kernel.yml](../.github/wo
     auto_patch: true
 ```
 
-When compiling the kernel, all patches with the suffix `.patch` under `common-kernel-patches` are first traversed and applied, followed by the private patches for the current compiled kernel (such as: linux-6.1.y). For more information, please refer to the detailed introduction in [Kernel Compilation Method](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel) and [Kernel Patch Addition Method](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/build-armbian/documents#9-compile-armbian-kernel).
+When compiling the kernel, it will first enumerate all the patches with `.patch` suffix under `common-kernel-patches` and apply them, then enumerate and apply the dedicated patches for the current compiled kernel (such as: linux-6.1.y). For more instructions, please refer to the detailed introduction in [Kernel Compilation Method](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel) and [Kernel Patch Addition Method](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/build-armbian/documents/README.md#9-compiling-armbian-kernel).
 
 # 内核补丁使用说明
 
