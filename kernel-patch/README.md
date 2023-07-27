@@ -26,7 +26,7 @@ The usage in the kernel compilation script can refer to the settings in [compile
     auto_patch: true
 ```
 
-When compiling the kernel, it will first enumerate all the patches with `.patch` suffix under `common-kernel-patches` and apply them, then enumerate and apply the dedicated patches for the current compiled kernel (such as: linux-6.1.y). For more instructions, please refer to the detailed introduction in [Kernel Compilation Method](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel) and [Kernel Patch Addition Method](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/build-armbian/documents/README.md#9-compiling-armbian-kernel).
+When compiling the kernel, it will first enumerate all the patches with `.patch` suffix under `common-kernel-patches` and apply them, then enumerate and apply the dedicated patches for the current compiled kernel (such as: linux-6.1.y). For more instructions, please refer to the detailed introduction in [Kernel Compilation Method](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel) and [Kernel Patch Addition Method](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/documents/README.md#9-compiling-armbian-kernel).
 
 # 内核补丁使用说明
 
@@ -56,4 +56,4 @@ When compiling the kernel, it will first enumerate all the patches with `.patch`
     auto_patch: true
 ```
 
-在编译内核时，会先遍列 `common-kernel-patches` 下后缀是 `.patch` 的全部补丁并应用，然后再遍列当前编译内核（如：linux-6.1.y）的专用补丁并应用。更多说明请参考 [内核编译方法](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel) 和 [内核补丁添加方法](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/build-armbian/documents/README.cn.md#9-编译-armbian-内核) 中的详细介绍。
+在编译内核时，会先遍列 `common-kernel-patches` 下后缀是 `.patch` 的全部补丁并应用，然后再遍列当前编译内核（如：linux-6.1.y）的专用补丁并应用。更多说明请参考 [内核编译方法](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel) 和 [内核补丁添加方法](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/documents/README.cn.md#9-编译-armbian-内核) 中的详细介绍。
