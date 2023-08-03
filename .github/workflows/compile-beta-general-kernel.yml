@@ -45,10 +45,10 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/beta/general"
+        default: "kernel-config/release/general"
         type: choice
         options:
-          - kernel-config/beta/general
+          - kernel-config/release/general
           - false
       kernel_patch:
         description: "Set the directory for kernel patches"
