@@ -33,11 +33,11 @@ These kernels can be used for `Armbian` and `OpenWrt` systems, such as the [amlo
 
 A big thank you to unifreq and others for maintaining the kernel source code. The source code used in the kernel files in the repository is as follows:
 
-| Kernel Tags   | Source Code Repository  |
-| ------------- | ----------------------- |
-| [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy)<br>[kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev)<br>[kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) | [unifreq/linux-5.4.y](https://github.com/unifreq/linux-5.4.y)<br>[unifreq/linux-5.10.y](https://github.com/unifreq/linux-5.10.y)<br>[unifreq/linux-5.15.y](https://github.com/unifreq/linux-5.15.y)<br>[unifreq/linux-6.1.y](https://github.com/unifreq/linux-6.1.y) |
-| [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) | [13584452567/linux-6.4.y](https://github.com/13584452567/linux-6.4.y) |
-| [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) |
+| Kernel Tags   | Source Code Repository  | Applicable devices      |
+| ------------- | ----------------------- | ----------------------- |
+| [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy)<br>[kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev)<br>[kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) | [unifreq/linux-5.4.y](https://github.com/unifreq/linux-5.4.y)<br>[unifreq/linux-5.10.y](https://github.com/unifreq/linux-5.10.y)<br>[unifreq/linux-5.15.y](https://github.com/unifreq/linux-5.15.y)<br>[unifreq/linux-6.1.y](https://github.com/unifreq/linux-6.1.y) | Amlogic<br>Allwinner<br>Rockchip |
+| [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) | [13584452567/linux-6.4.y](https://github.com/13584452567/linux-6.4.y) | Allwinner-H6 |
+| [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3588 |
 
 ## Links
 
