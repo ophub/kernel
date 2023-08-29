@@ -9,6 +9,7 @@ These kernels can be used for `Armbian` and `OpenWrt` systems, such as the [amlo
 - The kernel files in the [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) section of the Releases are `development version`, which added third-party driver support and special modifications for some specific boxes.
 - The kernel files in the [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) section of the Releases are `beta version`, which support custom addition of third-party driver patches, and allow custom configuration compilation.
 - The kernel files in the [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) section of the Releases are `special version` for the `rk3588` series, and they are not compatible with other series.
+- The kernel files in the [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) section of the Releases are `special version` for the `Allwinner H6 (TQC-A01)` device, and they are not compatible with other series.
 - The [dev](https://github.com/ophub/kernel/releases/tag/dev) section in the Releases has the download image of the `cross-compilation toolchain` required when compiling the kernel.
 - The [tools](https://github.com/ophub/kernel/releases/tag/tools) section in the Releases has download images of `Android systems` for some common TV boxes, which can be used to restore the Android system when using Armbian and OpenWrt systems.
 
@@ -36,8 +37,8 @@ A big thank you to unifreq and others for maintaining the kernel source code. Th
 | Kernel Tags   | Source Code Repository  | Applicable devices      |
 | ------------- | ----------------------- | ----------------------- |
 | [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy)<br>[kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev)<br>[kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) | [unifreq/linux-5.4.y](https://github.com/unifreq/linux-5.4.y)<br>[unifreq/linux-5.10.y](https://github.com/unifreq/linux-5.10.y)<br>[unifreq/linux-5.15.y](https://github.com/unifreq/linux-5.15.y)<br>[unifreq/linux-6.1.y](https://github.com/unifreq/linux-6.1.y) | Amlogic<br>Allwinner<br>Rockchip |
-| [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) | [13584452567/linux-6.4.y](https://github.com/13584452567/linux-6.4.y) | Allwinner-H6 |
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3588 |
+| [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) | [13584452567/linux-6.4.y](https://github.com/13584452567/linux-6.4.y) | Allwinner-H6(TQC-A01) |
 
 ## Links
 
