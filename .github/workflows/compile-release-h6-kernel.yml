@@ -23,6 +23,7 @@ on:
         default: "6.4.1"
         type: choice
         options:
+          - 6.5.1
           - 6.4.1
       kernel_auto:
         description: "Auto use the latest kernel"
