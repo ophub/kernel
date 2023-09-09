@@ -1,7 +1,7 @@
 #==========================================================================
 # Description: Compile release h6 kernel
-# Copyright (C) 2021 https://github.com/unifreq/openwrt_packit
-# Copyright (C) 2021 https://github.com/ophub/kernel
+# Copyright (C) 2023 https://github.com/13584452567
+# Copyright (C) 2023 https://github.com/ophub/kernel
 #==========================================================================
 
 name: Compile release h6 kernel
@@ -20,7 +20,7 @@ on:
       kernel_version:
         description: "Select kernel version"
         required: false
-        default: "6.4.1"
+        default: "6.5.1"
         type: choice
         options:
           - 6.5.1
