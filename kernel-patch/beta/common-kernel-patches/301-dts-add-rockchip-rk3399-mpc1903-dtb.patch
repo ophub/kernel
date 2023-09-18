@@ -1,19 +1,19 @@
-From c0ec6bd7236ca034e3e3d129b65505d8e5b451c5 Mon Sep 17 00:00:00 2001
+From d738ec5df78c21fc22fb2860af9a8cc7481d2c9d Mon Sep 17 00:00:00 2001
 From: xxxxx <67037522+xxxxx@users.noreply.github.com>
-Date: Fri, 2 Jun 2023 07:37:50 +0000
-Subject: [PATCH] dts: rockchip: add rk3399-mpc1903.dtb
+Date: Mon, 18 Sep 2023 03:09:25 +0000
+Subject: [PATCH] Add rk3399-mpc1903
 
 ---
  arch/arm64/boot/dts/rockchip/Makefile         |   1 +
- .../boot/dts/rockchip/rk3399-mpc1903.dts      | 687 ++++++++++++++++++
- 2 files changed, 688 insertions(+)
+ .../boot/dts/rockchip/rk3399-mpc1903.dts      | 814 ++++++++++++++++++
+ 2 files changed, 815 insertions(+)
  create mode 100644 arch/arm64/boot/dts/rockchip/rk3399-mpc1903.dts
 
 diff --git a/arch/arm64/boot/dts/rockchip/Makefile b/arch/arm64/boot/dts/rockchip/Makefile
-index af0aae270..47fbe3fbf 100644
+index f97cf4c32..ff70c1b4d 100644
 --- a/arch/arm64/boot/dts/rockchip/Makefile
 +++ b/arch/arm64/boot/dts/rockchip/Makefile
-@@ -35,6 +35,7 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-tn3399-v3.dtb
+@@ -37,6 +37,7 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-dlfr100.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-evb.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-ficus.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-firefly.dtb
@@ -23,14 +23,14 @@ index af0aae270..47fbe3fbf 100644
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3399-gru-scarlet-dumo.dtb
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399-mpc1903.dts b/arch/arm64/boot/dts/rockchip/rk3399-mpc1903.dts
 new file mode 100644
-index 000000000..773e3bd78
+index 000000000..7cac536bb
 --- /dev/null
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-mpc1903.dts
-@@ -0,0 +1,687 @@
+@@ -0,0 +1,814 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
 +/dts-v1/;
-+#include <dt-bindings/input/input.h>
++#include <dt-bindings/input/linux-event-codes.h>
 +#include "rk3399.dtsi"
 +#include "rk3399-opp.dtsi"
 +
@@ -41,6 +41,7 @@ index 000000000..773e3bd78
 +	aliases {
 +		mmc0 = &sdmmc;
 +		mmc1 = &sdhci;
++		mmc2 = &sdio0;
 +	};
 +
 +	chosen {
@@ -82,6 +83,41 @@ index 000000000..773e3bd78
 +		vin-supply = <&vcc12v_dcin>;
 +	};
 +
++	vcc5v0_hub: vcc5v0-hub {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&vcc5v0_hub_en>;
++		regulator-name = "vcc5v0_hub";
++		regulator-always-on;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	/*vcc3v3_pcie: vcc3v3-pcie-regulator {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pcie_drv>;
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-name = "vcc3v3_pcie";
++		vin-supply = <&vcc5v0_sys>;
++	};*/
++
++	vcc3v3_gsm: vcc3v3-gsm {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&vcc3v3_gsm_en>;
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-name = "vcc3v3_gsm";
++		vin-supply = <&vcc3v3_sys>;
++	};
++
 +	vcc3v3_sys: vcc3v3-sys {
 +		compatible = "regulator-fixed";
 +		regulator-name = "vcc3v3_sys";
@@ -103,26 +139,15 @@ index 000000000..773e3bd78
 +		vin-supply = <&vcc5v0_sys>;
 +	};
 +
-+	vcc5v0_hub: vcc5v0-hub {
++	vcc5v0_typec: vcc5v0-typec-regulator {
 +		compatible = "regulator-fixed";
 +		enable-active-high;
-+		gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
++		gpio = <&gpio3 RK_PD4 GPIO_ACTIVE_HIGH>;
 +		pinctrl-names = "default";
-+		pinctrl-0 = <&vcc5v0_hub_en>;
-+		regulator-name = "vcc5v0_hub";
++		pinctrl-0 = <&vcc5v0_typec_en>;
++		regulator-name = "vcc5v0_typec";
 +		regulator-always-on;
 +		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc3v3_gsm: vcc3v3-gsm {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpio = <&gpio1 RK_PC6 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&vcc3v3_gsm_en>;
-+		regulator-name = "vcc3v3_gsm";
-+		regulator-always-on;
-+		vin-supply = <&vcc3v3_sys>;
 +	};
 +
 +	vcc_lan: vcc-phy {
@@ -155,6 +180,29 @@ index 000000000..773e3bd78
 +			linux,default-trigger = "heartbeat";
 +			gpios = <&gpio1 RK_PD0 GPIO_ACTIVE_LOW>;
 +		};
++	};
++
++	wireless_wlan: wireless-wlan {
++		compatible = "wlan-platdata";
++		rockchip,grf = <&grf>;
++		wifi_chip_type = "rtl8723bu";
++		sdio_vref = <1800>;
++		WIFI,host_wake_irq = <&gpio0 RK_PA3 GPIO_ACTIVE_HIGH>;
++		status = "okay";
++	};
++
++	wireless_bluetooth: wireless-bluetooth {
++		compatible = "bluetooth-platdata";
++		clocks = <&rk808 1>;
++		clock-names = "ext_clock";
++		uart_rts_gpios = <&gpio2 RK_PC3 GPIO_ACTIVE_LOW>;
++		pinctrl-names = "default", "rts_gpio";
++		pinctrl-0 = <&uart0_rts>;
++		pinctrl-1 = <&uart0_gpios>;
++		BT,reset_gpio = <&gpio2 RK_PD3 GPIO_ACTIVE_HIGH>;
++		BT,wake_gpio = <&gpio2 RK_PD2 GPIO_ACTIVE_HIGH>;
++		BT,wake_host_irq = <&gpio0 RK_PA4 GPIO_ACTIVE_HIGH>;
++		status = "okay";
 +	};
 +};
 +
@@ -300,11 +348,11 @@ index 000000000..773e3bd78
 +			};
 +
 +			gen_1v8: LDO_REG1 {
-+				regulator-name = "gen_1v8";
++				regulator-name = "gen_3v0";
 +				regulator-always-on;
 +				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
++				regulator-min-microvolt = <3000000>;
++				regulator-max-microvolt = <3000000>;
 +
 +				regulator-state-mem {
 +					regulator-off-in-suspend;
@@ -312,7 +360,7 @@ index 000000000..773e3bd78
 +			};
 +
 +			gen_3v0: LDO_REG2 {
-+				regulator-name = "gen_3v0";
++				regulator-name = "gen_gen";
 +				regulator-always-on;
 +				regulator-boot-on;
 +				regulator-min-microvolt = <3000000>;
@@ -469,9 +517,36 @@ index 000000000..773e3bd78
 +};
 +
 +&i2c1 {
++	status = "okay";
 +	i2c-scl-rising-time-ns = <300>;
 +	i2c-scl-falling-time-ns = <15>;
-+	status = "okay";
++	clock-frequency = <200000>;
++
++	/*rt5651: rt5651@1a {
++		#sound-dai-cells = <0>;
++		compatible = "realtek,rt5651";
++		reg = <0x1a>;
++		clocks = <&cru SCLK_I2S_8CH_OUT>;
++		clock-names = "mclk";
++		pinctrl-names = "default";
++		pinctrl-0 = <&i2s_8ch_mclk>;
++		spk-con-gpio = <&gpio0 RK_PB3 GPIO_ACTIVE_HIGH>;
++		hp-det-gpio = <&gpio4 RK_PB3 GPIO_ACTIVE_LOW>;
++		status = "okay";
++	};*/
++
++	es8323: es8323@10 {
++		#sound-dai-cells = <0x0>;
++		compatible = "everest,es8323";
++		reg = <0x10>;
++		clocks = <&cru SCLK_I2S_8CH_OUT>;
++		clock-names = "mclk";
++		pinctrl-names = "default";
++		pinctrl-0 = <&spk_con &spk_pwr &amp_pwr &i2s_8ch_mclk>;
++		spk-con-gpio = <&gpio2 RK_PA2 GPIO_ACTIVE_HIGH>;
++		amp-pwr-en = <&gpio3 RK_PD6 GPIO_ACTIVE_HIGH>;
++		spk-pwr = <&gpio4 RK_PA5 GPIO_ACTIVE_HIGH>;
++	};
 +};
 +
 +&i2c4 {
@@ -512,13 +587,19 @@ index 000000000..773e3bd78
 +	pmu1830-supply = <&vcc_3v0>;
 +};
 +
-+&pinctrl {
-+	bt {
-+		bt_enable_h: bt-enable-h {
-+			rockchip,pins = <2 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
++/*&pcie_phy {
++	status = "okay";
++};
 +
++&pcie0 {
++	ep-gpios = <&gpio2 RK_PB0 GPIO_ACTIVE_HIGH>;
++	num-lanes = <4>;
++	pinctrl-0 = <&pcie_clkreqnb_cpm>;
++	pinctrl-names = "default";
++	status = "okay";
++};*/
++
++&pinctrl {
 +	pmic {
 +		pmic_int_l: pmic-int-l {
 +			rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_up>;
@@ -547,7 +628,13 @@ index 000000000..773e3bd78
 +		};
 +	};
 +
-+	wifi {
++	usb-typec {
++		vcc5v0_typec_en: vcc5v0-typec-en {
++			rockchip,pins = <3 RK_PD4 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	sdio-pwrseq {
 +		wifi_enable_h: wifi-enable-h {
 +			rockchip,pins = <2 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
 +		};
@@ -570,6 +657,44 @@ index 000000000..773e3bd78
 +			rockchip,pins = <0 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
 +		};
 +	};
++
++	es8323 {
++		spk_con: spk-con {
++			rockchip,pins = <2 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		spk_pwr: spk-pwr {
++			rockchip,pins = <4 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		amp_pwr: amp-pwr {
++			rockchip,pins = <3 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++   i2s0 {
++       i2s_8ch_mclk: i2s-8ch-mclk {
++           ockchip,pins = <4 RK_PA0 1 &pcfg_pull_none>;
++       };
++   };
++
++	fusb30x {
++		fusb0_int: fusb0-int {
++			rockchip,pins = <1 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	wireless-bluetooth {
++		uart0_gpios: uart0-gpios {
++			rockchip,pins = <2 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++/*	pcie {
++		pcie_drv: pcie-drv {
++			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};*/
 +};
 +
 +&pwm2 {
@@ -583,6 +708,7 @@ index 000000000..773e3bd78
 +};
 +
 +&sdio0 {
++	max-frequency = <200000000>;
 +	bus-width = <4>;
 +	clock-frequency = <50000000>;
 +	cap-sdio-irq;
@@ -593,6 +719,7 @@ index 000000000..773e3bd78
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&sdio0_bus4 &sdio0_cmd &sdio0_clk>;
 +	sd-uhs-sdr104;
++	status = "okay";
 +};
 +
 +&sdmmc {
@@ -600,7 +727,6 @@ index 000000000..773e3bd78
 +	cap-mmc-highspeed;
 +	cap-sd-highspeed;
 +	cd-gpios = <&gpio0 RK_PA7 GPIO_ACTIVE_LOW>;
-+	disable-wp;
 +	max-frequency = <150000000>;
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&sdmmc_clk &sdmmc_cd &sdmmc_cmd &sdmmc_bus4>;
@@ -608,6 +734,7 @@ index 000000000..773e3bd78
 +};
 +
 +&sdhci {
++	max-frequency = <150000000>;
 +	bus-width = <8>;
 +	mmc-hs400-1_8v;
 +	mmc-hs400-enhanced-strobe;
