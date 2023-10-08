@@ -9,7 +9,6 @@
 - 在 Releases 的 [kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev) 里的内核文件是`开发版`，为一些特定盒子添加了第三方的驱动支持和特殊修改。
 - 在 Releases 的 [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) 里的内核文件是 `测试版`，支持自定义添加第三方驱动等补丁，支持自定义配置编译。
 - 在 Releases 的 [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) 里的内核文件是 `rk3588` 系列的`专用版本`，和其他系列不通用。
-- 在 Releases 的 [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) 里的内核文件是 `rk3528/rk3566/rk3568` 系列的`专用版本`，和其他系列不通用。
 - 在 Releases 的 [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) 里的内核文件是 `全志 H6（TQC-A01）` 设备的`专用版本`，和其他系列不通用。
 - 在 Releases 的 [dev](https://github.com/ophub/kernel/releases/tag/dev) 里有编译内核时需要的`交叉编译工具链`下载镜像。
 - 在 Releases 的 [tools](https://github.com/ophub/kernel/releases/tag/tools) 里有一些常见的电视盒子的`安卓系统`下载镜像，在使用 Armbian 和 OpenWrt 系统时，可以用于恢复安卓系统使用。
@@ -39,7 +38,6 @@
 | ------------- | --------------------- | --------------------- |
 | [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy)<br>[kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev)<br>[kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) | [unifreq/linux-5.4.y](https://github.com/unifreq/linux-5.4.y)<br>[unifreq/linux-5.10.y](https://github.com/unifreq/linux-5.10.y)<br>[unifreq/linux-5.15.y](https://github.com/unifreq/linux-5.15.y)<br>[unifreq/linux-6.1.y](https://github.com/unifreq/linux-6.1.y) | Amlogic<br>Allwinner<br>Rockchip |
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3588 |
-| [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3528/RK3566/RK3568 |
 | [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) | [13584452567/linux-6.4.y](https://github.com/13584452567/linux-6.4.y)<br>[13584452567/linux-6.5.y](https://github.com/13584452567/linux-6.5.y) | Allwinner-H6(TQC-A01) |
 
 
