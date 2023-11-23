@@ -20,9 +20,10 @@ on:
       kernel_version:
         description: "Select kernel version"
         required: false
-        default: "6.5.1"
+        default: "6.6.1"
         type: choice
         options:
+          - 6.6.1
           - 6.5.1
           - 6.4.1
       kernel_auto:
