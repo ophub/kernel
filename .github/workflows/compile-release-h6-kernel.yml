@@ -13,10 +13,11 @@ on:
       kernel_source:
         description: "Select the kernel source"
         required: false
-        default: "13584452567"
+        default: "codesnas/linux-h6-6.6.y"
         type: choice
         options:
           - 13584452567
+          - codesnas/linux-h6-6.6.y
       kernel_version:
         description: "Select kernel version"
         required: false
@@ -24,8 +25,6 @@ on:
         type: choice
         options:
           - 6.6.1
-          - 6.5.1
-          - 6.4.1
       kernel_auto:
         description: "Auto use the latest kernel"
         required: false
