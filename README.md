@@ -41,6 +41,8 @@ A big thank you to unifreq and others for maintaining the kernel source code. Th
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3588 |
 | [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3528/RK3566/RK3568 |
 | [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) | [13584452567/linux-6.4.y](https://github.com/13584452567/linux-6.4.y)<br>[13584452567/linux-6.5.y](https://github.com/13584452567/linux-6.5.y)<br>[13584452567/linux-6.6.y](https://github.com/13584452567/linux-6.6.y) | Allwinner-H6(TQC-A01) |
+| [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev)<br>[kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) | [codesnas/linux-xxx](https://github.com/codesnas) | The kernel source code was cloned from the repositories <br>of [unifreq](https://github.com/unifreq), [13584452567](https://github.com/13584452567) and [chewitt](https://github.com/chewitt/linux), facilitating learning <br>how to patch the kernel by following these experts. |
+
 
 ## Links
 

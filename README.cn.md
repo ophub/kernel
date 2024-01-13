@@ -35,12 +35,13 @@
 
 非常感谢 unifreq 等大佬们维护的内核源码，目前仓库中的内核文件使用的源码如下：
 
-| 内核标签       | 源码仓库               | 适用设备               |
+| 内核标签        | 源码仓库               | 适用设备               |
 | ------------- | --------------------- | --------------------- |
 | [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy)<br>[kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev)<br>[kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) | [unifreq/linux-5.4.y](https://github.com/unifreq/linux-5.4.y)<br>[unifreq/linux-5.10.y](https://github.com/unifreq/linux-5.10.y)<br>[unifreq/linux-5.15.y](https://github.com/unifreq/linux-5.15.y)<br>[unifreq/linux-6.1.y](https://github.com/unifreq/linux-6.1.y) | Amlogic<br>Allwinner<br>Rockchip |
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3588 |
 | [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3528/RK3566/RK3568 |
 | [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) | [13584452567/linux-6.4.y](https://github.com/13584452567/linux-6.4.y)<br>[13584452567/linux-6.5.y](https://github.com/13584452567/linux-6.5.y)<br>[13584452567/linux-6.6.y](https://github.com/13584452567/linux-6.6.y) | Allwinner-H6(TQC-A01) |
+| [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev)<br>[kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) | [codesnas/linux-xxx](https://github.com/codesnas) | 内核源码复制自 [unifreq](https://github.com/unifreq), [13584452567](https://github.com/13584452567) 和 [chewitt](https://github.com/chewitt/linux) 的仓库，<br>便于跟随大佬们学习如何给内核打补丁。 |
 
 
 ## 链接
