@@ -59,6 +59,7 @@ on:
         type: choice
         options:
           - -ophub
+          - -happy-new-year
           - -yourname
       kernel_config:
         description: "Set the path of kernel .config"
