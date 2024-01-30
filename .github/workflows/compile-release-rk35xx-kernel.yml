@@ -51,6 +51,7 @@ on:
         type: choice
         options:
           - -rk35xx-ophub
+          - -happy-new-year
           - -yourname
       kernel_config:
         description: "Set the path of kernel .config"

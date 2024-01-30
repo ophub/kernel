@@ -81,6 +81,7 @@ on:
         type: choice
         options:
           - -beta
+          - -happy-new-year
           - -yourname
 
 env:
