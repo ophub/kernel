@@ -112,7 +112,7 @@ jobs:
           tag: kernel_rk35xx
           artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
           allowUpdates: true
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             - The kernel can be used to compile Armbian and OpenWrt.
             - The kernel source code comes from: unifreq/linux-5.10.y-rk35xx
