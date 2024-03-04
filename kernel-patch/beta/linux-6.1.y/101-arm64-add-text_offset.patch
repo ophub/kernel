@@ -1,6 +1,6 @@
-From 2c932164df37508ba169cd70475b43ec49e30e0e Mon Sep 17 00:00:00 2001
+From 7e669045af6bdd2df6a51c4f3c773692034f9899 Mon Sep 17 00:00:00 2001
 From: xxxxx <67037522+xxxxx@users.noreply.github.com>
-Date: Fri, 30 Jun 2023 13:40:46 +0000
+Date: Mon, 4 Mar 2024 13:09:02 +0800
 Subject: [PATCH] Add text_offset
 
 ---
@@ -19,7 +19,7 @@ Subject: [PATCH] Add text_offset
  12 files changed, 35 insertions(+), 20 deletions(-)
 
 diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
-index 5e56d26a2..add165d2a 100644
+index c9496539c..c86cd9445 100644
 --- a/arch/arm64/Makefile
 +++ b/arch/arm64/Makefile
 @@ -11,6 +11,7 @@
@@ -225,10 +225,10 @@ index 45131e354..329433fda 100644
  ASSERT(swapper_pg_dir - reserved_pg_dir == RESERVED_SWAPPER_OFFSET,
         "RESERVED_SWAPPER_OFFSET is wrong!")
 diff --git a/arch/arm64/mm/mmu.c b/arch/arm64/mm/mmu.c
-index 9a7c38965..1c57fbfb8 100644
+index 4b302dbf7..8632e111f 100644
 --- a/arch/arm64/mm/mmu.c
 +++ b/arch/arm64/mm/mmu.c
-@@ -50,9 +50,6 @@ u64 vabits_actual __ro_after_init = VA_BITS_MIN;
+@@ -52,9 +52,6 @@ u64 vabits_actual __ro_after_init = VA_BITS_MIN;
  EXPORT_SYMBOL(vabits_actual);
  #endif
  
@@ -239,7 +239,7 @@ index 9a7c38965..1c57fbfb8 100644
  EXPORT_SYMBOL(kimage_voffset);
  
 diff --git a/drivers/firmware/efi/libstub/Makefile b/drivers/firmware/efi/libstub/Makefile
-index ef5045a53..4e1275321 100644
+index b6e1dcb98..d562fc2e6 100644
 --- a/drivers/firmware/efi/libstub/Makefile
 +++ b/drivers/firmware/efi/libstub/Makefile
 @@ -88,6 +88,7 @@ lib-$(CONFIG_RISCV)		+= riscv-stub.o
