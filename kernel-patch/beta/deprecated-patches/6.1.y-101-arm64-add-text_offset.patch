@@ -1,7 +1,7 @@
-From 7e669045af6bdd2df6a51c4f3c773692034f9899 Mon Sep 17 00:00:00 2001
+From 5bebdd36f56da96f08bad5ab34e39bffd3ef872b Mon Sep 17 00:00:00 2001
 From: xxxxx <67037522+xxxxx@users.noreply.github.com>
-Date: Mon, 4 Mar 2024 13:09:02 +0800
-Subject: [PATCH] Add text_offset
+Date: Thu, 7 Mar 2024 11:38:19 +0800
+Subject: [PATCH] arm64: Apply the text_offset patch
 
 ---
  arch/arm64/Makefile                       |  5 +++++
@@ -239,10 +239,10 @@ index 4b302dbf7..8632e111f 100644
  EXPORT_SYMBOL(kimage_voffset);
  
 diff --git a/drivers/firmware/efi/libstub/Makefile b/drivers/firmware/efi/libstub/Makefile
-index b6e1dcb98..d562fc2e6 100644
+index 473ef1842..8693b17f6 100644
 --- a/drivers/firmware/efi/libstub/Makefile
 +++ b/drivers/firmware/efi/libstub/Makefile
-@@ -88,6 +88,7 @@ lib-$(CONFIG_RISCV)		+= riscv-stub.o
+@@ -89,6 +89,7 @@ lib-$(CONFIG_RISCV)		+= riscv-stub.o
  lib-$(CONFIG_LOONGARCH)		+= loongarch-stub.o
  
  CFLAGS_arm32-stub.o		:= -DTEXT_OFFSET=$(TEXT_OFFSET)
@@ -251,7 +251,7 @@ index b6e1dcb98..d562fc2e6 100644
  zboot-obj-$(CONFIG_RISCV)	:= lib-clz_ctz.o lib-ashldi3.o
  lib-$(CONFIG_EFI_ZBOOT)		+= zboot.o $(zboot-obj-y)
 diff --git a/drivers/firmware/efi/libstub/arm64-stub.c b/drivers/firmware/efi/libstub/arm64-stub.c
-index e2f90566b..94fdd23ea 100644
+index 16f15e36f..bc68c9fdc 100644
 --- a/drivers/firmware/efi/libstub/arm64-stub.c
 +++ b/drivers/firmware/efi/libstub/arm64-stub.c
 @@ -172,7 +172,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
@@ -263,16 +263,16 @@ index e2f90566b..94fdd23ea 100644
  
  	if (IS_ENABLED(CONFIG_RANDOMIZE_BASE) && phys_seed != 0) {
  		/*
-@@ -190,7 +190,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
+@@ -191,7 +191,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
  	if (status != EFI_SUCCESS) {
  		if (!check_image_region((u64)_text, kernel_memsize)) {
  			efi_err("FIRMWARE BUG: Image BSS overlaps adjacent EFI memory region\n");
--		} else if (IS_ALIGNED((u64)_text, min_kimg_align)) {
-+		} else if (IS_ALIGNED((u64)_text - TEXT_OFFSET, min_kimg_align)) {
+-		} else if (IS_ALIGNED((u64)_text, min_kimg_align) &&
++		} else if (IS_ALIGNED((u64)_text - TEXT_OFFSET, min_kimg_align) &&
+ 			   (u64)_end < EFI_ALLOC_LIMIT) {
  			/*
  			 * Just execute from wherever we were loaded by the
- 			 * UEFI PE/COFF loader if the alignment is suitable.
-@@ -210,7 +210,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
+@@ -213,7 +213,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
  		}
  	}
  
