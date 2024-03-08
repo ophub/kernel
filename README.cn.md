@@ -1,3 +1,6 @@
+> [!NOTE]
+> 自 `2024 年 3 月 8 日` 起，由于内核中 `/boot/vmlinuz-xxx` 文件从 `32MB` 调整到了 `64MB`，`晶晨（Amlogic）`系列盒子必须更新系统启动引导文件，否则更新内核后系统将无法启动。[Armbian](https://github.com/ophub/amlogic-s9xxx-armbian) 和 [OpenWrt](https://github.com/ophub/amlogic-s9xxx-openwrt) 系统的更新方法详见各仓库首页文档顶部的提示信息。
+
 # 内核说明
 
 查看英文说明 | [View English description](README.md)
