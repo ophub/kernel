@@ -1,0 +1,302 @@
+From f020c3333bea5fe6ab69504ed8f613c190ef9de3 Mon Sep 17 00:00:00 2001
+From: codesnas <67037511+codesnas@users.noreply.github.com>
+Date: Thu, 1 Feb 2024 22:26:10 +0800
+Subject: [PATCH] Add text_offset
+
+---
+ arch/arm64/Makefile                       |  5 +++++
+ arch/arm64/include/asm/boot.h             |  3 ++-
+ arch/arm64/include/asm/kernel-pgtable.h   |  2 +-
+ arch/arm64/include/asm/memory.h           |  2 +-
+ arch/arm64/kernel/Makefile                |  3 ++-
+ arch/arm64/kernel/head.S                  | 22 +++++++++++++++++-----
+ arch/arm64/kernel/image.h                 |  1 +
+ arch/arm64/kernel/setup.c                 |  7 -------
+ arch/arm64/kernel/vmlinux.lds.S           |  4 ++--
+ arch/arm64/mm/mmu.c                       |  3 ---
+ drivers/firmware/efi/libstub/Makefile     |  2 ++
+ drivers/firmware/efi/libstub/arm64-stub.c |  4 +++-
+ drivers/firmware/efi/libstub/kaslr.c      |  4 ++--
+ 13 files changed, 38 insertions(+), 24 deletions(-)
+
+diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
+index 26b8c7630..9c93bdca9 100644
+--- a/arch/arm64/Makefile
++++ b/arch/arm64/Makefile
+@@ -11,6 +11,7 @@
+ # Copyright (C) 1995-2001 by Russell King
+ 
+ LDFLAGS_vmlinux	:=--no-undefined -X
++CPPFLAGS_vmlinux.lds = -DTEXT_OFFSET=$(TEXT_OFFSET)
+ 
+ ifeq ($(CONFIG_RELOCATABLE), y)
+ # Pass --no-apply-dynamic-relocs to restore pre-binutils-2.27 behaviour
+@@ -134,6 +135,10 @@ else ifeq ($(CONFIG_DYNAMIC_FTRACE_WITH_ARGS),y)
+   CC_FLAGS_FTRACE := -fpatchable-function-entry=2
+ endif
+ 
++# The byte offset of the kernel image in RAM from the start of RAM.
++TEXT_OFFSET := 0x01080000
++export TEXT_OFFSET
++
+ ifeq ($(CONFIG_KASAN_SW_TAGS), y)
+ KASAN_SHADOW_SCALE_SHIFT := 4
+ else ifeq ($(CONFIG_KASAN_GENERIC), y)
+diff --git a/arch/arm64/include/asm/boot.h b/arch/arm64/include/asm/boot.h
+index 3e7943fd1..c7f67da13 100644
+--- a/arch/arm64/include/asm/boot.h
++++ b/arch/arm64/include/asm/boot.h
+@@ -13,7 +13,8 @@
+ #define MAX_FDT_SIZE		SZ_2M
+ 
+ /*
+- * arm64 requires the kernel image to placed at a 2 MB aligned base address
++ * arm64 requires the kernel image to placed
++ * TEXT_OFFSET bytes beyond a 2 MB aligned base
+  */
+ #define MIN_KIMG_ALIGN		SZ_2M
+ 
+diff --git a/arch/arm64/include/asm/kernel-pgtable.h b/arch/arm64/include/asm/kernel-pgtable.h
+index 85d26143f..d0333cd63 100644
+--- a/arch/arm64/include/asm/kernel-pgtable.h
++++ b/arch/arm64/include/asm/kernel-pgtable.h
+@@ -83,7 +83,7 @@
+ 			+ EARLY_PGDS((vstart), (vend), add) 	/* each PGDIR needs a next level page table */	\
+ 			+ EARLY_PUDS((vstart), (vend), add)	/* each PUD needs a next level page table */	\
+ 			+ EARLY_PMDS((vstart), (vend), add))	/* each PMD needs a next level page table */
+-#define INIT_DIR_SIZE (PAGE_SIZE * EARLY_PAGES(KIMAGE_VADDR, _end, EARLY_KASLR))
++#define INIT_DIR_SIZE (PAGE_SIZE * EARLY_PAGES(KIMAGE_VADDR + TEXT_OFFSET, _end, EARLY_KASLR))
+ 
+ /* the initial ID map may need two extra pages if it needs to be extended */
+ #if VA_BITS < 48
+diff --git a/arch/arm64/include/asm/memory.h b/arch/arm64/include/asm/memory.h
+index fde4186cc..479c5c336 100644
+--- a/arch/arm64/include/asm/memory.h
++++ b/arch/arm64/include/asm/memory.h
+@@ -193,7 +193,7 @@ extern s64			memstart_addr;
+ /* PHYS_OFFSET - the physical address of the start of memory. */
+ #define PHYS_OFFSET		({ VM_BUG_ON(memstart_addr & 1); memstart_addr; })
+ 
+-/* the virtual base of the kernel image */
++/* the virtual base of the kernel image (minus TEXT_OFFSET) */
+ extern u64			kimage_vaddr;
+ 
+ /* the offset between the kernel virtual and physical mappings */
+diff --git a/arch/arm64/kernel/Makefile b/arch/arm64/kernel/Makefile
+index d95b3d6b4..449e109cf 100644
+--- a/arch/arm64/kernel/Makefile
++++ b/arch/arm64/kernel/Makefile
+@@ -2,7 +2,8 @@
+ #
+ # Makefile for the linux kernel.
+ #
+-
++CPPFLAGS_vmlinux.lds	:= -DTEXT_OFFSET=$(TEXT_OFFSET)
++AFLAGS_head.o		:= -DTEXT_OFFSET=$(TEXT_OFFSET)
+ CFLAGS_armv8_deprecated.o := -I$(src)
+ 
+ CFLAGS_REMOVE_ftrace.o = $(CC_FLAGS_FTRACE)
+diff --git a/arch/arm64/kernel/head.S b/arch/arm64/kernel/head.S
+index 7b236994f..28020aee8 100644
+--- a/arch/arm64/kernel/head.S
++++ b/arch/arm64/kernel/head.S
+@@ -37,6 +37,8 @@
+ 
+ #include "efi-header.S"
+ 
++#define __PHYS_OFFSET  (KERNEL_START - TEXT_OFFSET)
++
+ #if (PAGE_OFFSET & 0x1fffff) != 0
+ #error PAGE_OFFSET must be at least 2MB aligned
+ #endif
+@@ -49,6 +51,9 @@
+  *   MMU = off, D-cache = off, I-cache = on or off,
+  *   x0 = physical address to the FDT blob.
+  *
++ * This code is mostly position independent so you call this at
++ * __pa(PAGE_OFFSET + TEXT_OFFSET).
++ *
+  * Note that the callee-saved registers are used for storing variables
+  * that are useful before the MMU is enabled. The allocations are described
+  * in the entry routines.
+@@ -59,7 +64,7 @@
+ 	 */
+ 	efi_signature_nop			// special NOP to identity as PE/COFF executable
+ 	b	primary_entry			// branch to kernel start, magic
+-	.quad	0				// Image load offset from start of RAM, little-endian
++	le64sym	_kernel_offset_le		// Image load offset from start of RAM, little-endian
+ 	le64sym	_kernel_size_le			// Effective size of kernel image, little-endian
+ 	le64sym	_kernel_flags_le		// Informative flags, little-endian
+ 	.quad	0				// reserved
+@@ -422,7 +427,7 @@ SYM_FUNC_END(create_idmap)
+ 
+ SYM_FUNC_START_LOCAL(create_kernel_mapping)
+ 	adrp	x0, init_pg_dir
+-	mov_q	x5, KIMAGE_VADDR		// compile time __va(_text)
++	mov_q	x5, KIMAGE_VADDR + TEXT_OFFSET		// compile time __va(_text)
+ #ifdef CONFIG_RELOCATABLE
+ 	add	x5, x5, x23			// add KASLR displacement
+ #endif
+@@ -467,7 +472,7 @@ SYM_FUNC_END(create_kernel_mapping)
+ /*
+  * The following fragment of code is executed with the MMU enabled.
+  *
+- *   x0 = __pa(KERNEL_START)
++ *   x0 = __PHYS_OFFSET
+  */
+ SYM_FUNC_START_LOCAL(__primary_switched)
+ 	adr_l	x4, init_task
+@@ -524,6 +529,13 @@ SYM_FUNC_START_LOCAL(__primary_switched)
+ 	ASM_BUG()
+ SYM_FUNC_END(__primary_switched)
+ 
++        .pushsection ".rodata", "a"
++ SYM_DATA_START(kimage_vaddr)
++        .quad           _text - TEXT_OFFSET
++ SYM_DATA_END(kimage_vaddr)
++ EXPORT_SYMBOL(kimage_vaddr)
++        .popsection
++
+ /*
+  * end early head section, begin head code that is also used for
+  * hotplug and needs to have the same protections as the text region
+@@ -875,7 +887,7 @@ SYM_FUNC_START_LOCAL(__primary_switch)
+ 	adrp	x2, init_idmap_pg_dir
+ 	bl	__enable_mmu
+ #ifdef CONFIG_RELOCATABLE
+-	adrp	x23, KERNEL_START
++	adrp	x23, __PHYS_OFFSET
+ 	and	x23, x23, MIN_KIMG_ALIGN - 1
+ #ifdef CONFIG_RANDOMIZE_BASE
+ 	mov	x0, x22
+@@ -897,6 +909,6 @@ SYM_FUNC_START_LOCAL(__primary_switch)
+ 	bl	__relocate_kernel
+ #endif
+ 	ldr	x8, =__primary_switched
+-	adrp	x0, KERNEL_START		// __pa(KERNEL_START)
++	adrp	x0, __PHYS_OFFSET
+ 	br	x8
+ SYM_FUNC_END(__primary_switch)
+diff --git a/arch/arm64/kernel/image.h b/arch/arm64/kernel/image.h
+index 7bc3ba897..c7d38c660 100644
+--- a/arch/arm64/kernel/image.h
++++ b/arch/arm64/kernel/image.h
+@@ -62,6 +62,7 @@
+  */
+ #define HEAD_SYMBOLS						\
+ 	DEFINE_IMAGE_LE64(_kernel_size_le, _end - _text);	\
++	DEFINE_IMAGE_LE64(_kernel_offset_le, TEXT_OFFSET);	\
+ 	DEFINE_IMAGE_LE64(_kernel_flags_le, __HEAD_FLAGS);
+ 
+ #endif /* __ARM64_KERNEL_IMAGE_H */
+diff --git a/arch/arm64/kernel/setup.c b/arch/arm64/kernel/setup.c
+index 417a8a86b..a0eb10a25 100644
+--- a/arch/arm64/kernel/setup.c
++++ b/arch/arm64/kernel/setup.c
+@@ -335,13 +335,6 @@ void __init __no_sanitize_address setup_arch(char **cmdline_p)
+ 	xen_early_init();
+ 	efi_init();
+ 
+-	if (!efi_enabled(EFI_BOOT)) {
+-		if ((u64)_text % MIN_KIMG_ALIGN)
+-			pr_warn(FW_BUG "Kernel image misaligned at boot, please fix your bootloader!");
+-		WARN_TAINT(mmu_enabled_at_boot, TAINT_FIRMWARE_WORKAROUND,
+-			   FW_BUG "Booted with MMU enabled!");
+-	}
+-
+ 	arm64_memblock_init();
+ 
+ 	paging_init();
+diff --git a/arch/arm64/kernel/vmlinux.lds.S b/arch/arm64/kernel/vmlinux.lds.S
+index 3cd7e76cc..b63529ca9 100644
+--- a/arch/arm64/kernel/vmlinux.lds.S
++++ b/arch/arm64/kernel/vmlinux.lds.S
+@@ -164,7 +164,7 @@ SECTIONS
+ 		*(.dynsym .dynstr .hash .gnu.hash)
+ 	}
+ 
+-	. = KIMAGE_VADDR;
++	. = KIMAGE_VADDR + TEXT_OFFSET;
+ 
+ 	.head.text : {
+ 		_text = .;
+@@ -368,7 +368,7 @@ ASSERT(__hyp_bss_start == __bss_start, "HYP and Host BSS are misaligned")
+ /*
+  * If padding is applied before .head.text, virt<->phys conversions will fail.
+  */
+-ASSERT(_text == KIMAGE_VADDR, "HEAD is misaligned")
++ASSERT(_text == (KIMAGE_VADDR + TEXT_OFFSET), "HEAD is misaligned")
+ 
+ ASSERT(swapper_pg_dir - reserved_pg_dir == RESERVED_SWAPPER_OFFSET,
+        "RESERVED_SWAPPER_OFFSET is wrong!")
+diff --git a/arch/arm64/mm/mmu.c b/arch/arm64/mm/mmu.c
+index 47781bec6..49a49b375 100644
+--- a/arch/arm64/mm/mmu.c
++++ b/arch/arm64/mm/mmu.c
+@@ -52,9 +52,6 @@ u64 vabits_actual __ro_after_init = VA_BITS_MIN;
+ EXPORT_SYMBOL(vabits_actual);
+ #endif
+ 
+-u64 kimage_vaddr __ro_after_init = (u64)&_text;
+-EXPORT_SYMBOL(kimage_vaddr);
+-
+ u64 kimage_voffset __ro_after_init;
+ EXPORT_SYMBOL(kimage_voffset);
+ 
+diff --git a/drivers/firmware/efi/libstub/Makefile b/drivers/firmware/efi/libstub/Makefile
+index a1157c2a7..170523e19 100644
+--- a/drivers/firmware/efi/libstub/Makefile
++++ b/drivers/firmware/efi/libstub/Makefile
+@@ -93,6 +93,8 @@ lib-$(CONFIG_RISCV)		+= kaslr.o riscv.o riscv-stub.o
+ lib-$(CONFIG_LOONGARCH)		+= loongarch.o loongarch-stub.o
+ 
+ CFLAGS_arm32-stub.o		:= -DTEXT_OFFSET=$(TEXT_OFFSET)
++CFLAGS_arm64-stub.o		:= -DTEXT_OFFSET=$(TEXT_OFFSET)
++CFLAGS_kaslr.o			:= -DTEXT_OFFSET=$(TEXT_OFFSET)
+ 
+ zboot-obj-$(CONFIG_RISCV)	:= lib-clz_ctz.o lib-ashldi3.o
+ lib-$(CONFIG_EFI_ZBOOT)		+= zboot.o $(zboot-obj-y)
+diff --git a/drivers/firmware/efi/libstub/arm64-stub.c b/drivers/firmware/efi/libstub/arm64-stub.c
+index 452b7ccd3..781680a85 100644
+--- a/drivers/firmware/efi/libstub/arm64-stub.c
++++ b/drivers/firmware/efi/libstub/arm64-stub.c
+@@ -22,6 +22,8 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
+ 				 efi_handle_t image_handle)
+ {
+ 	efi_status_t status;
++	u64 min_kimg_align = efi_get_kimg_min_align();
++
+ 	unsigned long kernel_size, kernel_codesize, kernel_memsize;
+ 
+ 	if (image->image_base != _text) {
+@@ -36,7 +38,7 @@ efi_status_t handle_kernel_image(unsigned long *image_addr,
+ 	kernel_size = _edata - _text;
+ 	kernel_codesize = __inittext_end - _text;
+ 	kernel_memsize = kernel_size + (_end - _edata);
+-	*reserve_size = kernel_memsize;
++	*reserve_size = kernel_memsize + TEXT_OFFSET % min_kimg_align;
+ 	*image_addr = (unsigned long)_text;
+ 
+ 	status = efi_kaslr_relocate_kernel(image_addr,
+diff --git a/drivers/firmware/efi/libstub/kaslr.c b/drivers/firmware/efi/libstub/kaslr.c
+index 62d63f7a2..6e359714a 100644
+--- a/drivers/firmware/efi/libstub/kaslr.c
++++ b/drivers/firmware/efi/libstub/kaslr.c
+@@ -129,7 +129,7 @@ efi_status_t efi_kaslr_relocate_kernel(unsigned long *image_addr,
+ 	if (status != EFI_SUCCESS) {
+ 		if (!check_image_region(*image_addr, kernel_memsize)) {
+ 			efi_err("FIRMWARE BUG: Image BSS overlaps adjacent EFI memory region\n");
+-		} else if (IS_ALIGNED(*image_addr, min_kimg_align) &&
++		} else if (IS_ALIGNED(*image_addr - TEXT_OFFSET, min_kimg_align) &&
+ 			   (unsigned long)_end < EFI_ALLOC_LIMIT) {
+ 			/*
+ 			 * Just execute from wherever we were loaded by the
+@@ -151,7 +151,7 @@ efi_status_t efi_kaslr_relocate_kernel(unsigned long *image_addr,
+ 	}
+ 
+ 	memcpy((void *)*reserve_addr, (void *)*image_addr, kernel_size);
+-	*image_addr = *reserve_addr;
++	*image_addr = *reserve_addr + TEXT_OFFSET % min_kimg_align;;
+ 	efi_icache_sync(*image_addr, *image_addr + kernel_codesize);
+ 	efi_remap_image(*image_addr, *reserve_size, kernel_codesize);
+ 
