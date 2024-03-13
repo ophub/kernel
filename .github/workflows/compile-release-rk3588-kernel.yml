@@ -20,10 +20,10 @@ on:
       kernel_version:
         description: "Select kernel version"
         required: false
-        default: "5.10.1"
+        default: "5.10.y"
         type: choice
         options:
-          - 5.10.1
+          - 5.10.y
       kernel_auto:
         description: "Auto use the latest kernel"
         required: false
