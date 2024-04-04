@@ -71,6 +71,14 @@ on:
         options:
           - -ophub
           - -happy-new-year
+          - -dragon-boat-festival
+          - -mid-autumn-festival
+          - -happy-national-day
+          - -merry-christmas
+          - -spring-plowing
+          - -summer-growing
+          - -autumn-harvesting
+          - -winter-storing
           - -yourname
       kernel_config:
         description: "Set the path of kernel .config"
