@@ -1,6 +1,3 @@
-> [!NOTE]
-> Starting from `March 8, 2024`, due to the adjustment of the `/boot/vmlinuz-xxx` file in the kernel from `32MB` to `64MB`, `Amlogic` series boxes must update the system bootloader, otherwise, the system will not be able to boot after the kernel update. The update methods for [Armbian](https://github.com/ophub/amlogic-s9xxx-armbian) and [OpenWrt](https://github.com/ophub/amlogic-s9xxx-openwrt) systems can be found in the prompt information at the top of the documentation on the homepage of each repository.
-
 # Kernel Description
 
 View Chinese description  |  [查看中文说明](README.cn.md)
