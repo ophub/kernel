@@ -42,6 +42,7 @@
 | [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx) | Rockchip-RK3528/RK3566/RK3568 |
 | [kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) | [13584452567/linux-6.4.y](https://github.com/13584452567/linux-6.4.y)<br>[13584452567/linux-6.5.y](https://github.com/13584452567/linux-6.5.y)<br>[13584452567/linux-6.6.y](https://github.com/13584452567/linux-6.6.y) | Allwinner-H6(TQC-A01) |
 | [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_dev](https://github.com/ophub/kernel/releases/tag/kernel_dev)<br>[kernel_h6](https://github.com/ophub/kernel/releases/tag/kernel_h6) | [codesnas/linux-xxx](https://github.com/codesnas) | 内核源码复制自 [unifreq](https://github.com/unifreq), [13584452567](https://github.com/13584452567) 和 [chewitt](https://github.com/chewitt/linux) 的仓库，<br>便于跟随大佬们学习如何给内核打补丁。 |
+| [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588)<br>[kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [armbian/linux-rockchip](https://github.com/armbian/linux-rockchip) | Rockchip-Beta(6.1.y) |
 
 
 ## 链接
