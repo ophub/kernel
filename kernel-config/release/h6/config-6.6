@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 6.6.60 Kernel Configuration
+# Linux/arm64 6.6.66 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="aarch64-none-linux-gnu-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614"
 CONFIG_CC_IS_GCC=y
@@ -512,7 +512,6 @@ CONFIG_ARM64_EPAN=y
 # end of ARMv8.7 architectural features
 
 CONFIG_ARM64_SVE=y
-# CONFIG_ARM64_SME is not set
 # CONFIG_ARM64_PSEUDO_NMI is not set
 CONFIG_RELOCATABLE=y
 # CONFIG_RANDOMIZE_BASE is not set
@@ -2428,6 +2427,7 @@ CONFIG_ZRAM_DEF_COMP_LZORLE=y
 # CONFIG_ZRAM_DEF_COMP_842 is not set
 CONFIG_ZRAM_DEF_COMP="lzo-rle"
 # CONFIG_ZRAM_WRITEBACK is not set
+# CONFIG_ZRAM_TRACK_ENTRY_ACTIME is not set
 # CONFIG_ZRAM_MEMORY_TRACKING is not set
 # CONFIG_ZRAM_MULTI_COMP is not set
 CONFIG_BLK_DEV_LOOP=m
@@ -7981,6 +7981,7 @@ CONFIG_FSL_ERRATUM_A008585=y
 CONFIG_HISILICON_ERRATUM_161010101=y
 CONFIG_ARM64_ERRATUM_858921=y
 CONFIG_SUN50I_ERRATUM_UNKNOWN1=y
+# CONFIG_ARM_TIMER_SP804 is not set
 # end of Clock Source drivers
 
 CONFIG_MAILBOX=y
