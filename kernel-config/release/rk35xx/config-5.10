@@ -2859,6 +2859,13 @@ CONFIG_FIXED_PHY=y
 # CONFIG_SFP is not set
 
 #
+# Switch configuration API + drivers
+#
+# CONFIG_SWCONFIG is not set
+# CONFIG_RTL8306_PHY is not set
+# CONFIG_RTL8366_SMI is not set
+
+#
 # MII PHY device drivers
 #
 # CONFIG_AMD_PHY is not set
