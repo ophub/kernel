@@ -3258,12 +3258,12 @@ CONFIG_WL_ROCKCHIP=m
 CONFIG_WIFI_BUILD_MODULE=y
 # CONFIG_WIFI_LOAD_DRIVER_WHEN_KERNEL_BOOTUP is not set
 # CONFIG_WIFI_GENERATE_RANDOM_MAC_ADDR is not set
-CONFIG_BCMDHD=y
+# CONFIG_BCMDHD is not set
 CONFIG_AP6XXX=m
-CONFIG_BCMDHD_SDIO=y
+# CONFIG_BCMDHD_SDIO is not set
 # CONFIG_BCMDHD_PCIE is not set
-CONFIG_BCMDHD_FW_PATH="/lib/firmware/fw_bcmdhd.bin"
-CONFIG_BCMDHD_NVRAM_PATH="/lib/firmware/nvram.txt"
+# CONFIG_BCMDHD_FW_PATH="/vendor/etc/firmware/fw_bcmdhd.bin" is not set
+# CONFIG_BCMDHD_NVRAM_PATH="/vendor/etc/firmware/nvram.txt" is not set
 # CONFIG_BCMDHD_STATIC_IF is not set
 # CONFIG_CYW_BCMDHD is not set
 # CONFIG_INFINEON_DHD is not set
