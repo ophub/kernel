@@ -188,6 +188,7 @@ jobs:
           kernel_patch: ${{ inputs.kernel_patch }}
           auto_patch: ${{ inputs.auto_patch }}
           compress_format: ${{ inputs.compress_format }}
+          delete_source: true
 
       - name: Upload Kernel to Release
         uses: ncipollo/release-action@main
