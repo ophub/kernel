@@ -29,9 +29,6 @@ on:
           - 6.1.y
           - 6.6.y
           - 6.12.y
-          - 5.4.y_5.10.y
-          - 5.15.y_6.1.y
-          - 6.6.y_6.12.y
       kernel_auto:
         description: "Auto use the latest kernel"
         required: false
@@ -189,6 +186,7 @@ jobs:
           auto_patch: ${{ inputs.auto_patch }}
           compress_format: ${{ inputs.compress_format }}
           delete_source: true
+          silent_log: false
 
       - name: Upload Kernel to Release
         uses: ncipollo/release-action@main
