@@ -1,6 +1,6 @@
-From 567f38972d068fdc7f2358ffe367b9d150d51d42 Mon Sep 17 00:00:00 2001
-From: xxx <xxx@users.noreply.github.com>
-Date: Tue, 10 Dec 2024 08:48:39 +0800
+From 9b2af930c2377459c3e67aa45c928acefb89d227 Mon Sep 17 00:00:00 2001
+From: xxx <68696949+xxx@users.noreply.github.com>
+Date: Wed, 21 May 2025 12:19:23 +0800
 Subject: [PATCH] fix i2cA and i2cB miossing pins
 
 ---

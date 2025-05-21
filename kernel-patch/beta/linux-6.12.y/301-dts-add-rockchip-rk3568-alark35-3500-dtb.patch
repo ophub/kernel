@@ -1,6 +1,6 @@
-From 42ec5548b542dd305fe5ddad17ded8a2e62fae86 Mon Sep 17 00:00:00 2001
-From: xxx <67037511+xxx@users.noreply.github.com>
-Date: Sat, 17 May 2025 16:39:09 +0800
+From 457ac631dd43a4bf5b807384deacbd85585a414c Mon Sep 17 00:00:00 2001
+From: xxx <68696949+xxx@users.noreply.github.com>
+Date: Wed, 21 May 2025 14:04:33 +0800
 Subject: [PATCH] arch: arm64: rockchip: add rk3568-alark35-3500.dtb
 
 ---
@@ -23,7 +23,7 @@ index 5e077b5f1..331b939bc 100644
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-ec-x.dtb
 diff --git a/arch/arm64/boot/dts/rockchip/rk3568-alark35-3500.dts b/arch/arm64/boot/dts/rockchip/rk3568-alark35-3500.dts
 new file mode 100644
-index 000000000..4b1986a60
+index 000000000..24347d1d7
 --- /dev/null
 +++ b/arch/arm64/boot/dts/rockchip/rk3568-alark35-3500.dts
 @@ -0,0 +1,1162 @@
