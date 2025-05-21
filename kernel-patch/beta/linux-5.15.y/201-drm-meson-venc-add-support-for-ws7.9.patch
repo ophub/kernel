@@ -1,18 +1,14 @@
-From bac4e2dc8d140b6425327f6ec2c23f739d67a18b Mon Sep 17 00:00:00 2001
-From: Steev Klimaszewski <steev@kali.org>
-Date: Thu, 15 Sep 2022 12:41:45 -0500
-Subject: [PATCH] hack: drm/meson: venc: add support for WS7.9"
+From 50f2d2574a541855ed5bf14dc9835de424fa3b60 Mon Sep 17 00:00:00 2001
+From: xxx <68696949+xxx@users.noreply.github.com>
+Date: Wed, 21 May 2025 12:08:39 +0800
+Subject: [PATCH] hack: drm/meson: venc: add support for WS7.9
 
-The Waveshare 7.9" display is 400x1280, so lets try a quick hack to make
-it so it doesn't complain that 400 vertical is a bad mode
-
-Signed-off-by: Steev Klimaszewski <steev@kali.org>
 ---
  drivers/gpu/drm/meson/meson_venc.c | 8 +++++---
  1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/gpu/drm/meson/meson_venc.c b/drivers/gpu/drm/meson/meson_venc.c
-index ebe4f2a92fe061..97f2bf05e249e5 100644
+index 559ab3b5e2..40d6a908b3 100644
 --- a/drivers/gpu/drm/meson/meson_venc.c
 +++ b/drivers/gpu/drm/meson/meson_venc.c
 @@ -866,11 +866,13 @@ meson_venc_hdmi_supported_mode(const struct drm_display_mode *mode)

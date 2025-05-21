@@ -1,6 +1,6 @@
-From 640321fcd7df0cfa7a35f07a9ef2a1979ad0fb18 Mon Sep 17 00:00:00 2001
-From: xxxxx <67037522+xxxxx@users.noreply.github.com>
-Date: Fri, 15 Nov 2024 11:00:32 +0800
+From ca1d980bb838887e89180b609ba33bdddf2f6533 Mon Sep 17 00:00:00 2001
+From: xxx <68696949+xxx@users.noreply.github.com>
+Date: Wed, 21 May 2025 12:09:17 +0800
 Subject: [PATCH] arch: arm64: dts: add cdhx-rb30(rk3399)
 
 ---
