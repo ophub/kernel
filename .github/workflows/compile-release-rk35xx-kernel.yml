@@ -58,7 +58,6 @@ on:
         default: "gcc"
         type: choice
         options:
-          - clang
           - gcc
           - gcc-11.3
           - gcc-12.2
