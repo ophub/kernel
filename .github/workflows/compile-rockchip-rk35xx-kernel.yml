@@ -1,10 +1,10 @@
 #==========================================================================
-# Description: Compile release h6 kernel
-# Copyright (C) 2023 https://github.com/13584452567
+# Description: Compile rockchip rk35xx kernel
+# Copyright (C) 2023 https://github.com/unifreq/linux-5.10.y-rk35xx
 # Copyright (C) 2023 https://github.com/ophub/kernel
 #==========================================================================
 
-name: Compile release h6 kernel
+name: Compile rockchip rk35xx kernel
 
 on:
   repository_dispatch:
@@ -13,20 +13,29 @@ on:
       kernel_source:
         description: "Select the kernel source"
         required: false
-        default: "codesnas/linux-h6-6.6.y"
+        default: "unifreq/linux-5.10.y-rk35xx"
         type: choice
         options:
-          - 13584452567
-          - codesnas/linux-h6-6.6.y
+          - unifreq/linux-5.10.y-rk35xx
+          - unifreq/linux-6.1.y-rockchip
+          - codesnas/linux-5.10.y-rk35xx
+          - codesnas/linux-6.1.y-rockchip
+          - armbian/linux-rockchip@rk-6.1-rkr5.1
       kernel_version:
         description: "Select kernel version"
         required: false
-        default: "6.6.y"
+        default: "5.10.y"
         type: choice
         options:
-          - 6.6.y
+          - 5.10.y
+          - 6.1.y
       kernel_auto:
         description: "Auto use the latest kernel"
+        required: false
+        default: true
+        type: boolean
+      silent_log:
+        description: "Use silent logging"
         required: false
         default: true
         type: boolean
@@ -49,7 +58,6 @@ on:
         default: "gcc"
         type: choice
         options:
-          - clang
           - gcc
           - gcc-14.2
       compress_format:
@@ -62,24 +70,13 @@ on:
           - gzip
           - zstd
           - lzma
-      docker_image:
-        description: "Select Armbian docker image"
-        required: false
-        default: "bookworm"
-        type: choice
-        options:
-          - jammy
-          - noble
-          - bookworm
-          - bullseye
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-zicai"
+        default: "-rk35xx-ophub"
         type: choice
         options:
-          - -zicai
-          - -ophub
+          - -rk35xx-ophub
           - -happy-new-year
           - -dragon-boat-festival
           - -mid-autumn-festival
@@ -93,10 +90,10 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/release/h6"
+        default: "kernel-config/release/rk35xx"
         type: choice
         options:
-          - kernel-config/release/h6
+          - kernel-config/release/rk35xx
           - false
 
 env:
@@ -151,41 +148,20 @@ jobs:
           sudo mount /dev/github/runner /builder
           sudo chown -R runner.runner /builder
           df -Th
-          echo "status=success" >> ${GITHUB_OUTPUT}
 
-      - name: Install Docker
-        id: install
+      - name: Create a mapped directory
+        id: mapped
         working-directory: /builder
-        if: ${{ steps.disk.outputs.status }} == 'success' && !cancelled()
         run: |
           df -hT ${PWD}
-          curl -fsSL https://get.docker.com | sh
-          sudo usermod -aG docker $USER
-          sudo newgrp docker
-          echo "status=success" >> ${GITHUB_OUTPUT}
-
-      - name: Pull Docker Image [ ${{ inputs.docker_image }} ]
-        id: pull
-        working-directory: /builder
-        if: ${{ steps.install.outputs.status }} == 'success' && !cancelled()
-        run: |
-          # Create a docker mapping directory
-          mkdir -p /builder/compile-kernel/{kernel,output}
-          ln -sf /builder/compile-kernel/kernel /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/kernel
-          ln -sf /builder/compile-kernel/output /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/output
-
-          # Pull the Armbian Docker image
-          docker run -d --privileged \
-              --name armbian-ophub \
-              -v /builder/compile-kernel:/opt/kernel/compile-kernel \
-              --restart=always \
-              ophub/armbian-${{ inputs.docker_image }}:latest
-
+          mkdir -p /builder/{kernel,output}
+          ln -sf /builder/kernel /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/kernel
+          ln -sf /builder/output /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/output
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Compile the kernel [ ${{ inputs.kernel_version }} ]
         uses: ophub/amlogic-s9xxx-armbian@main
-        if: ${{ steps.pull.outputs.status }} == 'success' && !cancelled()
+        if: ${{ steps.mapped.outputs.status }} == 'success' && !cancelled()
         with:
           build_target: kernel
           kernel_source: ${{ inputs.kernel_source }}
@@ -197,18 +173,19 @@ jobs:
           kernel_sign: ${{ inputs.kernel_sign }}
           kernel_config: ${{ inputs.kernel_config }}
           compress_format: ${{ inputs.compress_format }}
+          silent_log: ${{ inputs.silent_log }}
 
       - name: Upload Kernel to Release
         uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
         with:
-          tag: kernel_h6
+          tag: kernel_rk35xx
           artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             - The kernel can be used to compile Armbian and OpenWrt.
-            - The kernel source code comes from: ${{ inputs.kernel_source }}
-            - The kernel compilation toolchain: ${{ inputs.kernel_toolchain }}
-            - This is a dedicated kernel for `Allwinner H6 (TQC-A01)` and is not compatible with other series.
-            - 这是 `全志 H6（TQC-A01）` 设备的专用内核，和其他系列不通用。
+            - The kernel source code comes from: unifreq/linux-5.10.y-rk35xx
+            - The kernel compilation toolchain: gcc
+            - This is a dedicated kernel for `Rockchip rk3528/rk3566/rk3568` and is not compatible with other series.
+            - 这是 `Rockchip rk3528/rk3566/rk3568` 专用内核，和其他系列不通用。
