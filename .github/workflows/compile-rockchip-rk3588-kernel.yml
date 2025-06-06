@@ -1,10 +1,10 @@
 #==========================================================================
-# Description: Compile release rk35xx kernel
+# Description: Compile rockchip rk3588 kernel
 # Copyright (C) 2023 https://github.com/unifreq/linux-5.10.y-rk35xx
 # Copyright (C) 2023 https://github.com/ophub/kernel
 #==========================================================================
 
-name: Compile release rk35xx kernel
+name: Compile rockchip rk3588 kernel
 
 on:
   repository_dispatch:
@@ -73,10 +73,10 @@ on:
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
-        default: "-rk35xx-ophub"
+        default: "-rk3588-ophub"
         type: choice
         options:
-          - -rk35xx-ophub
+          - -rk3588-ophub
           - -happy-new-year
           - -dragon-boat-festival
           - -mid-autumn-festival
@@ -90,10 +90,10 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/release/rk35xx"
+        default: "kernel-config/release/rk3588"
         type: choice
         options:
-          - kernel-config/release/rk35xx
+          - kernel-config/release/rk3588
           - false
 
 env:
@@ -179,13 +179,13 @@ jobs:
         uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
         with:
-          tag: kernel_rk35xx
+          tag: kernel_rk3588
           artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             - The kernel can be used to compile Armbian and OpenWrt.
-            - The kernel source code comes from: unifreq/linux-5.10.y-rk35xx
-            - The kernel compilation toolchain: gcc
-            - This is a dedicated kernel for `Rockchip rk3528/rk3566/rk3568` and is not compatible with other series.
-            - 这是 `Rockchip rk3528/rk3566/rk3568` 专用内核，和其他系列不通用。
+            - The kernel source code comes from: ${{ inputs.kernel_source }}
+            - The kernel compilation toolchain: ${{ inputs.kernel_toolchain }}
+            - This is a dedicated kernel for `Rockchip rk3588` and is not compatible with other series.
+            - 这是 `Rockchip rk3588` 专用内核，和其他系列不通用。
