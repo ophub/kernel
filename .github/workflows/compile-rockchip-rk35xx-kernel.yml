@@ -205,4 +205,6 @@ jobs:
             - The kernel source code comes from: unifreq/linux-5.10.y-rk35xx
             - The kernel compilation toolchain: gcc
             - This is a dedicated kernel for `Rockchip rk3528/rk3566/rk3568` and is not compatible with other series.
+            - Kernels with `flippy` in the name are maintained by [flippy](https://github.com/unifreq). The others are automatically compiled online.
             - 这是 `Rockchip rk3528/rk3566/rk3568` 专用内核，和其他系列不通用。
+            - 其中名字里带有 `flippy` 的是手动上传的由 [flippy](https://github.com/unifreq) 大佬维护制作分享的内核，其他是在线自动编译的。
