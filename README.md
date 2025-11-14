@@ -26,7 +26,7 @@ These kernels can be used for `Armbian` and `OpenWrt` systems, such as the [amlo
   uses: ophub/amlogic-s9xxx-armbian@main
   with:
     build_target: kernel
-    kernel_version: 5.10.135_5.15.50
+    kernel_version: 6.1.y_6.12.y
     kernel_auto: true
     kernel_sign: -yourname
 ```

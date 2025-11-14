@@ -7,7 +7,7 @@ During cloud compilation using GitHub Actions, you can use the `kernel_config` p
   uses: ophub/amlogic-s9xxx-armbian@main
   with:
     build_target: kernel
-    kernel_version: 5.15.1_6.1.1
+    kernel_version: 5.15.y_6.1.y
     kernel_auto: true
     kernel_config: kernel-config/release/stable
 ```
@@ -23,7 +23,7 @@ If there is no special requirement, you can proceed without specifying personali
   uses: ophub/amlogic-s9xxx-armbian@main
   with:
     build_target: kernel
-    kernel_version: 5.15.1_6.1.1
+    kernel_version: 5.15.y_6.1.y
     kernel_auto: true
     kernel_config: kernel-config/release/stable
 ```
