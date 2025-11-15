@@ -102,7 +102,6 @@ on:
 
 env:
   TZ: Etc/UTC
-  CCACHE_DIR: /builder/ccache
 
 jobs:
   build:
@@ -226,10 +225,6 @@ jobs:
           kernel_sign: ${{ inputs.kernel_sign }}
           kernel_config: ${{ inputs.kernel_config }}
           compress_format: ${{ inputs.compress_format }}
-
-      - name: Show ccache statistics
-        run: |
-          ccache -s
 
       - name: Upload Kernel to Release
         uses: ncipollo/release-action@main

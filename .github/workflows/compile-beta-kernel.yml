@@ -105,7 +105,6 @@ on:
 
 env:
   TZ: Etc/UTC
-  CCACHE_DIR: /builder/ccache
 
 jobs:
   build:
@@ -232,10 +231,6 @@ jobs:
           kernel_sign: -beta
           delete_source: true
           silent_log: false
-
-      - name: Show ccache statistics
-        run: |
-          ccache -s
 
       - name: Upload Kernel to Release
         uses: ncipollo/release-action@main
