@@ -82,16 +82,11 @@ on:
           - gcc
           - gcc-14.2
           - gcc-14.3
-      compress_format:
-        description: "Set the initrd compression format"
+      ccache_clear:
+        description: "Set whether to clear the cache"
         required: false
-        default: "xz"
-        type: choice
-        options:
-          - xz
-          - gzip
-          - zstd
-          - lzma
+        default: false
+        type: boolean
       docker_image:
         description: "Select Armbian docker image"
         required: false
@@ -227,7 +222,7 @@ jobs:
           kernel_config: ${{ inputs.kernel_config }}
           kernel_patch: ${{ inputs.kernel_patch }}
           auto_patch: ${{ inputs.auto_patch }}
-          compress_format: ${{ inputs.compress_format }}
+          ccache_clear: ${{ inputs.ccache_clear }}
           kernel_sign: -beta
           delete_source: true
           silent_log: false
