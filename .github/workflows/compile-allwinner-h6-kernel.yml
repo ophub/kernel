@@ -202,9 +202,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /builder/ccache
-          key: kernel-h6-${{ inputs.kernel_version }}-${{ inputs.kernel_toolchain }}-${{ github.sha }}
+          key: kernel-h6-${{ inputs.kernel_toolchain }}-${{ inputs.kernel_version }}-${{ github.sha }}
           restore-keys: |
-            kernel-h6-${{ inputs.kernel_version }}-${{ inputs.kernel_toolchain }}-
+            kernel-h6-${{ inputs.kernel_toolchain }}-${{ inputs.kernel_version }}-
 
       - name: Compile the kernel [ ${{ inputs.kernel_version }} ]
         uses: ophub/amlogic-s9xxx-armbian@main
