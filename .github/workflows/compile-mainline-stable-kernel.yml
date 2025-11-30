@@ -1,10 +1,10 @@
 #==========================================================================
-# Description: Compile longterm kernel
+# Description: Compile mainline stable kernel
 # Copyright (C) 2021 https://github.com/unifreq/openwrt_packit
 # Copyright (C) 2021 https://github.com/ophub/kernel
 #==========================================================================
 
-name: Compile longterm kernel
+name: Compile mainline stable kernel
 
 on:
   repository_dispatch:
@@ -242,8 +242,7 @@ jobs:
           makeLatest: true
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
-            - The kernel can be used to compile Armbian and OpenWrt.
-            - The kernel source code comes from: ${{ inputs.kernel_source }}
-            - The kernel compilation toolchain: ${{ inputs.kernel_toolchain }}
-            - This is a `stable` kernel, which can be used in Armbian and OpenWrt.
-            - 这是`稳定版`内核，可以在 Armbian 和 OpenWrt 里使用。
+            - These are Mainline LTS(Long Term Support) kernels that provide `stable` support for Armbian and OpenWrt.
+            - It works with most `Amlogic`, `Rockchip`, and `Allwinner` devices. For specific details, please refer to the instructions on the homepage of each system's repository.
+            - 这些是主线 LTS（长期支持）内核，为 Armbian 和 OpenWrt 提供`稳定`的支持。
+            - 适用于 `amlogic`，`rockchip`，`allwinner` 的大部分设备，具体可以参考各系统仓库首页的说明。

@@ -237,8 +237,5 @@ jobs:
           makeLatest: true
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
-            - The kernel can be used to compile Armbian and OpenWrt.
-            - The kernel source code comes from: ${{ inputs.kernel_source }}
-            - The kernel compilation toolchain: ${{ inputs.kernel_toolchain }}
-            - This is a `beta version` kernel, tweaked to suit your little needs.
-            - 这是`测试版`内核，为了满足你的小需求而折腾。
+            - This is a beta kernel intended only for specific testing purposes. Do not use it unless you know what you are doing.
+            - 这是`测试版`内核，仅用于特定需求的测试，不知情勿用。
