@@ -211,9 +211,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /builder/ccache
-          key: kernel-longterm-${{ inputs.kernel_toolchain }}-${{ inputs.kernel_version }}-${{ env.source_hash }}
+          key: kernel-mainline-${{ inputs.kernel_toolchain }}-${{ inputs.kernel_version }}-${{ env.source_hash }}
           restore-keys: |
-            kernel-longterm-${{ inputs.kernel_toolchain }}-${{ inputs.kernel_version }}-
+            kernel-mainline-${{ inputs.kernel_toolchain }}-${{ inputs.kernel_version }}-
 
       - name: Compile the kernel [ ${{ inputs.kernel_version }} ]
         uses: ophub/amlogic-s9xxx-armbian@main
