@@ -44,15 +44,6 @@ A big thank you to unifreq and others for maintaining the kernel source code. Th
 | [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [armbian/linux-rockchip](https://github.com/armbian/linux-rockchip) | Rockchip-Beta(6.1.y) |
 | [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [armbian/linux-rockchip](https://github.com/armbian/linux-rockchip) | Rockchip-Beta(6.1.y) |
 
-
-## Resource Sharing
-
-> [!IMPORTANT]
-> I have backed up some Android system images for common devices under [Tools](https://github.com/ophub/kernel/releases/tag/tools). These can be used to restore the original Android system of a device, especially useful during flashing or unbricking. Unfortunately, due to an operational mistake on 2025.05.20, I accidentally deleted the kernel repository, resulting in the loss of all historical resources(The files have been re-uploaded using the 123 Cloud Drive backup shared by the enthusiastic user `Ghost`. Special thanks for the support.). According to GitHub’s policy, restoring a repository only recovers the code, not the assets in the Releases section. To prevent similar incidents in the future, I strongly recommend that users who need these resources download and back them up as soon as possible.
->
-> If you have backups or would like to share resources, you’re welcome to leave a comment in the [issues](https://github.com/ophub/kernel/issues) section with links to your repositories, cloud drives, or mirror sites. Sharing is not limited to the systems and tools I’ve backed up — all relevant resources are welcome. If you’ve created repositories such as [u-boot](https://github.com/ophub/u-boot) or [firmware](https://github.com/ophub/firmware), feel free to share those as well. Repositories on platforms like GitLab or Gitee are also welcome, and I’ll add navigation links to them in the repository’s friend links section.
-
-
 ## Links
 
 - [unifreq/kernel](https://github.com/unifreq)

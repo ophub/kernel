@@ -46,13 +46,6 @@
 | [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [armbian/linux-rockchip](https://github.com/armbian/linux-rockchip) | Rockchip-Beta(6.1.y) |
 
 
-## 资源共享
-> [!IMPORTANT]
-> 我在 [Tools](https://github.com/ophub/kernel/releases/tag/tools) 中备份了一些常见设备的安卓系统镜像，可以用于恢复设备的原安卓系统，在刷机和救砖时可以使用。由于操作失误，我在 2025.05.20 误删除了 kernel 仓库，导致历史资源全部遗失（现已使用热心网友 `Ghost` 分享的123云盘备份资源重新进行了上传，特此感谢！）。根据 github 的政策，恢复仓库的操作只能恢复代码，但是 release 中的资源无法恢复。为了避免以后再次发生类似的意外，请有需要的用户及时下载备份所需资源。
->
-> 如果有备份和分享资源的朋友，欢迎在 [issues](https://github.com/ophub/kernel/issues) 中留言分享你的仓库、网盘、镜像站等资源下载地址。不仅限于我备份的这些系统和工具，欢迎分享更多资源。如果你也创建了 [u-boot](https://github.com/ophub/u-boot) / [firmware](https://github.com/ophub/firmware) 等相关仓库均欢迎分享。如果你有 GitLab, Gitee 等仓库也欢迎分享，我会在仓库的友情链接里添加导航。
-
-
 ## 链接
 
 - [unifreq/kernel](https://github.com/unifreq)
