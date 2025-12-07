@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 5.15.196 Kernel Configuration
+# Linux/arm64 5.15.197 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="aarch64-none-linux-gnu-gcc (Arm GNU Toolchain 14.3.Rel1 (Build arm-14.174)) 14.3.1 20250623"
 CONFIG_CC_IS_GCC=y
@@ -6851,7 +6851,6 @@ CONFIG_RTLLIB_CRYPTO_WEP=m
 # CONFIG_RTL8192E is not set
 CONFIG_RTL8723BS=m
 CONFIG_RTL8723CS=m
-CONFIG_R8712U=m
 CONFIG_R8188EU=m
 CONFIG_88EU_AP_MODE=y
 # CONFIG_RTS5208 is not set
