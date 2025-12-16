@@ -18,8 +18,7 @@ on:
         options:
           - unifreq/linux-6.1.y-rockchip
           - unifreq/linux-5.10.y-rk35xx
-          - codesnas/linux-6.1.y-rockchip
-          - codesnas/linux-5.10.y-rk35xx
+          - ophub/linux-6.1.y-rockchip
           - armbian/linux-rockchip@rk-6.1-rkr6.1
           - armbian/linux-rockchip@rk-6.1-rkr5.1
       kernel_version:
