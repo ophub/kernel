@@ -92,10 +92,10 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/release/general"
+        default: "kernel-config/release/stable"
         type: choice
         options:
-          - kernel-config/release/general
+          - kernel-config/release/stable
           - false
 
 env:
@@ -241,7 +241,7 @@ jobs:
           makeLatest: true
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
-            - These are Mainline LTS(Long Term Support) kernels that provide `stable` support for Armbian and OpenWrt.
+            - These are Mainline `stable` kernels that provide support for Armbian and OpenWrt.
             - It works with most `Amlogic`, `Rockchip`, and `Allwinner` devices. For specific details, please refer to the instructions on the homepage of each system's repository.
-            - 这些是主线 LTS（长期支持）内核，为 Armbian 和 OpenWrt 提供`稳定`的支持。
+            - 这些是主线稳定内核，为 Armbian 和 OpenWrt 提供支持。
             - 适用于 `amlogic`，`rockchip`，`allwinner` 的大部分设备，具体可以参考各系统仓库首页的说明。

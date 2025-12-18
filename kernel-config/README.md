@@ -1,6 +1,6 @@
 # Kernel Personalized Configuration Guide
 
-During cloud compilation using GitHub Actions, you can use the `kernel_config` parameter to specify personalized kernel configuration. The naming of the configuration files (config-k.x) of each kernel version uses the major version number (for example: config-6.1). You can refer to the settings in [compile-mainline-kernel-on-a-server.yml](../.github/workflows/compile-mainline-kernel-on-a-server.yml):
+During cloud compilation using GitHub Actions, you can use the `kernel_config` parameter to specify personalized kernel configuration. The naming of the configuration files (config-k.x) of each kernel version uses the major version number (for example: config-6.1). You can refer to the settings in [compile-mainline-stable-kernel.yml](../.github/workflows/compile-mainline-stable-kernel.yml):
 
 ```yaml
 - name: Compile the kernel
@@ -16,7 +16,7 @@ If there is no special requirement, you can proceed without specifying personali
 
 # 内核个性化配置说明
 
-在 GitHub Actions 云编译时，可以使用 `kernel_config` 参数指定个性化内核配置，各内核版本的配置文件（config-k.x）的命名使用主版本号（例如：config-6.1），使用方法可以参考 [compile-mainline-kernel-on-a-server.yml](../.github/workflows/compile-mainline-kernel-on-a-server.yml) 的设置：
+在 GitHub Actions 云编译时，可以使用 `kernel_config` 参数指定个性化内核配置，各内核版本的配置文件（config-k.x）的命名使用主版本号（例如：config-6.1），使用方法可以参考 [compile-mainline-stable-kernel.yml](../.github/workflows/compile-mainline-stable-kernel.yml) 的设置：
 
 ```yaml
 - name: Compile the kernel

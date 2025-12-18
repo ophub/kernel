@@ -1,10 +1,10 @@
 #==========================================================================
-# Description: Compile beta kernel
+# Description: Compile mainline beta kernel
 # Copyright (C) 2021 https://github.com/unifreq/openwrt_packit
 # Copyright (C) 2021 https://github.com/ophub/kernel
 #==========================================================================
 
-name: Compile beta kernel
+name: Compile mainline beta kernel
 
 on:
   repository_dispatch:
@@ -45,10 +45,10 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "kernel-config/release/general"
+        default: "kernel-config/release/stable"
         type: choice
         options:
-          - kernel-config/release/general
+          - kernel-config/release/stable
           - false
       kernel_patch:
         description: "Set the directory for kernel patches"

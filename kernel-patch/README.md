@@ -12,7 +12,7 @@ During cloud compilation using GitHub Actions, you can use the `kernel_patch` pa
         └── more kernel directory...
 ```
 
-The usage in the kernel compilation script can refer to the settings in [compile-beta-general-kernel.yml](../.github/workflows/compile-beta-general-kernel.yml):
+The usage in the kernel compilation script can refer to the settings in [compile-mainline-beta-kernel.yml](../.github/workflows/compile-mainline-beta-kernel.yml):
 
 ```yaml
 - name: Compile the kernel
@@ -21,7 +21,7 @@ The usage in the kernel compilation script can refer to the settings in [compile
     build_target: kernel
     kernel_version: 5.15.1_6.1.1
     kernel_auto: true
-    kernel_config: kernel-config/beta
+    kernel_config: kernel-config/release/stable
     kernel_patch: kernel-patch/beta
     auto_patch: true
 ```
@@ -42,7 +42,7 @@ When compiling the kernel, it will first enumerate all the patches with `.patch`
         └── more kernel directory...
 ```
 
-在内核编译脚本中使用方法可以参考 [compile-beta-general-kernel.yml](../.github/workflows/compile-beta-general-kernel.yml) 的设置：
+在内核编译脚本中使用方法可以参考 [compile-mainline-beta-kernel.yml](../.github/workflows/compile-mainline-beta-kernel.yml) 的设置：
 
 ```yaml
 - name: Compile the kernel
@@ -51,7 +51,7 @@ When compiling the kernel, it will first enumerate all the patches with `.patch`
     build_target: kernel
     kernel_version: 5.15.1_6.1.1
     kernel_auto: true
-    kernel_config: kernel-config/beta
+    kernel_config: kernel-config/release/stable
     kernel_patch: kernel-patch/beta
     auto_patch: true
 ```
