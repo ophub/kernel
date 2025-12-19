@@ -34,11 +34,6 @@ on:
         required: false
         default: true
         type: boolean
-      delete_source:
-        description: "Delete source after compilation"
-        required: false
-        default: true
-        type: boolean
       kernel_package:
         description: "Select compile package list"
         required: false
@@ -61,6 +56,16 @@ on:
         required: false
         default: false
         type: boolean
+      docker_image:
+        description: "Select Armbian docker image"
+        required: false
+        default: "trixie"
+        type: choice
+        options:
+          - trixie
+          - bookworm
+          - noble
+          - jammy
       kernel_sign:
         description: "Set the kernel custom signature"
         required: false
@@ -89,7 +94,6 @@ on:
 
 env:
   TZ: Etc/UTC
-  CCACHE_DIR: /builder/ccache
 
 jobs:
   build:
@@ -146,29 +150,50 @@ jobs:
           df -Th
           echo "status=success" >> ${GITHUB_OUTPUT}
 
-      - name: Create a mapped directory
-        id: mapped
+      - name: Install Docker
+        id: install
         working-directory: /builder
+        if: ${{ steps.disk.outputs.status }} == 'success' && !cancelled()
         run: |
           df -hT ${PWD}
-          mkdir -p /builder/{kernel,output,ccache}
-          ln -sf /builder/kernel /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/kernel
-          ln -sf /builder/output /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/output
-          sudo rm -rf /root/.ccache
-          sudo ln -sf /builder/ccache /root/.ccache
+          curl -fsSL https://get.docker.com | sh
+          sudo usermod -aG docker $USER
+          sudo newgrp docker
+          echo "status=success" >> ${GITHUB_OUTPUT}
+
+      - name: Pull Docker Image [ ${{ inputs.docker_image }} ]
+        id: pull
+        working-directory: /builder
+        if: ${{ steps.install.outputs.status }} == 'success' && !cancelled()
+        run: |
+          # Create a docker mapping directory
+          mkdir -p /builder/{compile-kernel/{kernel,output},ccache}
+          ln -sf /builder/compile-kernel/kernel /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/kernel
+          ln -sf /builder/compile-kernel/output /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/compile-kernel/output
+
+          # Pull the Armbian Docker image
+          docker run -d --privileged \
+              --name armbian-ophub \
+              -v /builder/compile-kernel:/opt/kernel/compile-kernel \
+              -v /builder/ccache:/root/.ccache \
+              -v /etc/localtime:/etc/localtime:ro \
+              -v /etc/timezone:/etc/timezone:ro \
+              -e CCACHE_DIR=/root/.ccache \
+              --restart=always \
+              ophub/armbian-${{ inputs.docker_image }}:arm64
+
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Get kernel source hash
         id: kernelhash
-        if: ${{ steps.mapped.outputs.status }} == 'success' && !cancelled()
+        if: ${{ steps.pull.outputs.status }} == 'success' && !cancelled()
         run: |
-          # Parse the kernel source and branch
-          input_source="${{ inputs.kernel_source }}"
-          kernel_repo="${input_source%%@*}"
-          [[ "${input_source}" =~ @ ]] && kernel_branch="${input_source#*@}" || kernel_branch="main"
-          api_url="https://api.github.com/repos/${kernel_repo}/git/ref/heads/${kernel_branch}"
+          # Get the kernel source branch
+          kernel_source="${{ inputs.kernel_source }}"
+          [[ "${kernel_source}" =~ @ ]] && kernel_branch="$(echo "${kernel_source}" | awk -F'@' '{print $2}')" || kernel_branch="main"
 
           # Get the latest source hash from the kernel repository
+          api_url="https://api.github.com/repos/${{ inputs.kernel_source }}/git/ref/heads/${kernel_branch}"
           source_hash=$(curl -fsSL -m 20 \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
@@ -177,7 +202,6 @@ jobs:
           )
           [[ -z "${source_hash}" || "${source_hash}" == "null" ]] && source_hash="${{ github.sha }}"
           echo "source_hash=${source_hash}" >> ${GITHUB_ENV}
-
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Cache ccache
@@ -196,7 +220,6 @@ jobs:
           kernel_source: ${{ inputs.kernel_source }}
           kernel_version: ${{ inputs.kernel_version }}
           kernel_auto: ${{ inputs.kernel_auto }}
-          delete_source: ${{ inputs.delete_source }}
           kernel_package: ${{ inputs.kernel_package }}
           kernel_toolchain: ${{ inputs.kernel_toolchain }}
           kernel_sign: ${{ inputs.kernel_sign }}
