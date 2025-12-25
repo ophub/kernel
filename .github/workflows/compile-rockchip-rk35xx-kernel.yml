@@ -19,6 +19,7 @@ on:
           - unifreq/linux-6.1.y-rockchip
           - unifreq/linux-5.10.y-rk35xx
           - ophub/linux-6.1.y-rockchip
+          - ophub/linux-5.10.y-rk35xx
           - armbian/linux-rockchip@rk-6.1-rkr6.1
           - armbian/linux-rockchip@rk-6.1-rkr5.1
       kernel_version:
