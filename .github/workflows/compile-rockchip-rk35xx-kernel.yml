@@ -50,8 +50,9 @@ on:
         type: choice
         options:
           - gcc
-          - gcc-14.2
+          - gcc-15.2
           - gcc-14.3
+          - gcc-14.2
       ccache_clear:
         description: "Set whether to clear the cache"
         required: false
