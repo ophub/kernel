@@ -2,7 +2,7 @@
 
 View Chinese description  |  [查看中文说明](README.cn.md)
 
-These kernels can be used for `Armbian` and `OpenWrt` systems, such as the [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian), [amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt), [flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions), and [unifreq/openwrt_packit](https://github.com/unifreq/openwrt_packit) projects. They can be integrated when compiling firmware or installed in an existing system. Among them, [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable), [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) and [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) is an interchangeable mainline kernel. For specific usage methods, see the [Kernel Use Instructions](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel).
+These kernels can be used for `Armbian`, `OpenWrt` and `FnNAS` systems, such as the [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian), [amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt), [fnnas](https://github.com/ophub/fnnas), [flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions), and [unifreq/openwrt_packit](https://github.com/unifreq/openwrt_packit) projects. They can be integrated when compiling firmware or installed in an existing system. Among them, [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable), [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) and [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) is an interchangeable mainline kernel. For specific usage methods, see the [Kernel Use Instructions](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel).
 
 - The kernel files in the [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable) section of the Releases are `stable version`, which have enabled more support options according to user needs.
 - The kernel files in the [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) section of the Releases are `stable version`, which are series kernels shared by `flippy`.
@@ -51,6 +51,10 @@ A big thank you to unifreq and others for maintaining the kernel source code. Th
 - [chewitt/linux](https://github.com/chewitt/linux)
 - [torvalds/linux](https://github.com/torvalds/linux)
 - [kernel.org](https://kernel.org)
+- [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian)
+- [amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt)
+- [flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions)
+- [fnnas](https://github.com/ophub/fnnas)
 
 ## License
 

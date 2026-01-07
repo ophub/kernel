@@ -205,5 +205,7 @@ jobs:
           makeLatest: true
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
-            - This is a beta kernel intended only for specific testing purposes. Do not use it unless you know what you are doing.
-            - 这是`测试版`内核，仅用于特定需求的测试，不知情勿用。
+            - These kernels can be used for `Armbian`, `OpenWrt` and `FnNAS`.
+            - These are mainline `beta` kernels that may contain experimental features. Do not use unless you know what you are doing.
+            - 这些内核可用于 `Armbian`, `OpenWrt` 和 `FnNAS`。
+            - 这些是主线 `测试版` 内核，可能包含实验性功能，不知情勿用。
