@@ -1,0 +1,2321 @@
+From 1fd1907bee9a05cb86cce1d8cffa9335a2f2d7f5 Mon Sep 17 00:00:00 2001
+From: ophub <68696949+ophub@users.noreply.github.com>
+Date: Sat, 31 Jan 2026 16:56:47 +0800
+Subject: [PATCH] arch: arm64: dts: amlogic: add g12a, g12b, gxbb Series
+ devices
+
+---
+ arch/arm64/boot/dts/amlogic/Makefile          |  17 +
+ .../dts/amlogic/meson-g12a-s905l3a-cm311.dts  | 182 +++++++++
+ .../amlogic/meson-g12a-s905l3a-e900v22c.dts   | 159 ++++++++
+ .../dts/amlogic/meson-g12a-s905l3a-m401a.dts  | 165 ++++++++
+ .../dts/amlogic/meson-g12a-x96-max-rmii.dts   |  36 ++
+ .../amlogic/meson-g12b-a311d-oes-00050000.dts |  17 +
+ .../boot/dts/amlogic/meson-g12b-a311d-oes.dts | 377 ++++++++++++++++++
+ .../dts/amlogic/meson-g12b-ali-ct2000.dts     |  32 ++
+ .../meson-g12b-s922x-oes-plus-00050000.dts    |  17 +
+ .../amlogic/meson-g12b-s922x-oes-plus-v2.dts  |  34 ++
+ .../dts/amlogic/meson-g12b-s922x-oes-plus.dts | 375 +++++++++++++++++
+ .../dts/amlogic/meson-g12b-ugoos-am6-plus.dts | 225 +++++++++++
+ .../amlogic/meson-gxbb-beelink-mini-mx.dts    |  21 +
+ .../amlogic/meson-gxbb-beelink-mini-mxiii.dts | 177 ++++++++
+ .../dts/amlogic/meson-gxbb-mecool-ki-plus.dts |  34 ++
+ .../dts/amlogic/meson-gxbb-mecool-kii-pro.dts |  34 ++
+ .../dts/amlogic/meson-gxbb-minix-neo-u1.dts   | 190 +++++++++
+ .../dts/amlogic/meson-gxbb-mxq-pro-plus.dts   |  57 +++
+ 18 files changed, 2149 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-cm311.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-e900v22c.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-m401a.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12a-x96-max-rmii.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12b-a311d-oes-00050000.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12b-a311d-oes.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12b-ali-ct2000.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus-00050000.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus-v2.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-g12b-ugoos-am6-plus.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxbb-beelink-mini-mx.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxbb-beelink-mini-mxiii.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxbb-mecool-ki-plus.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxbb-mecool-kii-pro.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxbb-minix-neo-u1.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxbb-mxq-pro-plus.dts
+
+diff --git a/arch/arm64/boot/dts/amlogic/Makefile b/arch/arm64/boot/dts/amlogic/Makefile
+index dc9f2a968..ddf749d30 100644
+--- a/arch/arm64/boot/dts/amlogic/Makefile
++++ b/arch/arm64/boot/dts/amlogic/Makefile
+@@ -17,12 +17,19 @@ dtb-$(CONFIG_ARCH_MESON) += meson-axg-s400.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12a-fbx8am-brcm.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12a-fbx8am-realtek.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12a-radxa-zero.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12a-s905l3a-cm311.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12a-s905l3a-e900v22c.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12a-s905l3a-m401a.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12a-sei510.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12a-u200.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12a-x96-max-rmii.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12a-x96-max.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-a311d-bananapi-m2s.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-a311d-khadas-vim3.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-a311d-khadas-vim3-ts050.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12b-a311d-oes.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12b-a311d-oes-00050000.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12b-ali-ct2000.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-bananapi-cm4-cm4io.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-bananapi-cm4-mnt-reform2.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-dreambox-one.dtb
+@@ -44,8 +51,18 @@ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-odroid-n2l.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-radxa-zero2.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-s922x-bananapi-m2s.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-s922x-khadas-vim3.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12b-s922x-oes-plus.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12b-s922x-oes-plus-00050000.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12b-s922x-oes-plus-v2.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-g12b-ugoos-am6-plus.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-g12b-ugoos-am6.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-beelink-mini-mx.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-beelink-mini-mxiii.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-kii-pro.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-mecool-kii-pro.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-mecool-ki-plus.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-minix-neo-u1.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-mxq-pro-plus.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-nanopi-k2.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-nexbox-a95x.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxbb-odroidc2.dtb
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-cm311.dts b/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-cm311.dts
+new file mode 100644
+index 000000000..2420f01e5
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-cm311.dts
+@@ -0,0 +1,182 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2018 Amlogic, Inc. All rights reserved.
++ * Create by flippy
++ */
++
++/dts-v1/;
++
++#include "meson-g12a-u200.dts"
++
++/ {
++	compatible = "cm311,m401a,e900v22c", "amlogic,g12a";
++	model = "CM311-1a-YST";
++
++	aliases {
++		serial1 = &uart_A;
++	};
++
++	vddgpu: regulator-vddgpu {
++		compatible = "regulator-fixed";
++		regulator-name = "mali";
++		regulator-min-microvolt = <800000>;
++		regulator-max-microvolt = <800000>;
++		vin-supply = <&main_12v>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
++
++	wifi32k: wifi32k {
++		compatible = "pwm-clock";
++		#clock-cells = <0>;
++		clock-frequency = <32768>;
++		pwms = <&pwm_ef 0 30518 0>; /* PWM_E at 32.768KHz */
++	};
++
++	sdio_pwrseq: sdio-pwrseq {
++		compatible = "mmc-pwrseq-simple";
++		reset-gpios = <&gpio GPIOX_6 GPIO_ACTIVE_LOW>;
++		clocks = <&wifi32k>;
++		clock-names = "ext_clock";
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		power_led {
++			led_name = "power_led";
++			gpios = <&gpio_ao GPIOAO_11 GPIO_ACTIVE_LOW>;
++			default-state = "on";
++		};
++
++		green_led {
++			led_name = "green_led";
++			gpios = <&gpio_ao GPIOAO_10 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "heartbeat";
++		};
++	/*
++	 *	remote_led {
++	 *		led_name = "remote_led";
++	 *		gpios = <&gpio_ao GPIOAO_10 GPIO_ACTIVE_LOW>;
++	 *		default-state = "off";
++	 *		linux,default-trigger = "rc-feedback";
++	 *	};
++	 */
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x80000000>;
++	};
++};
++
++&uart_A {
++	status = "okay";
++	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
++	uart-has-rtscts;
++	pinctrl-names = "default";
++};
++
++&mali {
++	mali-supply=<&vddgpu>;
++};
++
++/* SDIO */
++&sd_emmc_a {
++	status = "okay";
++	pinctrl-0 = <&sdio_pins>;
++	pinctrl-1 = <&sdio_clk_gate_pins>;
++	pinctrl-names = "default", "clk-gate";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	bus-width = <4>;
++	cap-sd-highspeed;
++	sd-uhs-sdr50;
++	max-frequency = <100000000>;
++
++	non-removable;
++	disable-wp;
++
++	/* WiFi firmware requires power to be kept while in suspend */
++	keep-power-in-suspend;
++
++	mmc-pwrseq = <&sdio_pwrseq>;
++
++	vmmc-supply = <&vddao_3v3>;
++	vqmmc-supply = <&vddao_1v8>;
++
++	wifi: wifi@1 {
++		reg = <1>;
++		compatible = "sprd,unisoc-wifi";
++	};
++};
++
++/* SD card */
++&sd_emmc_b {
++	status = "okay";
++	bus-width = <4>;
++	cap-sd-highspeed;
++	max-frequency = <50000000>;
++};
++
++/* eMMC */
++&sd_emmc_c {
++	status = "okay";
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	max-frequency = <200000000>;
++};
++
++/* CPU Overclock */
++&cpu_opp_table {
++	opp-100000000 {
++		status = "disabled";
++	};
++
++	opp-250000000 {
++		status = "disabled";
++	};
++
++	opp-500000000 {
++		status = "disabled";
++	};
++
++	opp-667000000 {
++		status = "disabled";
++	};
++
++	opp-1908000000 {
++		opp-hz = /bits/ 64 <1908000000>;
++		opp-microvolt = <1001000>;
++	};
++
++	/* 2016mhz :  not test */
++	//opp-2016000000 {
++	//		opp-hz = /bits/ 64 <2016000000>;
++	//		opp-microvolt = <1021000>;
++	//};
++};
++
++&internal_ephy  {
++	max-speed = <100>;
++};
++
++&ethmac {
++	/delete-property/ resets;
++	/delete-property/ reset-names;
++	phy-handle = <&internal_ephy>;
++	phy-mode = "rmii";
++	status = "okay";
++};
++
++&pwm_ef {
++	pinctrl-0 = <&pwm_e_pins>;
++	pinctrl-names = "default";
++	clocks = <&xtal>;
++	clock-names = "clkin0";
++	status = "okay";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-e900v22c.dts b/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-e900v22c.dts
+new file mode 100644
+index 000000000..d942f2cd6
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-e900v22c.dts
+@@ -0,0 +1,159 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2018 Amlogic, Inc. All rights reserved.
++ * Create by flippy
++ */
++
++/dts-v1/;
++
++#include "meson-g12a-u200.dts"
++
++/ {
++	compatible = "skyworth,e900v22c", "amlogic,g12a";
++	model = "SKYWORTH E900V22C";
++
++	vddgpu: regulator-vddgpu {
++		compatible = "regulator-fixed";
++		regulator-name = "mali";
++		regulator-min-microvolt = <800000>;
++		regulator-max-microvolt = <800000>;
++		vin-supply = <&main_12v>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
++
++	wifi32k: wifi32k {
++		compatible = "pwm-clock";
++		#clock-cells = <0>;
++		clock-frequency = <32768>;
++		pwms = <&pwm_ef 0 30518 0>; /* PWM_E at 32.768KHz */
++	};
++
++	sdio_pwrseq: sdio-pwrseq {
++		compatible = "mmc-pwrseq-simple";
++		reset-gpios = <&gpio GPIOX_6 GPIO_ACTIVE_LOW>;
++		clocks = <&wifi32k>;
++		clock-names = "ext_clock";
++	};
++
++	leds {
++		compatible = "gpio-leds";
++		
++		power_led {
++			led_name = "power_led";
++                        gpios = <&gpio_ao GPIOAO_11 GPIO_ACTIVE_LOW>;
++			default-state = "on";
++		};
++
++		net_led {
++			led_name = "net_led";
++                        gpios = <&gpio_ao GPIOAO_9 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "0.0:00:link";
++		};
++
++		remote_led {
++			led_name = "remote_led";
++                        gpios = <&gpio_ao GPIOAO_10 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "rc-feedback";
++		};
++
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x80000000>;
++	};
++};
++
++&mali {
++	mali-supply=<&vddgpu>;
++};
++
++/* SDIO */
++&sd_emmc_a {
++	status = "okay";
++	pinctrl-0 = <&sdio_pins>;
++	pinctrl-1 = <&sdio_clk_gate_pins>;
++	pinctrl-names = "default", "clk-gate";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	bus-width = <4>;
++	cap-sd-highspeed;
++	sd-uhs-sdr50;
++	max-frequency = <100000000>;
++
++	non-removable;
++	disable-wp;
++
++	/* WiFi firmware requires power to be kept while in suspend */
++	keep-power-in-suspend;
++
++	mmc-pwrseq = <&sdio_pwrseq>;
++
++	vmmc-supply = <&vddao_3v3>;
++	vqmmc-supply = <&vddao_1v8>;
++
++	//wifi: wifi@1 {
++	//	reg = <1>;
++	//	compatible = "unisoc,uwe5622";
++	//};
++};
++
++/* SD card */
++&sd_emmc_b {
++	status = "okay";
++	bus-width = <4>;
++	cap-sd-highspeed;
++	max-frequency = <50000000>;
++};
++
++/* eMMC */
++&sd_emmc_c {
++	status = "okay";
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	max-frequency = <200000000>;
++};
++
++/* CPU Overclock */
++&cpu_opp_table {
++	opp-100000000 {
++		status = "disabled";
++	};
++
++	opp-250000000 {
++		status = "disabled";
++	};
++
++	opp-500000000 {
++		status = "disabled";
++	};
++
++	opp-667000000 {
++		status = "disabled";
++	};
++
++	opp-1908000000 {
++		opp-hz = /bits/ 64 <1908000000>;
++		opp-microvolt = <1001000>;
++	};
++
++	/* 2016mhz :  not test */
++	//opp-2016000000 {
++	//		opp-hz = /bits/ 64 <2016000000>;
++	//		opp-microvolt = <1021000>;
++	//};
++};
++
++&ethmac {
++	/delete-property/ resets;
++	/delete-property/ reset-names;
++	phy-handle = <&internal_ephy>;
++	phy-mode = "rmii";
++	status = "okay";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-m401a.dts b/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-m401a.dts
+new file mode 100644
+index 000000000..a538d0246
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12a-s905l3a-m401a.dts
+@@ -0,0 +1,165 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2018 Amlogic, Inc. All rights reserved.
++ * Create by janko888 2022/11/27
++ */
++ 
++/dts-v1/;
++
++#include "meson-g12a-u200.dts"
++
++/ {
++	compatible = "m401a", "amlogic,g12a";
++	model = "M401A";
++	
++	aliases {
++		serial1 = &uart_A;
++	};
++	
++	vddgpu: regulator-vddgpu {
++		compatible = "regulator-fixed";
++		regulator-name = "mali";
++		regulator-min-microvolt = <800000>;
++		regulator-max-microvolt = <800000>;
++		vin-supply = <&main_12v>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
++	
++	leds {
++		compatible = "gpio-leds";
++
++		power_led {
++			led_name = "power_led";
++			gpios = <&gpio_ao GPIOAO_11 GPIO_ACTIVE_LOW>;
++			default-state = "on";
++		};
++
++		net_led {
++			led_name = "net_led";
++			gpios = <&gpio_ao GPIOAO_9 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "0.0:00:link";
++		};
++
++		remote_led {
++			led_name = "remote_led";
++			gpios = <&gpio_ao GPIOAO_10 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "rc-feedback";
++		};
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x80000000>;
++	};
++};
++
++&uart_A {
++	status = "okay";
++	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
++	uart-has-rtscts;
++	pinctrl-names = "default";
++};
++
++&mali {
++	mali-supply=<&vddgpu>;
++};
++
++/* SD card */
++/* No SD card in M401A */
++&sd_emmc_b {
++	status = "disabled";
++	bus-width = <4>;
++	cap-sd-highspeed;
++	max-frequency = <50000000>;
++};
++
++/* eMMC */
++&sd_emmc_c {
++	status = "okay";
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	max-frequency = <100000000>;
++};
++
++/* CPU Overclock */
++&cpu_opp_table {
++	opp-100000000 {
++		opp-hz = /bits/ 64 <100000000>;
++		opp-microvolt = <731000>;
++	};
++
++	opp-250000000 {
++		opp-hz = /bits/ 64 <250000000>;
++		opp-microvolt = <731000>;
++	};
++	
++	opp-500000000 {
++		opp-hz = /bits/ 64 <500000000>;
++		opp-microvolt = <731000>;
++	};
++
++	opp-667000000 {
++		opp-hz = /bits/ 64 <667000000>;
++		opp-microvolt = <731000>;
++	};
++	
++	opp-1000000000 {
++		opp-hz = /bits/ 64 <1000000000>;
++		opp-microvolt = <731000>;
++	};
++
++	opp-1200000000 {
++		opp-hz = /bits/ 64 <1200000000>;
++		//opp-microvolt = <731000>;
++		opp-microvolt = <761000>;
++	};
++
++	opp-1398000000 {
++		opp-hz = /bits/ 64 <1398000000>;
++		//opp-microvolt = <761000>;
++		opp-microvolt = <791000>;
++	};
++
++	opp-1512000000 {
++		opp-hz = /bits/ 64 <1512000000>;
++		//opp-microvolt = <791000>;
++		opp-microvolt = <831000>;
++	};
++
++	opp-1608000000 {
++		opp-hz = /bits/ 64 <1608000000>;
++		//opp-microvolt = <831000>;
++		opp-microvolt = <871000>;
++	};
++
++	opp-1704000000 {
++		opp-hz = /bits/ 64 <1704000000>;
++		//opp-microvolt = <861000>;
++		opp-microvolt = <921000>;
++	};
++	
++	/* some soc has crash under 1800 */
++	opp-1800000000 {
++		opp-hz = /bits/ 64 <1800000000>;
++		opp-microvolt = <981000>;
++		status = "disabled";
++	};
++		
++};
++
++&internal_ephy  {
++	max-speed = <100>;
++};
++
++&ethmac {
++	/delete-property/ resets;
++	/delete-property/ reset-names;
++	phy-handle = <&internal_ephy>;
++	phy-mode = "rmii";
++	status = "okay";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12a-x96-max-rmii.dts b/arch/arm64/boot/dts/amlogic/meson-g12a-x96-max-rmii.dts
+new file mode 100644
+index 000000000..7090ac100
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12a-x96-max-rmii.dts
+@@ -0,0 +1,36 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2018 BayLibre SAS. All rights reserved.
++ */
++
++/dts-v1/;
++
++#include "meson-g12a-x96-max.dts"
++
++/ {
++	compatible = "amediatech,x96-max-rmii", "amlogic,u200", "amlogic,g12a";
++	//model = "Shenzhen Amediatech Technology Co., Ltd X96 Max";
++	model = "X96 Max (RMII)";
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x80000000>;
++	};
++};
++
++&ext_mdio {
++	external_phy: ethernet-phy@0 {
++	      compatible = "ethernet-phy-id001c.c916", "ethernet-phy-ieee802.3-c22";
++	      reg = <0>;
++	      max-speed = <1000>;
++	      eee-broken-1000t;
++	};
++};
++
++&ethmac {
++        pinctrl-0 = <&eth_pins>;
++        pinctrl-names = "default";
++        status = "okay";
++        phy-mode = "rmii";
++        phy-handle = <&internal_ephy>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12b-a311d-oes-00050000.dts b/arch/arm64/boot/dts/amlogic/meson-g12b-a311d-oes-00050000.dts
+new file mode 100644
+index 000000000..5de85bd80
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12b-a311d-oes-00050000.dts
+@@ -0,0 +1,17 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ * Copyright (c) 2019 Christian Hewitt <christianshewitt@gmail.com>
++ * Copyright (c) 2025 retro98boy <retro98boy@qq.com>
++ */
++
++/dts-v1/;
++
++#include "meson-g12b-a311d-oes.dts"
++
++&ethmac {
++	phy-mode = "rgmii-rxid";
++	amlogic,prg-eth-reg0 = <0xffffffff 0x00001629>;
++	amlogic,prg-eth-reg1 = <0xffffffff 0x00050000>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12b-a311d-oes.dts b/arch/arm64/boot/dts/amlogic/meson-g12b-a311d-oes.dts
+new file mode 100644
+index 000000000..202b08682
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12b-a311d-oes.dts
+@@ -0,0 +1,377 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ * Copyright (c) 2019 Christian Hewitt <christianshewitt@gmail.com>
++ * Copyright (c) 2025 retro98boy <retro98boy@qq.com>
++ */
++
++/dts-v1/;
++
++#include "meson-g12b-a311d.dtsi"
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/gpio/meson-g12a-gpio.h>
++#include <dt-bindings/leds/common.h>
++
++/ {
++	compatible = "onethingcloud,oes", "amlogic,a311d", "amlogic,g12b";
++	model = "OneThing Cloud OES";
++
++	aliases {
++		serial0 = &uart_AO;
++		ethernet0 = &ethmac;
++		rtc99 = &vrtc;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++		kaslr-seed = <0xfeedbeef 0xc0def00d>;
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0xee6b2800>; /* 4GB */
++	};
++
++	fan0: gpio-fan {
++		compatible = "gpio-fan";
++		gpio-fan,speed-map = <0 0 3000 1>;
++		gpios = <&gpio GPIOC_4 GPIO_ACTIVE_HIGH>;
++		#cooling-cells = <2>;
++	};
++
++	gpio-keys-polled {
++		compatible = "gpio-keys-polled";
++		poll-interval = <100>;
++
++		pwr-btn {
++			label = "pwr-btn";
++			linux,code = <KEY_POWER>;
++			gpios = <&gpio GPIOH_4 GPIO_ACTIVE_LOW>;
++		};
++
++		rst-btn {
++			label = "rst-btn";
++			linux,code = <KEY_RESTART>;
++			gpios = <&gpio GPIOA_0 GPIO_ACTIVE_LOW>;
++		};
++	};
++
++	gpio-leds {
++		compatible = "gpio-leds";
++
++		/*
++		 * The circuit design of this device, in its default state (when powered on but the SoC has not started),
++		 * has the red power LED on and the green power LED off.
++		 * Therefore, by simply turning off the red power LED and turning on the green power LED in the kernel,
++		 * it can indicate that the kernel has started.
++		 */
++		pwr-led-green {
++			function = LED_FUNCTION_POWER;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio_ao GPIOAO_11 GPIO_ACTIVE_LOW>;
++			default-state = "on";
++		};
++
++		pwr-led-red {
++			function = LED_FUNCTION_POWER;
++			color = <LED_COLOR_ID_RED>;
++			gpios = <&gpio GPIOA_5 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		/* https://stackoverflow.com/questions/63484352/device-tree-config-for-netdev-trigger-sources-to-control-led-based-on-link-statu */
++		/* cat /sys/class/leds/green\:lan/trigger */
++		lan-led-green {
++			function = LED_FUNCTION_LAN;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIOC_3 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "mdio_mux-0.0:00:link";
++		};
++
++		lan-led-red {
++			function = LED_FUNCTION_LAN;
++			color = <LED_COLOR_ID_RED>;
++			gpios = <&gpio GPIOA_4 GPIO_ACTIVE_HIGH>; /* In fact, a low level lights up the LED. */
++			/*
++			 * The default state is off (low level), meaning that after the SoC starts,
++			 * if no network cable is connected, the red LED lights up by default.
++			 */
++			default-state = "off";
++			linux,default-trigger = "mdio_mux-0.0:00:link";
++		};
++
++		sata1-led-green {
++			function = LED_FUNCTION_DISK;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIOA_14 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "ata1";
++		};
++
++		sata2-led-green {
++			function = LED_FUNCTION_DISK;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIOA_15 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "ata2";
++		};
++
++		sata3-led-green {
++			function = LED_FUNCTION_DISK;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIOC_0 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++			linux,default-trigger = "ata3";
++		};
++	};
++
++	emmc_pwrseq: emmc-pwrseq {
++		compatible = "mmc-pwrseq-emmc";
++		reset-gpios = <&gpio BOOT_12 GPIO_ACTIVE_LOW>;
++	};
++
++	dc_in: regulator-dc-in {
++		compatible = "regulator-fixed";
++		regulator-name = "dc_in";
++		regulator-always-on;
++		regulator-boot-on;
++	};
++
++	vddao_1v8: regulator-vddao-1v8 {
++		compatible = "regulator-fixed";
++		regulator-name = "vddao_1v8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	vddcpu_a: regulator-vddcpu-a {
++		compatible = "pwm-regulator";
++		regulator-name = "VDDCPU_A";
++		regulator-min-microvolt = <690000>;
++		regulator-max-microvolt = <1050000>;
++		pwm-supply = <&dc_in>;
++		pwms = <&pwm_ab 0 1250 0>;
++		pwm-dutycycle-range = <100 0>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
++
++	vddcpu_b: regulator-vddcpu-b {
++		compatible = "pwm-regulator";
++		regulator-name = "VDDCPU_B";
++		regulator-min-microvolt = <690000>;
++		regulator-max-microvolt = <1050000>;
++		pwm-supply = <&dc_in>;
++		pwms = <&pwm_AO_cd 1 1250 0>;
++		pwm-dutycycle-range = <100 0>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
++
++	vsys_3v3: regulator-vsys-3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "vsys_3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	usb_pwr: regulator-usb-pwr {
++		compatible = "regulator-fixed";
++		regulator-name = "usb_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	regulator-sata1-pwr {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio GPIOC_6 GPIO_ACTIVE_HIGH>;
++		regulator-name = "sata1_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	regulator-sata2-pwr {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio GPIOC_5 GPIO_ACTIVE_HIGH>;
++		regulator-name = "sata2_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	regulator-sata3-pwr {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio_ao GPIOAO_3 GPIO_ACTIVE_HIGH>;
++		regulator-name = "sata3_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++};
++
++&cpu0 {
++	cpu-supply = <&vddcpu_b>;
++	operating-points-v2 = <&cpu_opp_table_0>;
++	clocks = <&clkc CLKID_CPU_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu1 {
++	cpu-supply = <&vddcpu_b>;
++	operating-points-v2 = <&cpu_opp_table_0>;
++	clocks = <&clkc CLKID_CPU_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu100 {
++	cpu-supply = <&vddcpu_a>;
++	operating-points-v2 = <&cpub_opp_table_1>;
++	clocks = <&clkc CLKID_CPUB_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu101 {
++	cpu-supply = <&vddcpu_a>;
++	operating-points-v2 = <&cpub_opp_table_1>;
++	clocks = <&clkc CLKID_CPUB_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu102 {
++	cpu-supply = <&vddcpu_a>;
++	operating-points-v2 = <&cpub_opp_table_1>;
++	clocks = <&clkc CLKID_CPUB_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu103 {
++	cpu-supply = <&vddcpu_a>;
++	operating-points-v2 = <&cpub_opp_table_1>;
++	clocks = <&clkc CLKID_CPUB_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu_thermal {
++	trips {
++		cpu_active: cpu-active {
++			temperature = <60000>; /* millicelsius */
++			hysteresis = <5000>; /* millicelsius */
++			type = "active";
++		};
++	};
++
++	cooling-maps {
++		map2 {
++			trip = <&cpu_active>;
++			cooling-device = <&fan0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++		};
++	};
++};
++
++&ethmac {
++	pinctrl-0 = <&eth_pins>, <&eth_rgmii_pins>;
++	pinctrl-names = "default";
++	status = "okay";
++	phy-mode = "rgmii";
++	phy-handle = <&rtl8211f>;
++	amlogic,tx-delay-ns = <2>;
++};
++
++&ext_mdio {
++	rtl8211f: rtl8211f@0 {
++		reg = <0>;
++		max-speed = <1000>;
++
++		reset-assert-us = <10000>;
++		reset-deassert-us = <80000>;
++		reset-gpios = <&gpio GPIOZ_15 (GPIO_ACTIVE_LOW | GPIO_OPEN_DRAIN)>;
++
++		interrupt-parent = <&gpio_intc>;
++		/* MAC_INTR on GPIOZ_14 */
++		interrupts = <IRQID_GPIOZ_14 IRQ_TYPE_LEVEL_LOW>; /* tested by voltmeter */
++
++		realtek,led-data = <0xc160>;
++	};
++};
++
++&npu {
++	status = "okay";
++};
++
++&pcie {
++	status = "okay";
++	skip-version-detect;
++	reset-gpios = <&gpio GPIOC_1 GPIO_ACTIVE_LOW>; /* tested by voltmeter */
++};
++
++&pwm_ab {
++	status = "okay";
++	pinctrl-0 = <&pwm_a_e_pins>;
++	pinctrl-names = "default";
++	clocks = <&xtal>;
++	clock-names = "clkin0";
++};
++
++&pwm_AO_cd {
++	pinctrl-0 = <&pwm_ao_d_e_pins>;
++	pinctrl-names = "default";
++	clocks = <&xtal>;
++	clock-names = "clkin1";
++	status = "okay";
++};
++
++&sd_emmc_c {
++	status = "okay";
++	pinctrl-0 = <&emmc_ctrl_pins>, <&emmc_data_8b_pins>, <&emmc_ds_pins>;
++	pinctrl-1 = <&emmc_clk_gate_pins>;
++	pinctrl-names = "default", "clk-gate";
++
++	max-frequency = <200000000>;
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	non-removable;
++
++	mmc-pwrseq = <&emmc_pwrseq>;
++	vmmc-supply = <&vsys_3v3>;
++	vqmmc-supply = <&vddao_1v8>;
++};
++
++&uart_AO {
++	status = "okay";
++	pinctrl-0 = <&uart_ao_a_pins>;
++	pinctrl-names = "default";
++};
++
++&usb2_phy0 {
++	phy-supply = <&usb_pwr>;
++};
++
++&usb2_phy1 {
++	phy-supply = <&usb_pwr>;
++};
++
++&usb3_pcie_phy {
++	phy-supply = <&usb_pwr>;
++};
++
++&usb {
++	status = "okay";
++	dr_mode = "host";
++	phys = <&usb2_phy0>, <&usb2_phy1>;
++	phy-names = "usb2-phy0", "usb2-phy1";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12b-ali-ct2000.dts b/arch/arm64/boot/dts/amlogic/meson-g12b-ali-ct2000.dts
+new file mode 100644
+index 000000000..152e4c6c6
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12b-ali-ct2000.dts
+@@ -0,0 +1,32 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ * Copyright (c) 2019 Christian Hewitt <christianshewitt@gmail.com>
++ * Copyright (c) 2023 flippy
++ */
++
++/dts-v1/;
++
++#include "meson-g12b-gtking-pro.dts"
++#include "meson-g12b-s922x-h.dtsi"
++
++/ {
++	compatible = "ali,ct2000", "amlogic,s922x", "amlogic,g12b";
++	model = "Ali CT2000";
++};
++
++&uart_A {
++	status = "okay";
++	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
++	pinctrl-names = "default";
++	uart-has-rtscts;
++
++	bluetooth {
++		compatible = "brcm,bcm43438-bt";
++		shutdown-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
++		max-speed = <2000000>;
++		clocks = <&wifi32k>;
++		clock-names = "lpo";
++	};
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus-00050000.dts b/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus-00050000.dts
+new file mode 100644
+index 000000000..1e37d9fa3
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus-00050000.dts
+@@ -0,0 +1,17 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ * Copyright (c) 2019 Christian Hewitt <christianshewitt@gmail.com>
++ * Copyright (c) 2025 retro98boy <retro98boy@qq.com>
++ */
++
++/dts-v1/;
++
++#include "meson-g12b-s922x-oes-plus.dts"
++
++&ethmac {
++	phy-mode = "rgmii-rxid";
++	amlogic,prg-eth-reg0 = <0xffffffff 0x00001629>;
++	amlogic,prg-eth-reg1 = <0xffffffff 0x00050000>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus-v2.dts b/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus-v2.dts
+new file mode 100644
+index 000000000..83c68e363
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus-v2.dts
+@@ -0,0 +1,34 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ * Copyright (c) 2019 Christian Hewitt <christianshewitt@gmail.com>
++ * Copyright (c) 2025 retro98boy <retro98boy@qq.com>
++ */
++
++/dts-v1/;
++
++#include "meson-g12b-s922x-oes-plus.dts"
++
++/ {
++	model = "OneThing Cloud OES Plus V2.1";
++};
++
++/* Adjust Ethernet PHY configuration */
++&ethmac {
++	phy-mode = "rgmii-rxid";
++	amlogic,invert-rxclk;
++	amlogic,keep-rx-internal-delay;
++	rx-internal-delay-ps = <1000>;
++	amlogic,rx-delay-ns = <8>;
++};
++
++/* Modify fan thermal control strategy */
++&cpu_thermal {
++	trips {
++		cpu_active {
++			temperature = <55000>; /* 55°C */
++			hysteresis = <8000>;   /* 8°C */
++		};
++	};
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus.dts b/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus.dts
+new file mode 100644
+index 000000000..d3d5371ba
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12b-s922x-oes-plus.dts
+@@ -0,0 +1,375 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ * Copyright (c) 2019 Christian Hewitt <christianshewitt@gmail.com>
++ * Copyright (c) 2025 retro98boy <retro98boy@qq.com>
++ */
++
++/dts-v1/;
++
++#include "meson-g12b-s922x.dtsi"
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/gpio/meson-g12a-gpio.h>
++#include <dt-bindings/leds/common.h>
++
++/ {
++	compatible = "onethingcloud,oes-plus", "amlogic,s922x", "amlogic,g12b";
++	model = "OneThing Cloud OES Plus";
++
++	aliases {
++		serial0 = &uart_AO;
++		ethernet0 = &ethmac;
++		rtc99 = &vrtc;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++		kaslr-seed = <0xfeedbeef 0xc0def00d>;
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0xee6b2800>; /* 4GB */
++	};
++
++	fan0: gpio-fan {
++		compatible = "gpio-fan";
++		gpio-fan,speed-map = <0 0 3000 1>;
++		gpios = <&gpio GPIOC_4 GPIO_ACTIVE_HIGH>;
++		#cooling-cells = <2>;
++	};
++
++	gpio-keys-polled {
++		compatible = "gpio-keys-polled";
++		poll-interval = <100>;
++
++		pwr-btn {
++			label = "pwr-btn";
++			linux,code = <KEY_POWER>;
++			gpios = <&gpio GPIOA_11 GPIO_ACTIVE_LOW>;
++		};
++
++		rst-btn {
++			label = "rst-btn";
++			linux,code = <KEY_RESTART>;
++			gpios = <&gpio GPIOA_10 GPIO_ACTIVE_LOW>;
++		};
++	};
++
++	gpio-leds {
++		compatible = "gpio-leds";
++
++		/*
++		 * The circuit design of this device, in its default state (when powered on but the SoC has not started),
++		 * has the red power LED on and the green power LED off.
++		 * Therefore, by simply turning off the red power LED and turning on the green power LED in the kernel,
++		 * it can indicate that the kernel has started.
++		 */
++		pwr-led-green {
++			function = LED_FUNCTION_POWER;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio_ao GPIOAO_11 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++
++		pwr-led-red {
++			function = LED_FUNCTION_POWER;
++			color = <LED_COLOR_ID_RED>;
++			gpios = <&gpio_ao GPIOAO_10 GPIO_ACTIVE_LOW>;
++			default-state = "off";
++		};
++
++		/* https://stackoverflow.com/questions/63484352/device-tree-config-for-netdev-trigger-sources-to-control-led-based-on-link-statu */
++		/* cat /sys/class/leds/green\:lan/trigger */
++		lan-led-green {
++			function = LED_FUNCTION_LAN;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIOA_6 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++			linux,default-trigger = "mdio_mux-0.0:00:link";
++		};
++
++		lan-led-red {
++			function = LED_FUNCTION_LAN;
++			color = <LED_COLOR_ID_RED>;
++			gpios = <&gpio GPIOA_8 GPIO_ACTIVE_LOW>; /* In fact, a high level lights up the LED. */
++			/*
++			 * The default state is off (high level), meaning that after the SoC starts,
++			 * if no network cable is connected, the red LED lights up by default.
++			 */
++			default-state = "off";
++			linux,default-trigger = "mdio_mux-0.0:00:link";
++		};
++
++		sata1-led-green {
++			function = LED_FUNCTION_DISK;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIOA_9 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++			linux,default-trigger = "ata1";
++		};
++
++		sata2-led-green {
++			function = LED_FUNCTION_DISK;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIOA_3 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++			linux,default-trigger = "ata2";
++		};
++
++		sata3-led-green {
++			function = LED_FUNCTION_DISK;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIOA_4 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++			linux,default-trigger = "ata3";
++		};
++	};
++
++	emmc_pwrseq: emmc-pwrseq {
++		compatible = "mmc-pwrseq-emmc";
++		reset-gpios = <&gpio BOOT_12 GPIO_ACTIVE_LOW>;
++	};
++
++	dc_in: regulator-dc-in {
++		compatible = "regulator-fixed";
++		regulator-name = "dc_in";
++		regulator-always-on;
++		regulator-boot-on;
++	};
++
++	vddao_1v8: regulator-vddao-1v8 {
++		compatible = "regulator-fixed";
++		regulator-name = "vddao_1v8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	vddcpu_a: regulator-vddcpu-a {
++		compatible = "pwm-regulator";
++		regulator-name = "VDDCPU_A";
++		regulator-min-microvolt = <690000>;
++		regulator-max-microvolt = <1050000>;
++		pwm-supply = <&dc_in>;
++		pwms = <&pwm_ab 0 1250 0>;
++		pwm-dutycycle-range = <100 0>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
++
++	vddcpu_b: regulator-vddcpu-b {
++		compatible = "pwm-regulator";
++		regulator-name = "VDDCPU_B";
++		regulator-min-microvolt = <690000>;
++		regulator-max-microvolt = <1050000>;
++		pwm-supply = <&dc_in>;
++		pwms = <&pwm_AO_cd 1 1250 0>;
++		pwm-dutycycle-range = <100 0>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
++
++	vsys_3v3: regulator-vsys-3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "vsys_3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	usb_pwr: regulator-usb-pwr {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio GPIOH_6 GPIO_ACTIVE_HIGH>;
++		regulator-name = "usb_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	regulator-sata1-pwr {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio GPIOA_2 GPIO_ACTIVE_HIGH>;
++		regulator-name = "sata1_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	regulator-sata2-pwr {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio GPIOA_1 GPIO_ACTIVE_HIGH>;
++		regulator-name = "sata2_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++
++	regulator-sata3-pwr {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpio = <&gpio GPIOA_0 GPIO_ACTIVE_HIGH>;
++		regulator-name = "sata3_pwr";
++		regulator-always-on;
++		regulator-boot-on;
++		vin-supply = <&dc_in>;
++	};
++};
++
++&cpu0 {
++	cpu-supply = <&vddcpu_b>;
++	operating-points-v2 = <&cpu_opp_table_0>;
++	clocks = <&clkc CLKID_CPU_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu1 {
++	cpu-supply = <&vddcpu_b>;
++	operating-points-v2 = <&cpu_opp_table_0>;
++	clocks = <&clkc CLKID_CPU_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu100 {
++	cpu-supply = <&vddcpu_a>;
++	operating-points-v2 = <&cpub_opp_table_1>;
++	clocks = <&clkc CLKID_CPUB_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu101 {
++	cpu-supply = <&vddcpu_a>;
++	operating-points-v2 = <&cpub_opp_table_1>;
++	clocks = <&clkc CLKID_CPUB_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu102 {
++	cpu-supply = <&vddcpu_a>;
++	operating-points-v2 = <&cpub_opp_table_1>;
++	clocks = <&clkc CLKID_CPUB_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu103 {
++	cpu-supply = <&vddcpu_a>;
++	operating-points-v2 = <&cpub_opp_table_1>;
++	clocks = <&clkc CLKID_CPUB_CLK>;
++	clock-latency = <50000>;
++};
++
++&cpu_thermal {
++	trips {
++		cpu_active: cpu-active {
++			temperature = <60000>; /* millicelsius */
++			hysteresis = <5000>; /* millicelsius */
++			type = "active";
++		};
++	};
++
++	cooling-maps {
++		map2 {
++			trip = <&cpu_active>;
++			cooling-device = <&fan0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++		};
++	};
++};
++
++&ethmac {
++	pinctrl-0 = <&eth_pins>, <&eth_rgmii_pins>;
++	pinctrl-names = "default";
++	status = "okay";
++	phy-mode = "rgmii";
++	phy-handle = <&rtl8211f>;
++	amlogic,tx-delay-ns = <2>;
++};
++
++&ext_mdio {
++	rtl8211f: rtl8211f@0 {
++		reg = <0>;
++		max-speed = <1000>;
++
++		reset-assert-us = <10000>;
++		reset-deassert-us = <80000>;
++		reset-gpios = <&gpio GPIOZ_15 (GPIO_ACTIVE_LOW | GPIO_OPEN_DRAIN)>;
++
++		interrupt-parent = <&gpio_intc>;
++		/* MAC_INTR on GPIOZ_14 */
++		interrupts = <IRQID_GPIOZ_14 IRQ_TYPE_LEVEL_LOW>; /* tested by voltmeter */
++
++		realtek,led-data = <0xc160>;
++	};
++};
++
++&pcie {
++	status = "okay";
++	skip-version-detect;
++	reset-gpios = <&gpio GPIOH_4 GPIO_ACTIVE_LOW>; /* tested by voltmeter */
++};
++
++&pwm_ab {
++	status = "okay";
++	pinctrl-0 = <&pwm_a_e_pins>;
++	pinctrl-names = "default";
++	clocks = <&xtal>;
++	clock-names = "clkin0";
++};
++
++&pwm_AO_cd {
++	pinctrl-0 = <&pwm_ao_d_e_pins>;
++	pinctrl-names = "default";
++	clocks = <&xtal>;
++	clock-names = "clkin1";
++	status = "okay";
++};
++
++&sd_emmc_c {
++	status = "okay";
++	pinctrl-0 = <&emmc_ctrl_pins>, <&emmc_data_8b_pins>, <&emmc_ds_pins>;
++	pinctrl-1 = <&emmc_clk_gate_pins>;
++	pinctrl-names = "default", "clk-gate";
++
++	max-frequency = <200000000>;
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	non-removable;
++
++	mmc-pwrseq = <&emmc_pwrseq>;
++	vmmc-supply = <&vsys_3v3>;
++	vqmmc-supply = <&vddao_1v8>;
++};
++
++&uart_AO {
++	status = "okay";
++	pinctrl-0 = <&uart_ao_a_pins>;
++	pinctrl-names = "default";
++};
++
++&usb2_phy0 {
++	phy-supply = <&usb_pwr>;
++};
++
++&usb2_phy1 {
++	phy-supply = <&usb_pwr>;
++};
++
++&usb3_pcie_phy {
++	phy-supply = <&usb_pwr>;
++};
++
++&usb {
++	status = "okay";
++	dr_mode = "host";
++	phys = <&usb2_phy0>, <&usb2_phy1>;
++	phy-names = "usb2-phy0", "usb2-phy1";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-g12b-ugoos-am6-plus.dts b/arch/arm64/boot/dts/amlogic/meson-g12b-ugoos-am6-plus.dts
+new file mode 100644
+index 000000000..5acbabc99
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-g12b-ugoos-am6-plus.dts
+@@ -0,0 +1,225 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2019 BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ * Copyright (c) 2019 Christian Hewitt <christianshewitt@gmail.com>
++ */
++
++/dts-v1/;
++
++#include "meson-g12b-w400.dtsi"
++#include <dt-bindings/sound/meson-g12a-tohdmitx.h>
++
++/ {
++	compatible = "ugoos,am6-plus", "amlogic,s922x", "amlogic,g12b";
++	model = "Ugoos AM6 Plus";
++
++	aliases {
++		rtc0 = &rtc;
++		rtc1 = &vrtc;
++	};
++
++	gpio-keys-polled {
++		compatible = "gpio-keys-polled";
++		poll-interval = <100>;
++
++		power-button {
++			label = "power";
++			linux,code = <KEY_POWER>;
++			gpios = <&gpio_ao GPIOAO_6 GPIO_ACTIVE_HIGH>;
++		};
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		led-green {
++			label = "power:green";
++			gpios = <&gpio_ao GPIOAO_7 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++	};
++
++	spdif_dit: audio-codec-1 {
++		#sound-dai-cells = <0>;
++		compatible = "linux,spdif-dit";
++		status = "okay";
++		sound-name-prefix = "DIT";
++	};
++
++	sound {
++		compatible = "amlogic,axg-sound-card";
++		model = "AM6-PLUS";
++		audio-aux-devs = <&tdmout_b>;
++		audio-routing = "TDMOUT_B IN 0", "FRDDR_A OUT 1",
++				"TDMOUT_B IN 1", "FRDDR_B OUT 1",
++				"TDMOUT_B IN 2", "FRDDR_C OUT 1",
++				"TDM_B Playback", "TDMOUT_B OUT",
++				"SPDIFOUT_A IN 0", "FRDDR_A OUT 3",
++				"SPDIFOUT_A IN 1", "FRDDR_B OUT 3",
++				"SPDIFOUT_A IN 2", "FRDDR_C OUT 3";
++
++		clocks = <&clkc CLKID_MPLL2>,
++			 <&clkc CLKID_MPLL0>,
++			 <&clkc CLKID_MPLL1>;
++
++		assigned-clocks = <&clkc CLKID_MPLL2>,
++				  <&clkc CLKID_MPLL0>,
++				  <&clkc CLKID_MPLL1>;
++		assigned-clock-parents = <0>, <0>, <0>;
++		assigned-clock-rates = <294912000>,
++				       <270950400>,
++				       <393216000>;
++		status = "okay";
++
++		dai-link-0 {
++			sound-dai = <&frddr_a>;
++		};
++
++		dai-link-1 {
++			sound-dai = <&frddr_b>;
++		};
++
++		dai-link-2 {
++			sound-dai = <&frddr_c>;
++		};
++
++		/* 8ch hdmi interface */
++		dai-link-3 {
++			sound-dai = <&tdmif_b>;
++			dai-format = "i2s";
++			dai-tdm-slot-tx-mask-0 = <1 1>;
++			dai-tdm-slot-tx-mask-1 = <1 1>;
++			dai-tdm-slot-tx-mask-2 = <1 1>;
++			dai-tdm-slot-tx-mask-3 = <1 1>;
++			mclk-fs = <256>;
++
++			codec {
++				sound-dai = <&tohdmitx TOHDMITX_I2S_IN_B>;
++			};
++		};
++
++		/* spdif hdmi or toslink interface */
++		dai-link-4 {
++			sound-dai = <&spdifout_a>;
++
++			codec-0 {
++				sound-dai = <&spdif_dit>;
++			};
++
++			codec-1 {
++				sound-dai = <&tohdmitx TOHDMITX_SPDIF_IN_A>;
++			};
++		};
++
++		/* spdif hdmi interface */
++		dai-link-5 {
++			sound-dai = <&spdifout_b>;
++
++			codec {
++				sound-dai = <&tohdmitx TOHDMITX_SPDIF_IN_B>;
++			};
++		};
++
++		/* hdmi glue */
++		dai-link-6 {
++			sound-dai = <&tohdmitx TOHDMITX_I2S_OUT>;
++
++			codec {
++				sound-dai = <&hdmi_tx>;
++			};
++		};
++	};
++};
++
++&arb {
++	status = "okay";
++};
++
++&clkc_audio {
++	status = "okay";
++};
++
++&frddr_a {
++	status = "okay";
++};
++
++&frddr_b {
++	status = "okay";
++};
++
++&frddr_c {
++	status = "okay";
++};
++
++&ir {
++	linux,rc-map-name = "rc-khadas";
++};
++
++&i2c3 {
++	status = "okay";
++	pinctrl-0 = <&i2c3_sda_a_pins>, <&i2c3_sck_a_pins>;
++	pinctrl-names = "default";
++
++	rtc: rtc@51 {
++		compatible = "haoyu,hym8563";
++		reg = <0x51>;
++	};
++};
++
++&spdifout_a {
++	pinctrl-0 = <&spdif_out_h_pins>;
++	pinctrl-names = "default";
++	status = "okay";
++};
++
++&spdifout_b {
++	status = "okay";
++};
++
++&tdmif_b {
++	status = "okay";
++};
++
++&tdmout_b {
++	status = "okay";
++};
++
++&tohdmitx {
++	status = "okay";
++};
++
++&uart_A {
++	status = "okay";
++	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
++	pinctrl-names = "default";
++	uart-has-rtscts;
++
++	bluetooth {
++		compatible = "brcm,bcm43438-bt";
++		shutdown-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
++		max-speed = <2000000>;
++		clocks = <&wifi32k>;
++	clock-names = "lpo";
++	};
++};
++
++&uart_AO {
++	status = "okay";
++	pinctrl-0 = <&uart_ao_a_pins>;
++	pinctrl-names = "default";
++};
++
++&usb {
++	status = "okay";
++	dr_mode = "host";
++	vbus-supply = <&usb_pwr_en>;
++};
++
++&usb2_phy0 {
++	phy-supply = <&usb1_pow>;
++};
++
++&usb2_phy1 {
++	phy-supply = <&usb1_pow>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxbb-beelink-mini-mx.dts b/arch/arm64/boot/dts/amlogic/meson-gxbb-beelink-mini-mx.dts
+new file mode 100644
+index 000000000..792014889
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxbb-beelink-mini-mx.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * meson-gxbb-beelink-mini-mx.dts
++ * Copyright (c) 2022 unifreq
++ */
++
++/dts-v1/;
++
++#include "meson-gxbb-vega-s95.dtsi"
++
++/ {
++	compatible = "azw,mini-mx", "amlogic,meson-gxbb";
++	model = "Beelink Mini MX";
++};
++
++&ethmac {
++
++	amlogic,tx-delay-ns = <4>;
++
++};
++
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxbb-beelink-mini-mxiii.dts b/arch/arm64/boot/dts/amlogic/meson-gxbb-beelink-mini-mxiii.dts
+new file mode 100644
+index 000000000..72f7857d9
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxbb-beelink-mini-mxiii.dts
+@@ -0,0 +1,177 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2021 Christian Hewitt <christianshewitt@gmail.com>
++ */
++
++/dts-v1/;
++
++#include "meson-gxbb-p20x.dtsi"
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/leds/common.h>
++#include <dt-bindings/sound/meson-aiu.h>
++
++/ {
++	compatible = "beelink,mini-mxiii", "amlogic,meson-gxbb";
++	model = "Beelink Mini MXIII";
++
++	spdif_dit: audio-codec-0 {
++		#sound-dai-cells = <0>;
++		compatible = "linux,spdif-dit";
++		status = "okay";
++		sound-name-prefix = "DIT";
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		led-power {
++			/* Red in Standby */
++			color = <LED_COLOR_ID_GREEN>;
++			function = LED_FUNCTION_POWER;
++			gpios = <&gpio_ao GPIOAO_13 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++	};
++
++	gpio-keys-polled {
++		compatible = "gpio-keys-polled";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		poll-interval = <20>;
++
++		button-reset {
++			label = "reset";
++			linux,code = <KEY_POWER>;
++			gpios = <&gpio_ao GPIOAO_3 GPIO_ACTIVE_HIGH>;
++		};
++	};
++
++	avdd18_usb_adc: regulator-avdd18_usb_adc {
++		compatible = "regulator-fixed";
++		regulator-name = "AVDD18_USB_ADC";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++	};
++
++	sound {
++		compatible = "amlogic,gx-sound-card";
++		model = "MINI-MXIII";
++
++		clocks = <&clkc CLKID_MPLL2>,
++			 <&clkc CLKID_MPLL0>,
++			 <&clkc CLKID_MPLL1>;
++
++		assigned-clocks = <&clkc CLKID_MPLL0>,
++				  <&clkc CLKID_MPLL1>,
++				  <&clkc CLKID_MPLL2>;
++		assigned-clock-parents = <0>, <0>, <0>;
++		assigned-clock-rates = <294912000>,
++				       <270950400>,
++				       <393216000>;
++		status = "okay";
++
++		dai-link-0 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_FIFO>;
++		};
++
++		dai-link-1 {
++			sound-dai = <&aiu AIU_CPU CPU_SPDIF_FIFO>;
++		};
++
++		dai-link-2 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_ENCODER>;
++			dai-format = "i2s";
++			mclk-fs = <256>;
++
++			codec-0 {
++				sound-dai = <&aiu AIU_HDMI CTRL_I2S>;
++			};
++		};
++
++		dai-link-3 {
++			sound-dai = <&aiu AIU_CPU CPU_SPDIF_ENCODER>;
++
++			codec-0 {
++				sound-dai = <&spdif_dit>;
++			};
++		};
++
++		dai-link-4 {
++			sound-dai = <&aiu AIU_HDMI CTRL_OUT>;
++
++			codec-0 {
++				sound-dai = <&hdmi_tx>;
++			};
++		};
++	};
++};
++
++&aiu {
++	status = "okay";
++	pinctrl-0 = <&spdif_out_y_pins>;
++	pinctrl-names = "default";
++};
++
++&ethmac {
++	status = "okay";
++	pinctrl-0 = <&eth_rgmii_pins>;
++	pinctrl-names = "default";
++
++	phy-handle = <&eth_phy0>;
++	phy-mode = "rgmii";
++
++	amlogic,tx-delay-ns = <2>;
++
++	mdio {
++		compatible = "snps,dwmac-mdio";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		eth_phy0: ethernet-phy@0 {
++			/* Realtek RTL8211F (0x001cc916) */
++			reg = <0>;
++
++			reset-assert-us = <10000>;
++			reset-deassert-us = <80000>;
++			reset-gpios = <&gpio GPIOZ_14 GPIO_ACTIVE_LOW>;
++
++			interrupt-parent = <&gpio_intc>;
++			/* MAC_INTR on GPIOZ_15 */
++			interrupts = <29 IRQ_TYPE_LEVEL_LOW>;
++		};
++	};
++};
++
++&ir {
++	linux,rc-map-name = "rc-beelink-mxiii";
++};
++
++&saradc {
++	status = "okay";
++	vref-supply = <&avdd18_usb_adc>;
++};
++
++/* Realtek Wireless SDIO Module */
++&sd_emmc_a {
++	/delete-node/ brcmf;
++
++	rtl8723bs: wifi@1 {
++		reg = <1>;
++		compatible = "realtek,rtl8723bs";
++	};
++};
++
++/* Connected to the Bluetooth module */
++&uart_A {
++	status = "okay";
++	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
++	pinctrl-names = "default";
++	uart-has-rtscts;
++
++	bluetooth {
++		compatible = "realtek,rtl8723bs-bt";
++		enable-gpios = <&gpio GPIOX_20 GPIO_ACTIVE_HIGH>;
++		host-wake-gpios = <&gpio GPIOX_21 GPIO_ACTIVE_HIGH>;
++	};
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxbb-mecool-ki-plus.dts b/arch/arm64/boot/dts/amlogic/meson-gxbb-mecool-ki-plus.dts
+new file mode 100644
+index 000000000..cb422633a
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxbb-mecool-ki-plus.dts
+@@ -0,0 +1,34 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/*
++ * Author: Christian Hewitt <christianshewitt@gmail.com>
++ */
++
++#include "meson-gxbb-p201.dts"
++
++/ {
++	compatible = "videostrong,gxbb-ki-plus", "amlogic,meson-gxbb";
++	model = "MeCool KI Plus";
++
++	clock: meson_clock {
++		compatible = "amlogic, gxbb-clock";
++		reg = <0x0 0xc883c000 0x0 0x1000>,
++		      <0x0 0xc8100000 0x0 0x1000>;
++		#clock-cells = <1>;
++		#reset-cells = <1>;
++		sys_max = <1536000000>;
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x40000000>;
++	};
++};
++
++&ir {
++	linux,rc-map-name = "rc-mecool-ki-plus";
++};
++
++&usb_pwr {
++	gpio = <>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxbb-mecool-kii-pro.dts b/arch/arm64/boot/dts/amlogic/meson-gxbb-mecool-kii-pro.dts
+new file mode 100644
+index 000000000..0dbcf0f7d
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxbb-mecool-kii-pro.dts
+@@ -0,0 +1,34 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/*
++ * Author: Christian Hewitt <christianshewitt@gmail.com>
++ */
++
++#include "meson-gxbb-p201.dts"
++
++/ {
++	compatible = "videostrong,gxbb-kii-pro", "amlogic,meson-gxbb";
++	model = "MeCool KII Pro";
++
++	clock: meson_clock {
++		compatible = "amlogic, gxbb-clock";
++		reg = <0x0 0xc883c000 0x0 0x1000>,
++		      <0x0 0xc8100000 0x0 0x1000>;
++		#clock-cells = <1>;
++		#reset-cells = <1>;
++		sys_max = <1536000000>;
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x40000000>;
++	};
++};
++
++&ir {
++	linux,rc-map-name = "rc-mecool-kii-pro";
++};
++
++&usb_pwr {
++	gpio = <>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxbb-minix-neo-u1.dts b/arch/arm64/boot/dts/amlogic/meson-gxbb-minix-neo-u1.dts
+new file mode 100644
+index 000000000..5900ee92c
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxbb-minix-neo-u1.dts
+@@ -0,0 +1,190 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2021 Christian Hewitt <christianshewitt@gmail.com>
++ */
++
++/dts-v1/;
++
++#include "meson-gxbb-p20x.dtsi"
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/leds/common.h>
++#include <dt-bindings/sound/meson-aiu.h>
++
++/ {
++	compatible = "minix,neo-u1", "amlogic,meson-gxbb";
++	model = "Minix NEO U1";
++
++	aliases {
++		rtc0 = &rtc;
++		rtc1 = &vrtc;
++	};
++
++	spdif_dit: audio-codec-0 {
++		#sound-dai-cells = <0>;
++		compatible = "linux,spdif-dit";
++		status = "okay";
++		sound-name-prefix = "DIT";
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		led-status {
++			color = <LED_COLOR_ID_WHITE>;
++			function = LED_FUNCTION_STATUS;
++			gpios = <&gpio_ao GPIOAO_13 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++	};
++
++	gpio-keys-polled {
++		compatible = "gpio-keys-polled";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		poll-interval = <20>;
++
++		button-reset {
++			label = "reset";
++			linux,code = <KEY_POWER>;
++			gpios = <&gpio_ao GPIOAO_3 GPIO_ACTIVE_HIGH>;
++		};
++	};
++
++	avdd18_usb_adc: regulator-avdd18_usb_adc {
++		compatible = "regulator-fixed";
++		regulator-name = "AVDD18_USB_ADC";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++	};
++
++	sound {
++		compatible = "amlogic,gx-sound-card";
++		model = "MINIX-NEO";
++		assigned-clocks = <&clkc CLKID_MPLL0>,
++				  <&clkc CLKID_MPLL1>,
++				  <&clkc CLKID_MPLL2>;
++		assigned-clock-parents = <0>, <0>, <0>;
++		assigned-clock-rates = <294912000>,
++				       <270950400>,
++				       <393216000>;
++		status = "okay";
++
++		dai-link-0 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_FIFO>;
++		};
++
++		dai-link-1 {
++			sound-dai = <&aiu AIU_CPU CPU_SPDIF_FIFO>;
++		};
++
++		dai-link-2 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_ENCODER>;
++			dai-format = "i2s";
++			mclk-fs = <256>;
++
++			codec-0 {
++				sound-dai = <&aiu AIU_HDMI CTRL_I2S>;
++			};
++		};
++
++		dai-link-3 {
++			sound-dai = <&aiu AIU_CPU CPU_SPDIF_ENCODER>;
++
++			codec-0 {
++				sound-dai = <&spdif_dit>;
++			};
++		};
++
++		dai-link-4 {
++			sound-dai = <&aiu AIU_HDMI CTRL_OUT>;
++
++			codec-0 {
++				sound-dai = <&hdmi_tx>;
++			};
++		};
++	};
++};
++
++&aiu {
++	status = "okay";
++	pinctrl-0 = <&spdif_out_y_pins>;
++	pinctrl-names = "default";
++};
++
++&ethmac {
++	status = "okay";
++	pinctrl-0 = <&eth_rgmii_pins>;
++	pinctrl-names = "default";
++
++	phy-handle = <&eth_phy0>;
++	phy-mode = "rgmii";
++
++	amlogic,tx-delay-ns = <2>;
++
++	mdio {
++		compatible = "snps,dwmac-mdio";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		eth_phy0: ethernet-phy@0 {
++			/* Realtek RTL8211F (0x001cc916) */
++			reg = <0>;
++
++			reset-assert-us = <10000>;
++			reset-deassert-us = <80000>;
++			reset-gpios = <&gpio GPIOZ_14 GPIO_ACTIVE_LOW>;
++
++			interrupt-parent = <&gpio_intc>;
++			/* MAC_INTR on GPIOZ_15 */
++			interrupts = <29 IRQ_TYPE_LEVEL_LOW>;
++		};
++	};
++};
++
++&ir {
++	linux,rc-map-name = "rc-minix-neo";
++};
++
++&i2c_A {
++	status = "okay";
++	pinctrl-0 = <&i2c_a_pins>;
++	pinctrl-names = "default";
++};
++
++&i2c_B {
++	status = "okay";
++	pinctrl-0 = <&i2c_b_pins>;
++	pinctrl-names = "default";
++
++	rtc: rtc@51 {
++		status = "okay";
++		compatible = "haoyu,hym8563";
++		reg = <0x51>;
++		#clock-cells = <0>;
++		clock-frequency = <32768>;
++		clock-output-names = "xin32k";
++		wakeup-source;
++	};
++};
++
++&saradc {
++	status = "okay";
++	vref-supply = <&avdd18_usb_adc>;
++};
++
++/* This is connected to the Bluetooth module: */
++&uart_A {
++	status = "okay";
++	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
++	pinctrl-names = "default";
++	uart-has-rtscts;
++
++	bluetooth {
++		compatible = "bcm43438-bt";
++		shutdown-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
++		max-speed = <2000000>;
++		clocks = <&wifi32k>;
++		clock-names = "lpo";
++	};
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxbb-mxq-pro-plus.dts b/arch/arm64/boot/dts/amlogic/meson-gxbb-mxq-pro-plus.dts
+new file mode 100644
+index 000000000..bb804a914
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxbb-mxq-pro-plus.dts
+@@ -0,0 +1,57 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2021 Flippy
++ */
++
++/dts-v1/;
++
++#include "meson-gxbb-vega-s95.dtsi"
++
++/ {
++	compatible = "crocon,mxq-pro-plus", "amlogic,meson-gxbb";
++	model = "MXQ Pro+ (S905)";
++
++	reserved-memory {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++                /* 32 MiB reserved for ARM Trusted Firmware (BL32) */
++                secmon_reserved_bl32: secmon@5300000 {
++                        reg = <0x0 0x05300000 0x0 0x2000000>;
++                        no-map;
++                };
++
++		/* 2MiB reserved for ARM Trusted Firmware (BL31) */
++		secmon: secmon {
++			reg = <0x0 0x10000000 0x0 0x200000>;
++			no-map;
++		};
++	};
++
++	memory@0 {
++		device_type = "memory";
++		/*
++		 * The first 16MiB of the DDR memory zone
++		 * is reserved to the Hardware ROM Firmware
++		 */
++		linux,usable-memory = <0x0 0x1000000 0x0 0x7f000000>;
++	};
++};
++
++&ethmac {
++	amlogic,tx-delay-ns = <4>;
++	snps,aal;
++	snps,txpbl = <0x8>;
++	snps,rxpbl = <0x8>;
++};
++
++/*
++&eth_phy0 {
++	interrupts = <25 IRQ_TYPE_LEVEL_LOW>;
++};
++*/
++
++&sd_emmc_c {
++	max-frequency = <200000000>;	
++};

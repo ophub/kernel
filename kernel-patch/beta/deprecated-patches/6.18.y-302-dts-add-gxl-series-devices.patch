@@ -1,0 +1,1008 @@
+From 53ff558309689798c7c075d72afb2101ffaa6702 Mon Sep 17 00:00:00 2001
+From: ophub <68696949+ophub@users.noreply.github.com>
+Date: Sat, 31 Jan 2026 17:11:47 +0800
+Subject: [PATCH] arch: arm64: dts: amlogic: add gxl Series devices
+
+---
+ arch/arm64/boot/dts/amlogic/Makefile          |  13 +
+ .../meson-gxl-s905d-mecool-ki-plus.dts        |  21 ++
+ .../amlogic/meson-gxl-s905d-mecool-ki-pro.dts |  16 +
+ .../meson-gxl-s905d-mecool-m8s-plus.dts       |  16 +
+ .../meson-gxl-s905d-phicomm-n1-thresh.dts     |  13 +
+ .../dts/amlogic/meson-gxl-s905l-venz-v10.dts  | 326 ++++++++++++++++++
+ .../dts/amlogic/meson-gxl-s905l2-ipbs9505.dts |  20 ++
+ .../dts/amlogic/meson-gxl-s905l2-x7-5g.dts    |  29 ++
+ .../amlogic/meson-gxl-s905l3b-e900v22e.dts    |  21 ++
+ .../dts/amlogic/meson-gxl-s905l3b-m302a.dts   |  48 +++
+ .../dts/amlogic/meson-gxl-s905w-x96-mini.dts  |  22 ++
+ .../boot/dts/amlogic/meson-gxl-s905w-x96w.dts |  83 +++++
+ .../dts/amlogic/meson-gxl-s905x-b860h.dts     |  19 +
+ .../amlogic/meson-gxl-s905x-bestv-r3300-l.dts | 227 ++++++++++++
+ 14 files changed, 874 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-ki-plus.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-ki-pro.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-m8s-plus.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905d-phicomm-n1-thresh.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905l-venz-v10.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905l2-ipbs9505.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905l2-x7-5g.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905l3b-e900v22e.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905l3b-m302a.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905w-x96-mini.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905w-x96w.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905x-b860h.dts
+ create mode 100644 arch/arm64/boot/dts/amlogic/meson-gxl-s905x-bestv-r3300-l.dts
+
+diff --git a/arch/arm64/boot/dts/amlogic/Makefile b/arch/arm64/boot/dts/amlogic/Makefile
+index ddf749d30..ce7b506d5 100644
+--- a/arch/arm64/boot/dts/amlogic/Makefile
++++ b/arch/arm64/boot/dts/amlogic/Makefile
+@@ -77,15 +77,28 @@ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s805x-libretech-ac.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s805x-p241.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s805y-xiaomi-aquaman.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-libretech-pc.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-mecool-ki-plus.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-mecool-ki-pro.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-mecool-kii-pro.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-mecool-m8s-plus.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-p230.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-p231.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-phicomm-n1-thresh.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-phicomm-n1.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-sml5442tw.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905d-vero4k-plus.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905l-venz-v10.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905l2-ipbs9505.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905l2-x7-5g.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905l3b-e900v22e.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905l3b-m302a.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905w-jethome-jethub-j80.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905w-p281.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905w-tx3-mini.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905w-x96-mini.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905w-x96w.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905x-b860h.dtb
++dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905x-bestv-r3300-l.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905x-hwacom-amazetv.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905x-khadas-vim.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-gxl-s905x-libretech-cc-v2.dtb
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-ki-plus.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-ki-plus.dts
+new file mode 100644
+index 000000000..b4aed5d0d
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-ki-plus.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/*
++ * Author: Christian Hewitt <christianshewitt@gmail.com>
++ */
++
++#include "meson-gxl-s905d-p231.dts"
++
++/ {
++	compatible = "videostrong,gxl-ki-plus", "amlogic,s905d", "amlogic,meson-gxl";
++	model = "MeCool KI Plus";
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x40000000>;
++	};
++};
++
++&ir {
++	linux,rc-map-name = "rc-mecool-ki-plus";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-ki-pro.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-ki-pro.dts
+new file mode 100644
+index 000000000..af6956207
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-ki-pro.dts
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/*
++ * Author: Christian Hewitt <christianshewitt@gmail.com>
++ */
++
++#include "meson-gxl-s905d-p230.dts"
++
++/ {
++	compatible = "videostrong,gxl-ki-pro", "amlogic,s905d", "amlogic,meson-gxl";
++	model = "MeCool KI Pro";
++};
++
++&ir {
++	linux,rc-map-name = "rc-mecool-ki-pro";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-m8s-plus.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-m8s-plus.dts
+new file mode 100644
+index 000000000..3ddcf59d2
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-mecool-m8s-plus.dts
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/*
++ * Author: Christian Hewitt <christianshewitt@gmail.com>
++ */
++
++#include "meson-gxl-s905d-p231.dts"
++
++/ {
++	compatible = "videostrong,gxl-kii-pro", "amlogic,s905d", "amlogic,meson-gxl";
++	model = "MeCool M8S Plus";
++};
++
++&ir {
++	linux,rc-map-name = "rc-mecool-m8s-plus";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-phicomm-n1-thresh.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-phicomm-n1-thresh.dts
+new file mode 100644
+index 000000000..8f178fb7c
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905d-phicomm-n1-thresh.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2018 He Yangxuan
++ * Copyright (c) 2020 Flippy
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905d-phicomm-n1.dts"
++
++&ethmac {
++	snps,force_thresh_dma_mode;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905l-venz-v10.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l-venz-v10.dts
+new file mode 100644
+index 000000000..553377fce
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l-venz-v10.dts
+@@ -0,0 +1,326 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2016 Endless Computers, Inc.
++ * Author: Carlo Caione <carlo@endlessm.com>
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905x.dtsi"
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
++#include <dt-bindings/sound/meson-aiu.h>
++
++/ {
++	compatible = "venz,v10", "amlogic,s905l", "amlogic,meson-gxl";
++	model = "Venz V10";
++
++	aliases {
++		serial0 = &uart_AO;
++		ethernet0 = &ethmac;
++		wlan0 = &rtl8189;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x80000000>;
++	};
++
++	dio2133: analog-amplifier {
++		compatible = "simple-audio-amplifier";
++		sound-name-prefix = "AU2";
++		VCC-supply = <&hdmi_5v>;
++		enable-gpios = <&gpio GPIOH_5 GPIO_ACTIVE_HIGH>;
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		led-standby {
++			color = <LED_COLOR_ID_BLUE>;
++			function = LED_FUNCTION_POWER;
++			gpios = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++                };
++        };
++
++	cvbs-connector {
++		compatible = "composite-video-connector";
++
++		port {
++			cvbs_connector_in: endpoint {
++				remote-endpoint = <&cvbs_vdac_out>;
++			};
++		};
++	};
++
++	hdmi-connector {
++		compatible = "hdmi-connector";
++		type = "a";
++
++		port {
++			hdmi_connector_in: endpoint {
++				remote-endpoint = <&hdmi_tx_tmds_out>;
++			};
++		};
++	};
++
++	hdmi_5v: regulator-hdmi-5v {
++		compatible = "regulator-fixed";
++
++		regulator-name = "HDMI_5V";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++
++		gpio = <&gpio GPIOH_3 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++		regulator-always-on;
++	};
++
++	vddio_boot: regulator-vddio_boot {
++		compatible = "regulator-fixed";
++		regulator-name = "VDDIO_BOOT";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++	};
++
++	vddao_3v3: regulator-vddao_3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "VDDAO_3V3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++	};
++
++	vddio_ao18: regulator-vddio_ao18 {
++		compatible = "regulator-fixed";
++		regulator-name = "VDDIO_AO18";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++	};
++
++	vcc_3v3: regulator-vcc_3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "VCC_3V3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++	};
++
++	emmc_pwrseq: emmc-pwrseq {
++		compatible = "mmc-pwrseq-emmc";
++		reset-gpios = <&gpio BOOT_9 GPIO_ACTIVE_LOW>;
++	};
++
++	wifi32k: wifi32k {
++		compatible = "pwm-clock";
++		#clock-cells = <0>;
++		clock-frequency = <32768>;
++		pwms = <&pwm_ef 0 30518 0>; /* PWM_E at 32.768KHz */
++	};
++
++	sdio_pwrseq: sdio-pwrseq {
++		compatible = "mmc-pwrseq-simple";
++		reset-gpios = <&gpio GPIOX_6 GPIO_ACTIVE_LOW>;
++		clocks = <&wifi32k>;
++		clock-names = "ext_clock";
++	};
++
++	sound {
++		compatible = "amlogic,gx-sound-card";
++		model = "VENZ-V10";
++		audio-aux-devs = <&dio2133>;
++		audio-widgets = "Line", "Lineout";
++		audio-routing = "AU2 INL", "ACODEC LOLN",
++				"AU2 INR", "ACODEC LORN",
++				"Lineout", "AU2 OUTL",
++				"Lineout", "AU2 OUTR";
++		assigned-clocks = <&clkc CLKID_MPLL0>,
++				  <&clkc CLKID_MPLL1>,
++				  <&clkc CLKID_MPLL2>;
++		assigned-clock-parents = <0>, <0>, <0>;
++		assigned-clock-rates = <294912000>,
++				       <270950400>,
++				       <393216000>;
++		status = "okay";
++
++		dai-link-0 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_FIFO>;
++		};
++
++		dai-link-1 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_ENCODER>;
++			dai-format = "i2s";
++			mclk-fs = <256>;
++
++			codec-0 {
++				sound-dai = <&aiu AIU_HDMI CTRL_I2S>;
++			};
++
++			codec-1 {
++				sound-dai = <&aiu AIU_ACODEC CTRL_I2S>;
++			};
++		};
++
++		dai-link-2 {
++			sound-dai = <&aiu AIU_HDMI CTRL_OUT>;
++
++			codec-0 {
++				sound-dai = <&hdmi_tx>;
++			};
++		};
++
++		dai-link-3 {
++			sound-dai = <&aiu AIU_ACODEC CTRL_OUT>;
++
++			codec-0 {
++				sound-dai = <&acodec>;
++			};
++		};
++	};
++};
++
++&acodec {
++	AVDD-supply = <&vddio_ao18>;
++	status = "okay";
++};
++
++&aiu {
++	status = "okay";
++};
++
++&cec_AO {
++	status = "okay";
++	pinctrl-0 = <&ao_cec_pins>;
++	pinctrl-names = "default";
++	hdmi-phandle = <&hdmi_tx>;
++};
++
++&cvbs_vdac_port {
++	cvbs_vdac_out: endpoint {
++		remote-endpoint = <&cvbs_connector_in>;
++	};
++};
++
++&ethmac {
++	status = "okay";
++};
++
++&hdmi_tx {
++	status = "okay";
++	pinctrl-0 = <&hdmi_hpd_pins>, <&hdmi_i2c_pins>;
++	pinctrl-names = "default";
++	hdmi-supply = <&hdmi_5v>;
++};
++
++&hdmi_tx_tmds_port {
++	hdmi_tx_tmds_out: endpoint {
++		remote-endpoint = <&hdmi_connector_in>;
++	};
++};
++
++&ir {
++	status = "okay";
++	pinctrl-0 = <&remote_input_ao_pins>;
++	pinctrl-names = "default";
++	linux,rc-map-name = "rc-venz-v10";
++};
++
++&pwm_ef {
++	status = "okay";
++	pinctrl-0 = <&pwm_e_pins>;
++	pinctrl-names = "default";
++	clocks = <&clkc CLKID_FCLK_DIV4>;
++	clock-names = "clkin0";
++};
++
++&saradc {
++	status = "okay";
++	vref-supply = <&vddio_ao18>;
++};
++
++/* Wireless SDIO Module */
++&sd_emmc_a {
++	status = "okay";
++	pinctrl-0 = <&sdio_pins>;
++	pinctrl-1 = <&sdio_clk_gate_pins>;
++	pinctrl-names = "default", "clk-gate";
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	bus-width = <4>;
++	cap-sd-highspeed;
++	max-frequency = <100000000>;
++
++	non-removable;
++	disable-wp;
++
++	/* WiFi firmware requires power to be kept while in suspend */
++	keep-power-in-suspend;
++
++	mmc-pwrseq = <&sdio_pwrseq>;
++
++	vmmc-supply = <&vddao_3v3>;
++	vqmmc-supply = <&vddio_boot>;
++
++	rtl8189: wifi@1 {
++		reg = <1>;
++	};
++};
++
++/* SD card */
++&sd_emmc_b {
++	status = "okay";
++	pinctrl-0 = <&sdcard_pins>;
++	pinctrl-1 = <&sdcard_clk_gate_pins>;
++	pinctrl-names = "default", "clk-gate";
++
++	bus-width = <4>;
++	cap-sd-highspeed;
++	max-frequency = <50000000>;
++	disable-wp;
++
++	cd-gpios = <&gpio CARD_6 GPIO_ACTIVE_LOW>;
++
++	vmmc-supply = <&vddao_3v3>;
++	vqmmc-supply = <&vddio_boot>;
++};
++
++/* eMMC */
++&sd_emmc_c {
++	status = "okay";
++	pinctrl-0 = <&emmc_pins>, <&emmc_ds_pins>;
++	pinctrl-1 = <&emmc_clk_gate_pins>;
++	pinctrl-names = "default", "clk-gate";
++
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	max-frequency = <200000000>;
++	non-removable;
++	disable-wp;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++
++	mmc-pwrseq = <&emmc_pwrseq>;
++	vmmc-supply = <&vcc_3v3>;
++	vqmmc-supply = <&vddio_boot>;
++};
++
++/* This UART is brought out to the DB9 connector */
++&uart_AO {
++	status = "okay";
++	pinctrl-0 = <&uart_ao_a_pins>;
++	pinctrl-names = "default";
++};
++
++&usb {
++	status = "okay";
++	dr_mode = "host";
++};
++
++&usb2_phy0 {
++	/* HDMI_5V is the supply for the USB VBUS */
++	phy-supply = <&hdmi_5v>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905l2-ipbs9505.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l2-ipbs9505.dts
+new file mode 100644
+index 000000000..4503d01da
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l2-ipbs9505.dts
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2016 Endless Computers, Inc.
++ * Author: Carlo Caione <carlo@endlessm.com>, flippy
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905l2-x7-5g.dts"
++
++/ {
++	compatible = "amlogic,ipbs9505", "amlogic,s905l2", "amlogic,meson-gxl";
++	model = "Wojia TV IPBS9505";
++};
++
++/* eMMC */
++// Reduce the frequency from 200000000 to 100000000 to solve the emmc usage problem
++&sd_emmc_c {
++	max-frequency = <100000000>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905l2-x7-5g.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l2-x7-5g.dts
+new file mode 100644
+index 000000000..8efc85e0e
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l2-x7-5g.dts
+@@ -0,0 +1,29 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2016 Endless Computers, Inc.
++ * Author: Carlo Caione <carlo@endlessm.com>
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905w-p281.dts"
++
++/ {
++	compatible = "amlogic,x7-5g", "amlogic,s905l2", "amlogic,meson-gxl";
++	model = "Amlogic Meson GXL (S905L2) X7 5G Tv Box";
++};
++
++// the gpu in the S905L2 has one pp core less
++// (i.e. only two in total) than the one in the other S905X/W
++&mali {
++	interrupts = <GIC_SPI 160 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 161 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 162 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 163 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 164 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 165 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 166 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 167 IRQ_TYPE_LEVEL_HIGH>;
++	interrupt-names = "gp", "gpmmu", "pp", "pmu",
++		"pp0", "ppmmu0", "pp1", "ppmmu1";
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905l3b-e900v22e.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l3b-e900v22e.dts
+new file mode 100644
+index 000000000..1c0854c82
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l3b-e900v22e.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2016 Endless Computers, Inc.
++ * Author: Carlo Caione <carlo@endlessm.com>
++ * Copyright (c) flippy
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905l2-x7-5g.dts"
++
++/ {
++	compatible = "amlogic,s905l3b", "amlogic,meson-gxl";
++	model = "Skyworth E900V22E";
++};
++
++/* eMMC */
++&sd_emmc_c {
++	status = "okay";
++	max-frequency = <52000000>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905l3b-m302a.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l3b-m302a.dts
+new file mode 100644
+index 000000000..3c91ccab5
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905l3b-m302a.dts
+@@ -0,0 +1,48 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2016 Endless Computers, Inc.
++ * Author: Carlo Caione <carlo@endlessm.com>
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905w-p281.dts"
++
++/ {
++	compatible = "amlogic,m302a", "amlogic,s905w", "amlogic,meson-gxl";
++	model = "Amlogic Meson GXL (S905L3b) MBH-M302A Box";
++	
++	memory@0 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x80000000>;
++	};
++
++};
++
++// the gpu in the S905L2 has one pp core less
++// (i.e. only two in total) than the one in the other S905X/W
++
++&mali {
++	interrupts = <GIC_SPI 160 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 161 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 162 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 163 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 164 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 165 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 166 IRQ_TYPE_LEVEL_HIGH>,
++		<GIC_SPI 167 IRQ_TYPE_LEVEL_HIGH>;
++	interrupt-names = "gp", "gpmmu", "pp", "pmu","pp0", "ppmmu0", "pp1", "ppmmu1";
++};
++
++&sd_emmc_c {
++	status = "okay";
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-ddr-1_8v;
++	mmc-hs200-1_8v;
++	max-frequency = <200000000>;
++};
++
++&internal_phy {
++	max-speed = <100>;
++};
+\ No newline at end of file
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905w-x96-mini.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905w-x96-mini.dts
+new file mode 100644
+index 000000000..d9a24cc8d
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905w-x96-mini.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2018 Martin Blumenstingl <martin.blumenstingl@googlemail.com>.
++ * Based on meson-gxl-s905d-p231.dts:
++ * - Copyright (c) 2016 Endless Computers, Inc.
++ *   Author: Carlo Caione <carlo@endlessm.com>
++ *           github.com/TThanhXuan, github.com/box-automation1, github.com/unifreq
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905w-p281.dts"
++
++/ {
++	compatible = "amlogic,p281", "amlogic,s905w", "amlogic,meson-gxl";
++	model = "X96 mini";
++};
++
++/* eMMC */
++&sd_emmc_c {
++	max-frequency = <50000000>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905w-x96w.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905w-x96w.dts
+new file mode 100644
+index 000000000..3ab4f66d8
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905w-x96w.dts
+@@ -0,0 +1,83 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2018 Martin Blumenstingl <martin.blumenstingl@googlemail.com>.
++ * Based on meson-gxl-s905d-p231.dts:
++ * - Copyright (c) 2016 Endless Computers, Inc.
++ * - Copyright (c) unifreq
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905w-p281.dts"
++
++/ {
++	compatible = "amlogic,p281", "amlogic,s905w", "amlogic,meson-gxl";
++	model = "X96W";
++
++	aliases {
++		serial0 = &uart_AO;   /* Console */
++		serial1 = &uart_A;    /* Bluetooth */
++		ethernet0 = &ethmac;
++	};
++};
++
++/* SDIO wifi: AP6255 */
++&sd_emmc_a {
++	status = "okay";
++
++	brcmf: wifi@1 {
++		reg = <1>;
++		compatible = "brcm,bcm4329-fmac";
++	};
++};
++
++/* SD card */
++&sd_emmc_b {
++	status = "okay";
++	bus-width = <4>;
++	cap-sd-highspeed;
++	max-frequency = <50000000>;
++};
++
++/* eMMC */
++&sd_emmc_c {
++	status = "okay";
++	max-frequency = <50000000>;
++};
++
++/* Console UART */
++&uart_AO {
++	status = "okay";
++	pinctrl-0 = <&uart_ao_a_pins>;
++	pinctrl-names = "default";
++};
++
++/* S905W only has access to its internal PHY */
++&ethmac {
++	status = "okay";
++	phy-mode = "rmii";
++	phy-handle = <&internal_phy>;
++};
++
++&internal_phy {
++	status = "okay";
++	pinctrl-0 = <&eth_link_led_pins>, <&eth_act_led_pins>;
++	pinctrl-names = "default";
++	max-speed = <100>;
++};
++
++/* This is connected to the Bluetooth module: AP6255 */
++&uart_A {
++	status = "okay";
++	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
++	pinctrl-names = "default";
++	uart-has-rtscts;
++
++	bluetooth {
++		compatible = "brcm,bcm4345c5";
++		shutdown-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
++		max-speed = <2000000>;
++		clocks = <&wifi32k>;
++		clock-names = "lpo";
++	};
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905x-b860h.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905x-b860h.dts
+new file mode 100644
+index 000000000..956941fb2
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905x-b860h.dts
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2016 Endless Computers, Inc.
++ * Author: Carlo Caione <carlo@endlessm.com>
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905x-p212.dts"
++
++/ {
++	compatible = "zte,b860h", "amlogic,p212";
++	model = "ZTE B860H";
++
++};
++
++&sdio_pwrseq {
++	reset-gpios = <&gpio GPIODV_27 GPIO_ACTIVE_LOW>;
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson-gxl-s905x-bestv-r3300-l.dts b/arch/arm64/boot/dts/amlogic/meson-gxl-s905x-bestv-r3300-l.dts
+new file mode 100644
+index 000000000..d67705806
+--- /dev/null
++++ b/arch/arm64/boot/dts/amlogic/meson-gxl-s905x-bestv-r3300-l.dts
+@@ -0,0 +1,227 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2025 retro98boy <retro98boy@qq.com>
++ */
++
++/dts-v1/;
++
++#include "meson-gxl-s905x-p212.dtsi"
++#include <dt-bindings/sound/meson-aiu.h>
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/leds/common.h>
++
++/ {
++	compatible = "bestv,r3300-l", "amlogic,s905x", "amlogic,meson-gxl";
++	model = "BesTV R3300-L";
++
++	aliases {
++		rtc1 = &vrtc;
++	};
++
++	memory@0 {
++		reg = <0x0 0x0 0x0 0x40000000>;
++	};
++
++	gpio-keys-polled {
++		compatible = "gpio-keys-polled";
++		poll-interval = <100>;
++
++		rst-btn {
++			label = "rst-btn";
++			linux,code = <KEY_RESTART>;
++			gpios = <&gpio_ao GPIOAO_2 GPIO_ACTIVE_LOW>;
++		};
++	};
++
++	gpio-leds {
++		compatible = "gpio-leds";
++
++		/*
++		 * The power LED on the device is always on, defaulting to red.
++		 * Pulling GPIODV_24 high changes it to green, indicating that the kernel has started.
++		 */
++		pwr-led-green {
++			function = LED_FUNCTION_POWER;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIODV_24 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++
++		/*
++		 * GPIOAO_4 is used to turn on the WLAN LED, defaulting to red,
++		 * and GPIODV_27 is used to change the color of the WLAN LED.
++		 */
++		wlan-led-red {
++			function = LED_FUNCTION_WLAN;
++			color = <LED_COLOR_ID_RED>;
++			gpios = <&gpio_ao GPIOAO_4 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++
++		/*
++		 * modprobe ledtrig-netdev
++		 * echo netdev > /sys/class/leds/green\:wlan/trigger
++		 * echo wlan0 > /sys/class/leds/green\:wlan/device_name
++		 *
++		 * echo 1 > /sys/class/leds/green\:wlan/link
++		 * or
++		 * echo 1 > /sys/class/leds/green\:wlan/rx
++		 */
++		wlan-led-green {
++			function = LED_FUNCTION_WLAN;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio GPIODV_27 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++			linux,default-trigger = "netdev";
++		};
++	};
++
++	dio2128: analog-amplifier {
++		compatible = "simple-audio-amplifier";
++		sound-name-prefix = "AU2";
++		VCC-supply = <&hdmi_5v>;
++		enable-gpios = <&gpio GPIOH_5 GPIO_ACTIVE_HIGH>;
++	};
++
++	cvbs-connector {
++		compatible = "composite-video-connector";
++
++		port {
++			cvbs_connector_in: endpoint {
++				remote-endpoint = <&cvbs_vdac_out>;
++			};
++		};
++	};
++
++	hdmi-connector {
++		compatible = "hdmi-connector";
++		type = "a";
++
++		port {
++			hdmi_connector_in: endpoint {
++				remote-endpoint = <&hdmi_tx_tmds_out>;
++			};
++		};
++	};
++
++	sound {
++		compatible = "amlogic,gx-sound-card";
++		model = "S905X-P212";
++		audio-aux-devs = <&dio2128>;
++		audio-widgets = "Line", "Lineout";
++		audio-routing = "AU2 INL", "ACODEC LOLN",
++				"AU2 INR", "ACODEC LORN",
++				"Lineout", "AU2 OUTL",
++				"Lineout", "AU2 OUTR";
++		clocks = <&clkc CLKID_MPLL0>,
++			 <&clkc CLKID_MPLL1>,
++			 <&clkc CLKID_MPLL2>;
++
++		assigned-clocks = <&clkc CLKID_MPLL0>,
++				  <&clkc CLKID_MPLL1>,
++				  <&clkc CLKID_MPLL2>;
++		assigned-clock-parents = <0>, <0>, <0>;
++		assigned-clock-rates = <294912000>,
++				       <270950400>,
++				       <393216000>;
++		dai-link-0 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_FIFO>;
++		};
++
++		dai-link-1 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_ENCODER>;
++			dai-format = "i2s";
++			mclk-fs = <256>;
++
++			codec-0 {
++				sound-dai = <&aiu AIU_HDMI CTRL_I2S>;
++			};
++
++			codec-1 {
++				sound-dai = <&aiu AIU_ACODEC CTRL_I2S>;
++			};
++		};
++
++		dai-link-2 {
++			sound-dai = <&aiu AIU_HDMI CTRL_OUT>;
++
++			codec-0 {
++				sound-dai = <&hdmi_tx>;
++			};
++		};
++
++		dai-link-3 {
++			sound-dai = <&aiu AIU_ACODEC CTRL_OUT>;
++
++			codec-0 {
++				sound-dai = <&acodec>;
++			};
++		};
++	};
++};
++
++&acodec {
++	AVDD-supply = <&vddio_ao18>;
++	status = "okay";
++};
++
++&aiu {
++	status = "okay";
++};
++
++&cec_AO {
++	status = "okay";
++	pinctrl-0 = <&ao_cec_pins>;
++	pinctrl-names = "default";
++	hdmi-phandle = <&hdmi_tx>;
++};
++
++&cvbs_vdac_port {
++	cvbs_vdac_out: endpoint {
++		remote-endpoint = <&cvbs_connector_in>;
++	};
++};
++
++&emmc_pwrseq {
++	reset-gpios = <&gpio BOOT_9 GPIO_ACTIVE_LOW>; /* not sure */
++};
++
++&hdmi_5v {
++	/delete-property/ gpio;
++	/delete-property/ enable-active-high;
++};
++
++&hdmi_tx {
++	status = "okay";
++	pinctrl-0 = <&hdmi_hpd_pins>, <&hdmi_i2c_pins>;
++	pinctrl-names = "default";
++	hdmi-supply = <&hdmi_5v>;
++};
++
++&hdmi_tx_tmds_port {
++	hdmi_tx_tmds_out: endpoint {
++		remote-endpoint = <&hdmi_connector_in>;
++	};
++};
++
++&sd_emmc_b {
++	max-frequency = <200000000>;
++	sd-uhs-sdr12;
++	sd-uhs-sdr25;
++	sd-uhs-sdr50;
++	sd-uhs-sdr104;
++	sd-uhs-ddr50;
++};
++
++&sd_emmc_c {
++	mmc-hs400-1_8v;
++};
++
++&uart_A {
++	status = "disabled";
++	/delete-node/ bluetooth;
++};
++
++&usb {
++	dr_mode = "otg";
++};

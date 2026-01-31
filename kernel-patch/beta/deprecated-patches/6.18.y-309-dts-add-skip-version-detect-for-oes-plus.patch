@@ -1,0 +1,102 @@
+From 26a1bdca091fe1987bf892ac2f68001cff2c2ed1 Mon Sep 17 00:00:00 2001
+From: ophub <68696949+ophub@users.noreply.github.com>
+Date: Sat, 31 Jan 2026 21:53:42 +0800
+Subject: [PATCH] oes-plus: Skip detection for some boards marked with
+ skip-version-detect in the device tree
+
+---
+ .../ethernet/stmicro/stmmac/dwmac-meson8b.c   | 25 +++++++++++++++++--
+ drivers/pci/controller/dwc/pcie-designware.c  |  9 +++++++
+ 2 files changed, 32 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-meson8b.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-meson8b.c
+index a50782994..3f0874dda 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/dwmac-meson8b.c
++++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-meson8b.c
+@@ -29,6 +29,8 @@
+ #define PRG_ETH0_EXT_RGMII_MODE		1
+ #define PRG_ETH0_EXT_RMII_MODE		4
+ 
++#define PRG_ETH0_INVERT_RXCLK		BIT(3)
++
+ /* mux to choose between fclk_div2 (bit unset) and mpll2 (bit set) */
+ #define PRG_ETH0_CLK_M250_SEL_MASK	GENMASK(4, 4)
+ 
+@@ -94,6 +96,8 @@ struct meson8b_dwmac {
+ 	struct clk			*rgmii_tx_clk;
+ 	u32				tx_delay_ns;
+ 	u32				rx_delay_ps;
++	bool				keep_rx_delay;
++	bool				invert_rxclk;
+ 	struct clk			*timing_adj_clk;
+ };
+ 
+@@ -303,7 +307,8 @@ static int meson8b_init_rgmii_delays(struct meson8b_dwmac *dwmac)
+ 		break;
+ 	case PHY_INTERFACE_MODE_RGMII_RXID:
+ 		delay_config = tx_dly_config;
+-		cfg_rxclk_dly = 0;
++		if(!dwmac->keep_rx_delay)
++			cfg_rxclk_dly = 0;
+ 		break;
+ 	case PHY_INTERFACE_MODE_RGMII_TXID:
+ 		delay_config = rx_adj_config;
+@@ -311,7 +316,8 @@ static int meson8b_init_rgmii_delays(struct meson8b_dwmac *dwmac)
+ 	case PHY_INTERFACE_MODE_RGMII_ID:
+ 	case PHY_INTERFACE_MODE_RMII:
+ 		delay_config = 0;
+-		cfg_rxclk_dly = 0;
++		if(!dwmac->keep_rx_delay)
++			cfg_rxclk_dly = 0;
+ 		break;
+ 	default:
+ 		dev_err(dwmac->dev, "unsupported phy-mode %s\n",
+@@ -341,6 +347,11 @@ static int meson8b_init_rgmii_delays(struct meson8b_dwmac *dwmac)
+ 				PRG_ETH0_ADJ_DELAY | PRG_ETH0_ADJ_SKEW,
+ 				delay_config);
+ 
++	if(dwmac->invert_rxclk)
++		meson8b_dwmac_mask_bits(dwmac, PRG_ETH0,
++					PRG_ETH0_INVERT_RXCLK,
++					PRG_ETH0_INVERT_RXCLK);
++
+ 	meson8b_dwmac_mask_bits(dwmac, PRG_ETH1, PRG_ETH1_CFG_RXCLK_DLY,
+ 				cfg_rxclk_dly);
+ 
+@@ -448,6 +459,16 @@ static int meson8b_dwmac_probe(struct platform_device *pdev)
+ 		}
+ 	}
+ 
++	/*
++	* Some boards need to enable the internal RX delay of the PHY
++	* while simultaneously enabling the internal RX delay of the MAC,
++	* as implemented in the Amlogic BSP kernel.
++	*/
++	dwmac->keep_rx_delay = of_property_read_bool(pdev->dev.of_node,
++		"amlogic,keep-rx-internal-delay");
++
++	dwmac->invert_rxclk = of_property_read_bool(pdev->dev.of_node, "amlogic,invert-rxclk");
++
+ 	dwmac->timing_adj_clk = devm_clk_get_optional(dwmac->dev,
+ 						      "timing-adjustment");
+ 	if (IS_ERR(dwmac->timing_adj_clk))
+diff --git a/drivers/pci/controller/dwc/pcie-designware.c b/drivers/pci/controller/dwc/pcie-designware.c
+index 06eca858e..c4aa47ed7 100644
+--- a/drivers/pci/controller/dwc/pcie-designware.c
++++ b/drivers/pci/controller/dwc/pcie-designware.c
+@@ -203,6 +203,15 @@ void dw_pcie_version_detect(struct dw_pcie *pci)
+ {
+ 	u32 ver;
+ 
++    /*
++	* Some boards with Amlogic A311D SoC's AHCI controller breaks
++	* if the version register is read.
++	* Skip detection for some boards marked with skip-version-detect
++	* in the device tree.
++	*/
++	if (of_property_read_bool(pci->dev->of_node, "skip-version-detect"))
++		return;
++
+ 	/* The content of the CSR is zero on DWC PCIe older than v4.70a */
+ 	ver = dw_pcie_readl_dbi(pci, PCIE_VERSION_NUMBER);
+ 	if (!ver)
