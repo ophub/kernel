@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 6.18.8 Kernel Configuration
+# Linux/arm64 6.18.9 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="aarch64-none-linux-gnu-gcc (Arm GNU Toolchain 15.2.Rel1 (Build arm-15.86)) 15.2.1 20251203"
 CONFIG_CC_IS_GCC=y
@@ -3297,6 +3297,7 @@ CONFIG_WLAN_VENDOR_ADMTEK=y
 CONFIG_ADM8211=m
 CONFIG_ATH_COMMON=m
 CONFIG_WLAN_VENDOR_ATH=y
+# CONFIG_ATH_USER_REGD is not set
 # CONFIG_ATH_DEBUG is not set
 CONFIG_ATH_REG_DYNAMIC_USER_REG_HINTS=y
 # CONFIG_ATH_REG_DYNAMIC_USER_CERT_TESTING is not set
