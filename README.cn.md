@@ -1,6 +1,6 @@
 # 内核说明
 
-查看英文说明 | [View English description](README.md)
+[English Instructions](README.md) | [中文说明](README.cn.md)
 
 这些内核适用于 `Armbian`、`OpenWrt` 和 `FnNAS` 系统，例如 [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian)、[amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt)、[fnnas](https://github.com/ophub/fnnas)、[flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions) 和 [unifreq/openwrt_packit](https://github.com/unifreq/openwrt_packit) 等项目。内核既可以在编译固件时集成，也可以安装到现有系统中使用。其中 [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)、[kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy) 和 [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) 是可互换使用的主线内核。具体使用方法详见[内核使用说明](https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/compile-kernel/README.cn.md#内核使用说明)。
 

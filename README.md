@@ -1,6 +1,6 @@
 # Kernel Description
 
-View Chinese description  |  [查看中文说明](README.cn.md)
+[English Instructions](README.md) | [中文说明](README.cn.md)
 
 These kernels can be used with `Armbian`, `OpenWrt`, and `FnNAS` systems, such as the [amlogic-s9xxx-armbian](https://github.com/ophub/amlogic-s9xxx-armbian), [amlogic-s9xxx-openwrt](https://github.com/ophub/amlogic-s9xxx-openwrt), [fnnas](https://github.com/ophub/fnnas), [flippy-openwrt-actions](https://github.com/ophub/flippy-openwrt-actions), and [unifreq/openwrt_packit](https://github.com/unifreq/openwrt_packit) projects. They can be integrated during firmware compilation or installed into an existing system. Among them, [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable), [kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy), and [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) are interchangeable mainline kernels. For detailed usage instructions, see the [Kernel Use Instructions](https://github.com/ophub/amlogic-s9xxx-armbian/tree/main/compile-kernel).
 
