@@ -1,15 +1,19 @@
-From 0000000000000000000000000000000000000001 Mon Sep 17 00:00:00 2001
+From 1ffb4947ad80e574a5f4f50627b8d4673b64d189 Mon Sep 17 00:00:00 2001
 From: Community Fix <fix@rk3568-nas.local>
-Date: Sun, 19 Apr 2026 00:00:00 +0800
-Subject: [PATCH] ata: ahci_dwc: 由硬件综合参数自动启用 FIS-Based Switching
+Date: Sun, 19 Apr 2026 16:53:17 +0000
+Subject: [PATCH] =?UTF-8?q?ata:=20ahci=5Fdwc:=20=E7=94=B1=E7=A1=AC?=
+ =?UTF-8?q?=E4=BB=B6=E7=BB=BC=E5=90=88=E5=8F=82=E6=95=B0=E8=87=AA=E5=8A=A8?=
+ =?UTF-8?q?=E5=90=AF=E7=94=A8=20FIS-Based=20Switching?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 DWC AHCI IP 在 GPARAM2R 寄存器的 FBS_SUP 位（bit 15）报告该控制器
-在芯片综合时是否内置了 FBS 支持。ahci_dwc_check_cap() 已读取此位，
+在芯片综合时是否内置了 FBS 支持。ahci_dwc_check_cap() 已读取此位
 但未将其传递给 libahci。
 
-在 fbs_sup 为真时设置 AHCI_HFLAG_YES_FBS，使 libahci 在
-ahci_platform_init_host() 的 ahci_save_initial_config() 中将端口
-标记为 FBS 可用，无需对每款 SoC 单独列举 compatible。
+在 fbs_sup 为真时设置 AHCI_HFLAG_YES_FBS，使 libahci 将端口标记为
+FBS 可用，无需对每款 SoC 单独列举 compatible。
 
 Signed-off-by: Community Fix <fix@rk3568-nas.local>
 ---
@@ -17,11 +21,10 @@ Signed-off-by: Community Fix <fix@rk3568-nas.local>
  1 file changed, 3 insertions(+)
 
 diff --git a/drivers/ata/ahci_dwc.c b/drivers/ata/ahci_dwc.c
+index 8fb66860d..e7ae405f1 100644
 --- a/drivers/ata/ahci_dwc.c
 +++ b/drivers/ata/ahci_dwc.c
-@@ -1,6 +1,9 @@
- 	if (fbs_sup && fbs_pmp < AHCI_DWC_FBS_PMPN_MAX) {
- 		dev_warn(&dpriv->pdev->dev, "PMPn is limited up to %u ports\n",
+@@ -205,6 +205,9 @@ static void ahci_dwc_check_cap(struct ahci_host_priv *hpriv)
  			 fbs_pmp);
  	}
  
@@ -29,3 +32,7 @@ diff --git a/drivers/ata/ahci_dwc.c b/drivers/ata/ahci_dwc.c
 +		hpriv->flags |= AHCI_HFLAG_YES_FBS;
 +
  	for_each_set_bit(i, &port_map, AHCI_MAX_PORTS) {
+ 		if (!dev_mp && hpriv->saved_port_cap[i] & PORT_CMD_MPSP) {
+ 			dev_warn(&dpriv->pdev->dev, "MPS incapable port %d\n", i);
+-- 
+2.43.0
