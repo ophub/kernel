@@ -231,5 +231,8 @@ jobs:
           body: |
             - These kernels can be used for `Armbian`, `OpenWrt` and `FnNAS`.
             - These are mainline `beta` kernels that may contain experimental features. Do not use unless you know what you are doing.
+
+            <br />
+
             - 这些内核可用于 `Armbian`, `OpenWrt` 和 `FnNAS`。
             - 这些是主线 `测试版` 内核，可能包含实验性功能，不知情勿用。
