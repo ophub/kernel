@@ -100,9 +100,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-24.04-arm
+    if: ${{ github.event.repository.owner.id == github.event.sender.id }}
     permissions:
       contents: write
-    if: ${{ github.event.repository.owner.id == github.event.sender.id }}
 
     steps:
       - name: Checkout
