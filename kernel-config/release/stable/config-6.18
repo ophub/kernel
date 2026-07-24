@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 6.18.38 Kernel Configuration
+# Linux/arm64 6.18.39 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="aarch64-none-linux-gnu-gcc (Arm GNU Toolchain 15.3.Rel1 (Build arm-15.149)) 15.3.1 20260627"
 CONFIG_CC_IS_GCC=y
@@ -5187,6 +5187,7 @@ CONFIG_VIDEO_V4L2_SUBDEV_API=y
 CONFIG_VIDEO_ADV_DEBUG=y
 CONFIG_VIDEO_FIXED_MINOR_RANGES=y
 CONFIG_VIDEO_TUNER=m
+CONFIG_V4L2_JPEG_HELPER=m
 CONFIG_V4L2_H264=m
 CONFIG_V4L2_VP9=m
 CONFIG_V4L2_MEM2MEM_DEV=m
@@ -5407,7 +5408,10 @@ CONFIG_VIDEO_SYNOPSYS_HDMIRX=m
 #
 # Verisilicon media platform drivers
 #
-# CONFIG_VIDEO_HANTRO is not set
+CONFIG_VIDEO_HANTRO=m
+# CONFIG_VIDEO_HANTRO_HEVC_RFC is not set
+CONFIG_VIDEO_HANTRO_ROCKCHIP=y
+CONFIG_VIDEO_HANTRO_SUNXI=y
 
 #
 # VIA media platform drivers
