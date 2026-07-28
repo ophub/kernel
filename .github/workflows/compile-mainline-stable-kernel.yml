@@ -13,7 +13,7 @@ on:
       kernel_source:
         description: "Select the kernel source"
         required: false
-        default: "unifreq"
+        default: "ophub"
         type: choice
         options:
           - unifreq
@@ -202,9 +202,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: /builder/ccache
-          key: kernel-mainline-${{ inputs.kernel_toolchain }}-${{ matrix.kernel_version }}-${{ env.source_hash }}
+          key: kernel-stable-${{ inputs.kernel_toolchain }}-${{ matrix.kernel_version }}-${{ env.source_hash }}
           restore-keys: |
-            kernel-mainline-${{ inputs.kernel_toolchain }}-${{ matrix.kernel_version }}-
+            kernel-stable-${{ inputs.kernel_toolchain }}-${{ matrix.kernel_version }}-
 
       - name: Compile the kernel [ ${{ matrix.kernel_version }} ]
         uses: ophub/amlogic-s9xxx-armbian@main
