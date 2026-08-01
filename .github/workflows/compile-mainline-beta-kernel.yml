@@ -36,6 +36,10 @@ on:
         description: "Set the kernel branch"
         required: false
         default: "main"
+      kernel_sign:
+        description: "Set the kernel sign"
+        required: false
+        default: "-beta"
       kernel_auto:
         description: "Auto use the latest kernel"
         required: false
@@ -189,6 +193,11 @@ jobs:
           kernel_branch="${{ inputs.kernel_branch }}"
           [[ -n "${kernel_branch}" ]] || kernel_branch="main"
 
+          # Get the kernel sign
+          kernel_sign="${{ inputs.kernel_sign }}"
+          [[ -n "${kernel_sign}" ]] || kernel_sign="-beta"
+          [[ ${kernel_sign:0:1} != "-" ]] && kernel_sign="-${kernel_sign}"
+
           # Get the latest source hash from the kernel repository
           api_url="https://api.github.com/repos/${{ inputs.kernel_source }}/linux-${{ matrix.kernel_version }}/git/ref/heads/${kernel_branch}"
           source_hash=$(curl -fsSL -m 20 \
@@ -199,6 +208,7 @@ jobs:
           )
           [[ -z "${source_hash}" || "${source_hash}" == "null" ]] && source_hash="${{ github.sha }}"
           echo "source_hash=${source_hash}" >> ${GITHUB_ENV}
+          echo "kernel_sign=${kernel_sign}" >> ${GITHUB_ENV}
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Cache ccache
@@ -223,7 +233,7 @@ jobs:
           kernel_patch: ${{ inputs.kernel_patch }}
           auto_patch: ${{ inputs.auto_patch }}
           ccache_clear: ${{ inputs.ccache_clear }}
-          kernel_sign: -beta
+          kernel_sign: ${{ env.kernel_sign }}
           delete_source: true
           docker_hostpath: /builder
           docker_image: ophub/armbian-${{ inputs.docker_image }}:arm64
