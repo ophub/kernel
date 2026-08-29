@@ -31,16 +31,14 @@
 
 ## 内核源码
 
-特别感谢 unifreq 等贡献者维护的内核源码。目前本仓库中的内核文件所使用的源码如下：
+特别感谢 unifreq 等贡献者维护的内核源码，其中 ophub 内核源码复制自 unifreq 的仓库。
 
 | 内核标签        | 源码仓库               | 适用设备               |
 | ------------- | --------------------- | --------------------- |
 | [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_flippy](https://github.com/ophub/kernel/releases/tag/kernel_flippy)<br>[kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) | [unifreq/linux-5.10.y](https://github.com/unifreq/linux-5.10.y)<br>[unifreq/linux-5.15.y](https://github.com/unifreq/linux-5.15.y)<br>[unifreq/linux-6.1.y](https://github.com/unifreq/linux-6.1.y)<br>[unifreq/linux-6.6.y](https://github.com/unifreq/linux-6.6.y)<br>[unifreq/linux-6.12.y](https://github.com/unifreq/linux-6.12.y)<br>[unifreq/linux-6.18.y](https://github.com/unifreq/linux-6.18.y) | Amlogic<br>Allwinner<br>Rockchip |
-| [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx)<br>[unifreq/linux-6.1.y-rockchip](https://github.com/unifreq/linux-6.1.y-rockchip) | Rockchip-RK3588 |
-| [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx)<br>[unifreq/linux-6.1.y-rockchip](https://github.com/unifreq/linux-6.1.y-rockchip) | Rockchip-RK3528/RK3566/RK3568 |
-| [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588)<br>[kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [ophub/linux-5.10.y](https://github.com/ophub/linux-5.10.y)<br>[ophub/linux-5.15.y](https://github.com/ophub/linux-5.15.y)<br>[ophub/linux-6.1.y](https://github.com/ophub/linux-6.1.y)<br>[ophub/linux-6.6.y](https://github.com/ophub/linux-6.6.y)<br>[ophub/linux-6.12.y](https://github.com/ophub/linux-6.12.y)<br>[ophub/linux-6.18.y](https://github.com/ophub/linux-6.18.y)<br>[ophub/linux-5.10.y-rk35xx](https://github.com/ophub/linux-5.10.y-rk35xx)<br>[ophub/linux-6.1.y-rockchip](https://github.com/ophub/linux-6.1.y-rockchip) | 内核源码复制自 [unifreq](https://github.com/unifreq) 的仓库 |
-| [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588)<br>[kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [armbian/linux-rockchip](https://github.com/armbian/linux-rockchip) | Rockchip-Beta(6.1.y) |
-
+| [kernel_stable](https://github.com/ophub/kernel/releases/tag/kernel_stable)<br>[kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) | [ophub/linux-5.10.y](https://github.com/ophub/linux-5.10.y)<br>[ophub/linux-5.15.y](https://github.com/ophub/linux-5.15.y)<br>[ophub/linux-6.1.y](https://github.com/ophub/linux-6.1.y)<br>[ophub/linux-6.6.y](https://github.com/ophub/linux-6.6.y)<br>[ophub/linux-6.12.y](https://github.com/ophub/linux-6.12.y)<br>[ophub/linux-6.18.y](https://github.com/ophub/linux-6.18.y) | Amlogic<br>Allwinner<br>Rockchip |
+| [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx)<br>[unifreq/linux-6.1.y-rockchip](https://github.com/unifreq/linux-6.1.y-rockchip)<br>[ophub/linux-5.10.y-rk35xx](https://github.com/ophub/linux-5.10.y-rk35xx)<br>[ophub/linux-6.1.y-rockchip](https://github.com/ophub/linux-6.1.y-rockchip)<br>[armbian/linux-rockchip](https://github.com/armbian/linux-rockchip) | RK3588 |
+| [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) | [unifreq/linux-5.10.y-rk35xx](https://github.com/unifreq/linux-5.10.y-rk35xx)<br>[unifreq/linux-6.1.y-rockchip](https://github.com/unifreq/linux-6.1.y-rockchip)<br>[ophub/linux-5.10.y-rk35xx](https://github.com/ophub/linux-5.10.y-rk35xx)<br>[ophub/linux-6.1.y-rockchip](https://github.com/ophub/linux-6.1.y-rockchip)<br>[armbian/linux-rockchip](https://github.com/armbian/linux-rockchip) | RK3399/RK3566/RK3568 等 |
 
 ## 链接
 
