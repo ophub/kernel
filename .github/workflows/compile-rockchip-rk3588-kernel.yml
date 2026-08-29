@@ -20,8 +20,6 @@ on:
           - unifreq/linux-5.10.y-rk35xx
           - ophub/linux-6.1.y-rockchip
           - ophub/linux-5.10.y-rk35xx
-          - armbian/linux-rockchip@rk-6.1-rkr6.1
-          - armbian/linux-rockchip@rk-6.1-rkr5.1
       kernel_version:
         description: "Select kernel version"
         required: false
@@ -157,12 +155,8 @@ jobs:
       - name: Get kernel source commit hash
         id: kernelhash
         run: |
-          # Get the kernel source branch
-          kernel_source="${{ inputs.kernel_source }}"
-          [[ "${kernel_source}" =~ @ ]] && kernel_branch="$(echo "${kernel_source}" | awk -F'@' '{print $2}')" || kernel_branch="main"
-
           # Get the latest source hash from the kernel repository
-          api_url="https://api.github.com/repos/${{ inputs.kernel_source }}/git/ref/heads/${kernel_branch}"
+          api_url="https://api.github.com/repos/${{ inputs.kernel_source }}/git/ref/heads/main"
           source_hash=$(curl -fsSL -m 20 \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
