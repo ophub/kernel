@@ -6,7 +6,7 @@ When performing cloud compilation using GitHub Actions, you can use the `kernel_
 ~/kernel
     └── <your-kernel-patches>
         ├── common-kernel-patches  # Fixed directory name: Stores kernel patches common to all versions
-        ├── linux-5.15.y           # Same as the kernel source library: stores dedicated patches
+        ├── linux-5.15.y           # Same as the kernel source repository: stores dedicated patches
         ├── linux-6.1.y
         ├── linux-5.10.y-rk35xx
         └── more kernel directory...
@@ -30,7 +30,7 @@ During kernel compilation, all patches with the `.patch` suffix under `common-ke
 
 # 内核补丁使用说明
 
-在 GitHub Actions 云编译时，可以使用 `kernel_patch` 参数指定内核补丁在仓库中的目录。其中适用于所有系列内核的通用补丁，采用固定目录名称（`common-kernel-patches`）；仅适用于指定系列的补丁，例如 [linux-5.15.y](https://github.com/unifreq/linux-5.15.y)，使用`与内核源码仓库同名`的目录名称。使用其他自定义名称的目录（例如存放已弃用补丁的 `deprecated-patches` 目录）在内核编译时将被跳过，不会被应用。
+在 GitHub Actions 云编译时，可以使用 `kernel_patch` 参数指定内核补丁在仓库中的目录。其中适用于所有系列内核的通用补丁，采用固定目录名称（`common-kernel-patches`）；而特定内核系列的专用补丁，例如 [linux-5.15.y](https://github.com/unifreq/linux-5.15.y)，使用`与内核源码仓库同名`的目录名称。使用其他自定义名称的目录（例如存放已弃用补丁的 `deprecated-patches` 目录）在内核编译时将被跳过，不会被应用。
 
 ```shell
 ~/kernel
