@@ -9,7 +9,7 @@ These kernels can be used with `Armbian`, `OpenWrt`, and `FnNAS` systems, such a
 - The kernel files in the [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) section of the Releases are the `beta version` mainline kernels, which support the addition of custom third-party driver patches and custom build configurations.
 - The kernel files in the [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) section of the Releases are a `dedicated version` for the `rk3588` series and are not interchangeable with other series.
 - The kernel files in the [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) section of the Releases are a `dedicated version` for the `rk3528/rk3566/rk3568` series and are not interchangeable with other series.
-- The [dev](https://github.com/ophub/kernel/releases/tag/dev) section in the Releases provides `cross-compilation toolchain` downloads required for kernel compilation.
+- The [toolchain](https://github.com/ophub/kernel/releases/tag/toolchain) section in the Releases provides `cross-compilation toolchain` downloads required for kernel compilation.
 - The [tools](https://github.com/ophub/kernel/releases/tag/tools) section in the Releases provides `Android system` images for common TV boxes, which can be used to restore the Android system when running Armbian or OpenWrt.
 
 ## Kernel Compilation

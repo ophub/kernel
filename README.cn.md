@@ -9,7 +9,7 @@
 - Releases 中的 [kernel_beta](https://github.com/ophub/kernel/releases/tag/kernel_beta) 为`测试版`主线内核，支持自定义添加第三方驱动补丁，并支持自定义配置编译。
 - Releases 中的 [kernel_rk3588](https://github.com/ophub/kernel/releases/tag/kernel_rk3588) 为 `rk3588` 系列的`专用版本`，与其他系列不通用。
 - Releases 中的 [kernel_rk35xx](https://github.com/ophub/kernel/releases/tag/kernel_rk35xx) 为 `rk3528/rk3566/rk3568` 等系列的`专用版本`，与其他系列不通用。
-- Releases 中的 [dev](https://github.com/ophub/kernel/releases/tag/dev) 提供了编译内核所需的`交叉编译工具链`下载镜像。
+- Releases 中的 [toolchain](https://github.com/ophub/kernel/releases/tag/toolchain) 提供了编译内核所需的`交叉编译工具链`下载镜像。
 - Releases 中的 [tools](https://github.com/ophub/kernel/releases/tag/tools) 提供了部分常见电视盒子的`安卓系统`下载镜像，在使用 Armbian 或 OpenWrt 系统时可用于恢复安卓系统。
 
 ## 编译内核
