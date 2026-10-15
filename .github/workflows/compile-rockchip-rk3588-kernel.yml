@@ -1,6 +1,6 @@
 #==========================================================================
 # Description: Compile rockchip rk3588 kernel
-# Copyright (C) 2023 https://github.com/unifreq/linux-5.10.y-rk35xx
+# Copyright (C) 2023 https://github.com/unifreq
 # Copyright (C) 2023 https://github.com/ophub/kernel
 #==========================================================================
 
@@ -16,8 +16,10 @@ on:
         default: "ophub/linux-6.1.y-rockchip"
         type: choice
         options:
+          - unifreq/linux-6.12.y-rockchip
           - unifreq/linux-6.1.y-rockchip
           - unifreq/linux-5.10.y-rk35xx
+          - ophub/linux-6.12.y-rockchip
           - ophub/linux-6.1.y-rockchip
           - ophub/linux-5.10.y-rk35xx
       kernel_version:
@@ -26,6 +28,7 @@ on:
         default: "6.1.y"
         type: choice
         options:
+          - 6.12.y
           - 6.1.y
           - 5.10.y
       kernel_auto:
