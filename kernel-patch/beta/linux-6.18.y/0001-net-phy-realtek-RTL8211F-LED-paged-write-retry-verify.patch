@@ -1,73 +1,38 @@
 --- a/drivers/net/phy/realtek/realtek_main.c
 +++ b/drivers/net/phy/realtek/realtek_main.c
-@@ -233,14 +233,32 @@
- {
+@@ -234,12 +234,34 @@
  	struct rtl821x_priv *priv = phydev->priv;
  	u16 reg;
--	int ret;
-+	int ret, val, i;
+ 	int ret;
++	int retry;
  
  	if (!priv->led_dts_configured)
  		return;
  
  	reg = priv->led_reg_val | RTL8211F_LEDCR_MODE;
 -	ret = phy_write_paged(phydev, RTL8211F_LEDCR_PAGE, RTL8211F_LEDCR, reg);
--	if (ret < 0) {
 +
 +	/*
-+	 * Paged MDIO writes can be silently lost when the bus is busy:
-+	 * the page-select write is dropped and the data lands on the
-+	 * wrong page. Verify by read-back and retry before giving up,
-+	 * otherwise the LED configuration never takes effect.
++	 * Paged MDIO writes can be silently dropped while the MDIO bus is
++	 * busy (observed as an intermittent race during probe on some
++	 * platforms, leaving the LED configuration lost until the next
++	 * manual rewrite). Write, read back to verify, and retry with a
++	 * small delay before giving up.
 +	 */
-+	for (i = 0; i < 10; i++) {
++	for (retry = 0; retry < 10; retry++) {
 +		ret = phy_write_paged(phydev, RTL8211F_LEDCR_PAGE,
 +				      RTL8211F_LEDCR, reg);
-+		if (ret < 0)
-+			continue;
++		if (ret >= 0) {
++			int val;
 +
-+		val = phy_read_paged(phydev, RTL8211F_LEDCR_PAGE,
-+				     RTL8211F_LEDCR);
-+		if (val == reg)
-+			break;
++			val = phy_read_paged(phydev, RTL8211F_LEDCR_PAGE,
++					     RTL8211F_LEDCR);
++			if (val == reg)
++				break;
++		}
++		usleep_range(2000, 5000);
 +	}
 +
-+	if (val != reg) {
+ 	if (ret < 0) {
  		phydev_err(phydev, "Failed to write LEDCR: %d\n", ret);
  		return;
- 	}
-@@ -1016,6 +1034,7 @@
- {
- 	const u16 mask = RTL8211F_LEDCR_MASK << (RTL8211F_LEDCR_SHIFT * index);
- 	u16 reg = 0;
-+	int ret, val, i;
- 
- 	if (index >= RTL8211x_LED_COUNT)
- 		return -EINVAL;
-@@ -1043,8 +1062,24 @@
- 	reg <<= RTL8211F_LEDCR_SHIFT * index;
- 	reg |= RTL8211F_LEDCR_MODE;	 /* Mode B */
- 
--	return phy_modify_paged(phydev, RTL8211F_LEDCR_PAGE, RTL8211F_LEDCR,
--				mask, reg);
-+	/*
-+	 * Paged MDIO writes can be silently lost under bus contention.
-+	 * Verify by read-back and retry; a lost write leaves the LED dark
-+	 * until the next link change (if ever).
-+	 */
-+	for (i = 0; i < 10; i++) {
-+		ret = phy_modify_paged(phydev, RTL8211F_LEDCR_PAGE,
-+				       RTL8211F_LEDCR, mask, reg);
-+		if (ret < 0)
-+			continue;
-+
-+		val = phy_read_paged(phydev, RTL8211F_LEDCR_PAGE,
-+				     RTL8211F_LEDCR);
-+		if (val >= 0 && (val & mask) == (reg & mask))
-+			return 0;
-+	}
-+
-+	return ret < 0 ? ret : -EIO;
- }
- 
- static int rtl8211e_led_hw_control_get(struct phy_device *phydev, u8 index,
