@@ -1,0 +1,38 @@
+--- a/drivers/net/phy/realtek/realtek_main.c
++++ b/drivers/net/phy/realtek/realtek_main.c
+@@ -234,12 +234,34 @@
+ 	struct rtl821x_priv *priv = phydev->priv;
+ 	u16 reg;
+ 	int ret;
++	int retry;
+ 
+ 	if (!priv->led_dts_configured)
+ 		return;
+ 
+ 	reg = priv->led_reg_val | RTL8211F_LEDCR_MODE;
+-	ret = phy_write_paged(phydev, RTL8211F_LEDCR_PAGE, RTL8211F_LEDCR, reg);
++
++	/*
++	 * Paged MDIO writes can be silently dropped while the MDIO bus is
++	 * busy (observed as an intermittent race during probe on some
++	 * platforms, leaving the LED configuration lost until the next
++	 * manual rewrite). Write, read back to verify, and retry with a
++	 * small delay before giving up.
++	 */
++	for (retry = 0; retry < 10; retry++) {
++		ret = phy_write_paged(phydev, RTL8211F_LEDCR_PAGE,
++				      RTL8211F_LEDCR, reg);
++		if (ret >= 0) {
++			int val;
++
++			val = phy_read_paged(phydev, RTL8211F_LEDCR_PAGE,
++					     RTL8211F_LEDCR);
++			if (val == reg)
++				break;
++		}
++		usleep_range(2000, 5000);
++	}
++
+ 	if (ret < 0) {
+ 		phydev_err(phydev, "Failed to write LEDCR: %d\n", ret);
+ 		return;
