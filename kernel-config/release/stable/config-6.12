@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 6.12.118 Kernel Configuration
+# Linux/arm64 6.12.119 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="aarch64-none-linux-gnu-gcc (Arm GNU Toolchain 15.3.Rel2 (Build arm-15.181)) 15.3.1 20260627"
 CONFIG_CC_IS_GCC=y
@@ -1856,7 +1856,6 @@ CONFIG_BT_MTK=m
 CONFIG_BT_HCIBTUSB=m
 # CONFIG_BT_HCIBTUSB_AUTOSUSPEND is not set
 CONFIG_BT_HCIBTUSB_POLL_SYNC=y
-# CONFIG_BT_HCIBTUSB_AUTO_ISOC_ALT is not set
 CONFIG_BT_HCIBTUSB_BCM=y
 CONFIG_BT_HCIBTUSB_MTK=y
 CONFIG_BT_HCIBTUSB_RTL=y
